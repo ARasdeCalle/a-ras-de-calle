@@ -6,7 +6,6 @@
     <title>A Ras de Calle - El fútbol sevillano, desde dentro</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilos base Mobile-First directos */
         :root {
             --bg-dark: #0b1f3b;
             --bg-card: #132a4a;
@@ -22,7 +21,6 @@
             color: var(--text-light);
         }
 
-        /* Cabecera optimizada para móvil */
         .mobile-header {
             background: var(--bg-dark);
             border-bottom: 2px solid var(--gold);
@@ -60,7 +58,6 @@
             color: #ffffff;
         }
 
-        /* Menú deslizable horizontal para móviles */
         .nav-scroll {
             display: flex;
             gap: 0.5rem;
@@ -71,9 +68,7 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .nav-scroll::-webkit-scrollbar {
-            display: none;
-        }
+        .nav-scroll::-webkit-scrollbar { display: none; }
 
         .nav-pill {
             background: rgba(255, 255, 255, 0.08);
@@ -92,14 +87,12 @@
             border-color: var(--gold);
         }
 
-        /* Layout contenedor */
         .container {
             padding: 1rem;
             max-width: 1100px;
             margin: 0 auto;
         }
 
-        /* Tarjeta Hero */
         .hero-banner {
             background: linear-gradient(180deg, rgba(11,31,59,0.4) 0%, #0b1f3b 100%), url('https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&w=800&q=80') center/cover;
             border-radius: 12px;
@@ -132,7 +125,6 @@
             line-height: 1.4;
         }
 
-        /* Secciones y Tarjetas */
         .section-title {
             font-size: 1.1rem;
             font-weight: 800;
@@ -152,6 +144,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
 
         .team-name {
@@ -182,7 +175,6 @@
             font-size: 0.9rem;
         }
 
-        /* Grid adaptativo para escritorio */
         @media (min-width: 768px) {
             .grid-desktop {
                 display: grid;
@@ -197,7 +189,6 @@
 </head>
 <body>
 
-    <!-- Cabecera Mobile-First -->
     <header class="mobile-header">
         <div class="brand-container">
             <div class="brand-logo">
@@ -206,11 +197,11 @@
             </div>
         </div>
         
-        <!-- Menú deslisable táctil -->
         <nav class="nav-scroll">
             <a href="index.html" class="nav-pill active">Inicio</a>
             <a href="partido.html" class="nav-pill">Resultados</a>
             <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-pill">Categorías</a>
             <a href="foro.html" class="nav-pill">Foro</a>
             <a href="equipos.html" class="nav-pill">Equipos</a>
             <a href="noticias.html" class="nav-pill">Noticias</a>
@@ -219,7 +210,6 @@
     </header>
 
     <main class="container">
-        <!-- Banner Noticia Principal -->
         <div class="hero-banner">
             <span class="hero-tag">3ª FEDERACIÓN - GRUPO X</span>
             <h1 class="hero-title">El Dos Hermanas CF 1971 afianza su liderato provincial</h1>
@@ -228,7 +218,6 @@
         </div>
 
         <div class="grid-desktop">
-            <!-- Bloque Izquierdo: Acceso Rápido -->
             <div>
                 <div class="section-title">⚡ Acceso Rápido</div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem;">
@@ -245,7 +234,6 @@
                 </div>
             </div>
 
-            <!-- Bloque Derecho: Últimos Resultados Realizados -->
             <div>
                 <div class="section-title">📊 Última Jornada</div>
                 
