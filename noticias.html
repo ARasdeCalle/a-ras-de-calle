@@ -3,146 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Ras de Calle - Tablón de Noticias</title>
+    <title>A Ras de Calle - Noticias</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg-dark: #0b1f3b;
+            --bg-card: #132a4a;
+            --gold: #d4af37;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #071324;
+            color: var(--text-light);
+        }
+
+        .mobile-header {
+            background: var(--bg-dark);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-badge {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .nav-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-top: 0.75rem;
+            padding-bottom: 0.25rem;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-pill.active {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-color: var(--gold);
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .news-card {
+            background: var(--bg-card);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--gold);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .news-tag {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+            line-height: 1.3;
+        }
+
+        .news-desc {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            margin: 0 0 0.8rem 0;
+            line-height: 1.5;
+        }
+
+        .news-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+    </style>
 </head>
 <body>
-    <!-- Encabezado / Menú Navegación -->
-    <header class="header">
-        <div class="nav-container">
-            <div class="logo-area">
-                <span class="logo-badge">FÚTBOL SEVILLANO</span>
-                <span class="logo-title">A RAS DE CALLE</span>
-            </div>
-            <nav class="nav-links">
-                <a href="index.html">Inicio</a>
-                
-                <!-- Menú desplegable por clic -->
-                <div class="dropdown">
-                    <a href="javascript:void(0);" onclick="toggleDropdown(event)" style="cursor: pointer;">El Proyecto ▾</a>
-                    <div class="dropdown-content" id="projectDropdown">
-                        <a href="proyecto.html">Sobre el proyecto</a>
-                        <a href="nosotros.html">Sobre nosotros</a>
-                        <a href="contacto.html">Contacto</a>
-                    </div>
-                </div>
 
-                <a href="foro.html">Foro</a>
-                <a href="equipos.html">Equipos</a>
-                <a href="competiciones.html">Competiciones</a>
-                <a href="partido.html">Resultados</a>
-                <a href="noticias.html" class="active">Noticias</a>
-                <a href="estadisticas.html">Estadísticas</a>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn-login">Iniciar sesión</button>
-                <button class="btn-register">Registrarse</button>
+    <header class="mobile-header">
+        <div class="brand-container">
+            <div class="brand-logo">
+                <span class="logo-badge">⚽ ARC</span>
+                <span class="logo-text">A RAS DE CALLE</span>
             </div>
         </div>
+        <nav class="nav-scroll">
+            <a href="index.html" class="nav-pill">Inicio</a>
+            <a href="partido.html" class="nav-pill">Resultados</a>
+            <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-pill">Categorías</a>
+            <a href="foro.html" class="nav-pill">Foro</a>
+            <a href="equipos.html" class="nav-pill">Equipos</a>
+            <a href="noticias.html" class="nav-pill active">Noticias</a>
+            <a href="proyecto.html" class="nav-pill">El Proyecto</a>
+        </nav>
     </header>
 
-    <main class="main-container">
-        <!-- Banner Cabecera -->
-        <div class="card" style="background: linear-gradient(135deg, #0b1a30 0%, #1e293b 100%); color: #ffffff; text-align: center; padding: 1.5rem; margin-bottom: 1.5rem;">
-            <span style="color: #d4af37; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">ACTUALIDAD PROVINCIAL</span>
-            <h2 style="font-size: 1.8rem; margin: 0.5rem 0; color: #ffffff;">Tablón de Noticias</h2>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">La última hora de los equipos sevillanos en competición.</p>
+    <main class="container">
+        <h2 style="color: var(--gold); font-size: 1.2rem; margin-bottom: 1rem;">Tablón de Actualidad</h2>
+
+        <div class="news-card">
+            <span class="news-tag">3ª Federación - Grupo X</span>
+            <h3 class="news-title">El Dos Hermanas CF 1971 afianza su liderato provincial</h3>
+            <p class="news-desc">Victoria clave nazarena por 4-3 ante el Real Betis C en un duelo vibrante de alternativas que consolida al conjunto blanquiazul en lo más alto de la tabla.</p>
+            <div class="news-meta">Hace 2 horas · Redacción A Ras de Calle</div>
         </div>
 
-        <!-- Grid de Noticias por Equipo -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
-            
-            <!-- Sevilla FC C -->
-            <div class="card" style="border-top: 4px solid #0b1a30;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.75rem; background: #0b1a30; color: #d4af37; padding: 2px 8px; border-radius: 4px; font-weight: bold;">SEVILLA FC C</span>
-                    <span style="font-size: 0.75rem; color: #64748b;">Tercera RFEF</span>
-                </div>
-                <h3 style="color: #0b1a30; font-size: 1.15rem; margin: 0.5rem 0;">Repesca clave para asegurar la plaza en el Grupo X</h3>
-                <p style="font-size: 0.9rem; color: #475569; line-height: 1.4; margin-bottom: 1rem;">El segundo filial sevillista quedó encuadrado de forma definitiva en el grupo andaluz tras cubrir una vacante estival crucial para la planificación de la cantera.</p>
-                <a href="#" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Leer noticia completa &rarr;</a>
-            </div>
+        <div class="news-card">
+            <span class="news-tag">División de Honor</span>
+            <h3 class="news-title">Emoción máxima en los puestos de cabeza</h3>
+            <p class="news-desc">Los equipos sevillanos de la categoría aprietan el paso tras una jornada con triunfos ajustados de Castilleja CF y PD Rociera que reavivan la lucha por el ascenso.</p>
+            <div class="news-meta">Hace 5 horas · Redacción A Ras de Calle</div>
+        </div>
 
-            <!-- Real Betis C -->
-            <div class="card" style="border-top: 4px solid #0b1a30;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.75rem; background: #0b1a30; color: #d4af37; padding: 2px 8px; border-radius: 4px; font-weight: bold;">REAL BETIS C</span>
-                    <span style="font-size: 0.75rem; color: #64748b;">Tercera RFEF</span>
-                </div>
-                <h3 style="color: #0b1a30; font-size: 1.15rem; margin: 0.5rem 0;">Intensidad ofensiva en el arranque liguero</h3>
-                <p style="font-size: 0.9rem; color: #475569; line-height: 1.4; margin-bottom: 1rem;">El segundo filial verdiblanco destaca por partidos de altísimo voltaje ofensivo, como el vibrante 4-3 cosechado en los primeros compases del campeonato.</p>
-                <a href="#" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Leer noticia completa &rarr;</a>
-            </div>
-
-            <!-- CD Utrera -->
-            <div class="card" style="border-top: 4px solid #0b1a30;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.75rem; background: #0b1a30; color: #d4af37; padding: 2px 8px; border-radius: 4px; font-weight: bold;">CD UTRERA</span>
-                    <span style="font-size: 0.75rem; color: #64748b;">Tercera RFEF</span>
-                </div>
-                <h3 style="color: #0b1a30; font-size: 1.15rem; margin: 0.5rem 0;">Afectados por las condiciones meteorológicas</h3>
-                <p style="font-size: 0.9rem; color: #475569; line-height: 1.4; margin-bottom: 1rem;">El choque en el San Juan Bosco frente al Córdoba B tuvo que aplazarse por la fuerte tromba de agua, buscando fecha para recuperar el pulso competitivo.</p>
-                <a href="#" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Leer noticia completa &rarr;</a>
-            </div>
-
-            <!-- Dos Hermanas CF 1971 -->
-            <div class="card" style="border-top: 4px solid #0b1a30;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.75rem; background: #0b1a30; color: #d4af37; padding: 2px 8px; border-radius: 4px; font-weight: bold;">DOS HERMANAS CF</span>
-                    <span style="font-size: 0.75rem; color: #64748b;">Tercera RFEF</span>
-                </div>
-                <h3 style="color: #0b1a30; font-size: 1.15rem; margin: 0.5rem 0;">Un debut fulgurante en la categoría</h3>
-                <p style="font-size: 0.9rem; color: #475569; line-height: 1.4; margin-bottom: 1rem;">El conjunto nazareno está pisando fuerte en la zona alta del Grupo X gracias a una solidez defensiva envidiable y partidos muy solventes en casa.</p>
-                <a href="#" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Leer noticia completa &rarr;</a>
-            </div>
-
-            <!-- UD Tomares -->
-            <div class="card" style="border-top: 4px solid #0b1a30;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.75rem; background: #0b1a30; color: #d4af37; padding: 2px 8px; border-radius: 4px; font-weight: bold;">UD TOMARES</span>
-                    <span style="font-size: 0.75rem; color: #64748b;">Tercera RFEF</span>
-                </div>
-                <h3 style="color: #0b1a30; font-size: 1.15rem; margin: 0.5rem 0;">Trabajo táctico para consolidar el proyecto</h3>
-                <p style="font-size: 0.9rem; color: #475569; line-height: 1.4; margin-bottom: 1rem;">El cuadro aljarafeño prioriza el orden defensivo en este tramo de temporada para hacerse fuerte ante los históricos del grupo en San Sebastián.</p>
-                <a href="#" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Leer noticia completa &rarr;</a>
-            </div>
-
-            <!-- Atlético Central -->
-            <div class="card" style="border-top: 4px solid #0b1a30;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                    <span style="font-size: 0.75rem; background: #0b1a30; color: #d4af37; padding: 2px 8px; border-radius: 4px; font-weight: bold;">ATLÉTICO CENTRAL</span>
-                    <span style="font-size: 0.75rem; color: #64748b;">Tercera RFEF</span>
-                </div>
-                <h3 style="color: #0b1a30; font-size: 1.15rem; margin: 0.5rem 0;">Ambiciones firmes en el fútbol nacional</h3>
-                <p style="font-size: 0.9rem; color: #475569; line-height: 1.4; margin-bottom: 1rem;">El club sevillano continúa adaptándose con nota al ritmo de la Tercera Federación, buscando dar la campanada a domicilio frente a los gallitos del grupo.</p>
-                <a href="#" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Leer noticia completa &rarr;</a>
-            </div>
-
+        <div class="news-card">
+            <span class="news-tag">1ª Andaluza Sevilla</span>
+            <h3 class="news-title">Estrella San Agustín golpea con autoridad</h3>
+            <p class="news-desc">El conjunto sevillano se impuso con claridad por 3-1 al Osuna BCN en un encuentro marcado por el acierto ofensivo durante la segunda mitad.</p>
+            <div class="news-meta">Ayer · Redacción A Ras de Calle</div>
         </div>
     </main>
 
-    <footer class="footer" style="margin-top: 2rem;">
-        <p>El fútbol sevillano, desde dentro.</p>
-    </footer>
-
-    <!-- Script para el menú desplegable -->
-    <script>
-    function toggleDropdown(event) {
-        event.stopPropagation();
-        document.getElementById("projectDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropdown > a')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-    </script>
 </body>
 </html>
