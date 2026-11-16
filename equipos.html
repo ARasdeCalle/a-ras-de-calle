@@ -5,112 +5,226 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Ras de Calle - Equipos</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg-dark: #0b1f3b;
+            --bg-card: #132a4a;
+            --gold: #d4af37;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #071324;
+            color: var(--text-light);
+        }
+
+        .mobile-header {
+            background: var(--bg-dark);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-badge {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .nav-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-top: 0.75rem;
+            padding-bottom: 0.25rem;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-pill.active {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-color: var(--gold);
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .team-search {
+            width: 100%;
+            background: var(--bg-card);
+            color: var(--text-light);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 1.25rem;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .team-box {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid var(--gold);
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .team-details h3 {
+            margin: 0 0 0.2rem 0;
+            font-size: 1rem;
+            color: #ffffff;
+        }
+
+        .team-details span {
+            font-size: 0.78rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        @media (min-width: 600px) {
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="header">
-        <div class="nav-container">
-            <div class="logo-area">
-                <span class="logo-badge">FÚTBOL SEVILLANO</span>
-                <span class="logo-title">A RAS DE CALLE</span>
-            </div>
-            <nav class="nav-links">
-                <a href="index.html">Inicio</a>
-                
-                <!-- Menú desplegable por clic -->
-                <div class="dropdown">
-                    <a href="javascript:void(0);" onclick="toggleDropdown(event)" style="cursor: pointer;">El Proyecto ▾</a>
-                    <div class="dropdown-content" id="projectDropdown">
-                        <a href="proyecto.html">Sobre el proyecto</a>
-                        <a href="nosotros.html">Sobre nosotros</a>
-                        <a href="contacto.html">Contacto</a>
-                    </div>
-                </div>
 
-                <a href="foro.html">Foro</a>
-                <a href="equipos.html" class="active">Equipos</a>
-                <a href="competiciones.html">Competiciones</a>
-                <a href="partido.html">Resultados</a>
-                <a href="noticias.html">Noticias</a>
-                <a href="estadisticas.html">Estadísticas</a>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn-login">Iniciar sesión</button>
-                <button class="btn-register">Registrarse</button>
+    <header class="mobile-header">
+        <div class="brand-container">
+            <div class="brand-logo">
+                <span class="logo-badge">⚽ ARC</span>
+                <span class="logo-text">A RAS DE CALLE</span>
             </div>
         </div>
+        <nav class="nav-scroll">
+            <a href="index.html" class="nav-pill">Inicio</a>
+            <a href="partido.html" class="nav-pill">Resultados</a>
+            <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-pill">Categorías</a>
+            <a href="foro.html" class="nav-pill">Foro</a>
+            <a href="equipos.html" class="nav-pill active">Equipos</a>
+            <a href="noticias.html" class="nav-pill">Noticias</a>
+            <a href="proyecto.html" class="nav-pill">El Proyecto</a>
+        </nav>
     </header>
 
-    <main class="main-container">
-        <!-- Cabecera -->
-        <div class="card" style="background: linear-gradient(135deg, #0b1a30 0%, #1e293b 100%); color: #ffffff; text-align: center; padding: 1.5rem; margin-bottom: 1.5rem;">
-            <span style="color: #d4af37; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">DIRECTORIO DE CLUBES</span>
-            <h2 style="font-size: 1.8rem; margin: 0.5rem 0; color: #ffffff;">Equipos Sevillanos</h2>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">Conoce los clubes que conforman el mapa futbolístico de nuestra provincia.</p>
-        </div>
+    <main class="container">
+        <h2 style="color: var(--gold); font-size: 1.2rem; margin-bottom: 1rem;">Directorio de Equipos</h2>
+        
+        <input type="text" class="team-search" placeholder="Buscar equipo o club..." id="searchTeam">
 
-        <!-- Listado de Equipos Destacados -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-            
-            <!-- CD Utrera -->
-            <div class="card" style="border-top: 4px solid #d4af37;">
-                <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0;">CD Utrera</h3>
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Estadio San Juan Bosco • Tercera Federación (Grupo X)</p>
-                <a href="partido.html" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Ver resultados y partidos &rarr;</a>
+        <div class="team-grid">
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>Dos Hermanas CF 1971</h3>
+                    <span>3ª RFEF - Grupo X</span>
+                </div>
             </div>
 
-            <!-- Dos Hermanas CF 1971 -->
-            <div class="card" style="border-top: 4px solid #d4af37;">
-                <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0;">Dos Hermanas CF 1971</h3>
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Estadio Miguel Román • Tercera Federación (Grupo X)</p>
-                <a href="partido.html" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Ver resultados y partidos &rarr;</a>
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>CD Utrera</h3>
+                    <span>3ª RFEF - Grupo X</span>
+                </div>
             </div>
 
-            <!-- Sevilla FC C -->
-            <div class="card" style="border-top: 4px solid #d4af37;">
-                <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0;">Sevilla FC C</h3>
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Ciudad Deportiva José Ramón Cisneros • Tercera Federación (Grupo X)</p>
-                <a href="partido.html" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Ver resultados y partidos &rarr;</a>
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>Real Betis C</h3>
+                    <span>3ª RFEF - Grupo X</span>
+                </div>
             </div>
 
-            <!-- Real Betis C -->
-            <div class="card" style="border-top: 4px solid #d4af37;">
-                <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0;">Real Betis C</h3>
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Luis del Sol • Tercera Federación (Grupo X)</p>
-                <a href="partido.html" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Ver resultados y partidos &rarr;</a>
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>Sevilla FC C</h3>
+                    <span>3ª RFEF - Grupo X</span>
+                </div>
             </div>
 
-            <!-- UD Tomares -->
-            <div class="card" style="border-top: 4px solid #d4af37;">
-                <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0;">UD Tomares</h3>
-                <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 1rem;">Municipal San Sebastián • Tercera Federación (Grupo X)</p>
-                <a href="partido.html" style="color: #0b1a30; font-weight: bold; font-size: 0.85rem; text-decoration: none;">Ver resultados y partidos &rarr;</a>
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>Castilleja CF</h3>
+                    <span>División de Honor</span>
+                </div>
             </div>
 
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>UP Viso</h3>
+                    <span>División de Honor</span>
+                </div>
+            </div>
+
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>Estrella San Agustín</h3>
+                    <span>1ª Andaluza Sevilla</span>
+                </div>
+            </div>
+
+            <div class="team-box">
+                <div class="team-details">
+                    <h3>CD Alcalá</h3>
+                    <span>2ª Andaluza Sevilla</span>
+                </div>
+            </div>
         </div>
     </main>
 
-    <footer class="footer" style="margin-top: 2rem;">
-        <p>El fútbol sevillano, desde dentro.</p>
-    </footer>
-
-    <!-- Script para el menú desplegable -->
-    <script>
-    function toggleDropdown(event) {
-        event.stopPropagation();
-        document.getElementById("projectDropdown").classList.toggle("show");
-    }
-
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropdown > a')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-    </script>
 </body>
 </html>
