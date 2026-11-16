@@ -3,86 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Ras de Calle - Estadísticas</title>
+    <title>A Ras de Calle - Clasificaciones</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg-dark: #0b1f3b;
+            --bg-card: #132a4a;
+            --gold: #d4af37;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #071324;
+            color: var(--text-light);
+        }
+
+        .mobile-header {
+            background: var(--bg-dark);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-badge {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .nav-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-top: 0.75rem;
+            padding-bottom: 0.25rem;
+            white-space: nowrap;
+        }
+
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-pill.active {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-color: var(--gold);
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .selectors-box {
+            background: var(--bg-card);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .select-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .select-group label {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        select {
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            outline: none;
+        }
+
+        .table-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: var(--bg-dark);
+            color: var(--gold);
+            padding: 10px;
+            font-weight: 800;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        tr:nth-child(1), tr:nth-child(2) {
+            border-left: 4px solid var(--gold);
+        }
+
+        .pos-badge {
+            font-weight: 800;
+            display: inline-block;
+            width: 20px;
+            text-align: center;
+        }
+
+        @media (min-width: 600px) {
+            .selectors-box {
+                flex-direction: row;
+            }
+            .select-group {
+                flex: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Encabezado / Menú Navegación -->
-    <header class="header">
-        <div class="nav-container">
-            <div class="logo-area">
-                <span class="logo-badge">FÚTBOL SEVILLANO</span>
-                <span class="logo-title">A RAS DE CALLE</span>
-            </div>
-            <nav class="nav-links">
-                <a href="index.html">Inicio</a>
-                
-                <!-- Menú desplegable por clic -->
-                <div class="dropdown">
-                    <a href="javascript:void(0);" onclick="toggleDropdown(event)" style="cursor: pointer;">El Proyecto ▾</a>
-                    <div class="dropdown-content" id="projectDropdown">
-                        <a href="proyecto.html">Sobre el proyecto</a>
-                        <a href="nosotros.html">Sobre nosotros</a>
-                        <a href="contacto.html">Contacto</a>
-                    </div>
-                </div>
 
-                <a href="foro.html">Foro</a>
-                <a href="equipos.html">Equipos</a>
-                <a href="competiciones.html">Competiciones</a>
-                <a href="partido.html">Resultados</a>
-                <a href="noticias.html">Noticias</a>
-                <a href="estadisticas.html" class="active">Estadísticas</a>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn-login">Iniciar sesión</button>
-                <button class="btn-register">Registrarse</button>
+    <header class="mobile-header">
+        <div class="brand-container">
+            <div class="brand-logo">
+                <span class="logo-badge">⚽ ARC</span>
+                <span class="logo-text">A RAS DE CALLE</span>
             </div>
         </div>
+        <nav class="nav-scroll">
+            <a href="index.html" class="nav-pill">Inicio</a>
+            <a href="partido.html" class="nav-pill">Resultados</a>
+            <a href="estadisticas.html" class="nav-pill active">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-pill">Categorías</a>
+            <a href="foro.html" class="nav-pill">Foro</a>
+            <a href="equipos.html" class="nav-pill">Equipos</a>
+            <a href="noticias.html" class="nav-pill">Noticias</a>
+        </nav>
     </header>
 
-    <main class="main-container">
-        <!-- Banner Cabecera -->
-        <div class="card" style="background: linear-gradient(135deg, #0b1a30 0%, #1e293b 100%); color: #ffffff; text-align: center; padding: 1.5rem; margin-bottom: 1.5rem;">
-            <span style="color: #d4af37; font-weight: bold; font-size: 0.85rem; letter-spacing: 1px;">DATOS Y CLASIFICACIONES</span>
-            <h2 style="font-size: 1.8rem; margin: 0.5rem 0; color: #ffffff;">Estadísticas</h2>
-            <p style="font-size: 0.85rem; color: #cbd5e1;">Análisis detallado de la temporada en el Grupo X de Tercera Federación.</p>
+    <main class="container">
+        
+        <!-- Selectores por Categoría y Grupo -->
+        <div class="selectors-box">
+            <div class="select-group">
+                <label for="catSelect">Categoría</label>
+                <select id="catSelect" onchange="updateSubgroups()">
+                    <option value="3rfef">3ª RFEF</option>
+                    <option value="div-honor">División de Honor</option>
+                    <option value="1-andaluza">1ª Andaluza</option>
+                    <option value="2-andaluza">2ª Andaluza</option>
+                </select>
+            </div>
+            
+            <div class="select-group">
+                <label for="groupSelect">Grupo / Subgrupo</label>
+                <select id="groupSelect" onchange="filterTable()">
+                    <option value="gx">Grupo X</option>
+                </select>
+            </div>
         </div>
 
-        <!-- Contenido Estadísticas -->
-        <div class="card" style="padding: 1.5rem;">
-            <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0; margin-bottom: 1rem;">Resumen de rendimiento provincial</h3>
-            <p style="font-size: 0.9rem; color: #475569; line-height: 1.5; margin-bottom: 1.5rem;">
-                Consulta próximamente las tablas de goleadores, porteros menos goleados y la clasificación general interactiva actualizada jornada a jornada tras cada encuentro disputado por los equipos sevillanos.
-            </p>
-            <div style="background: #fffdf5; border-left: 4px solid #d4af37; padding: 1rem; border-radius: 4px;">
-                <span style="font-size: 0.85rem; font-weight: bold; color: #0b1a30;">Sección en evolución constante</span>
-                <p style="font-size: 0.85rem; color: #64748b; margin: 0.3rem 0 0 0;">Los datos estadísticos se sincronizan directamente con las actas oficiales de la competición.</p>
-            </div>
+        <!-- Tabla de Clasificación -->
+        <div class="table-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pos</th>
+                        <th>Equipo</th>
+                        <th>PJ</th>
+                        <th>PG</th>
+                        <th>PE</th>
+                        <th>PP</th>
+                        <th>Pts</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td><span class="pos-badge">1</span></td>
+                        <td><strong>Dos Hermanas CF 1971</strong></td>
+                        <td>9</td><td>7</td><td>1</td><td>1</td>
+                        <td><strong style="color: var(--gold);">22</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="pos-badge">2</span></td>
+                        <td>CD Pozoblanco</td>
+                        <td>9</td><td>6</td><td>2</td><td>1</td>
+                        <td><strong>20</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="pos-badge">3</span></td>
+                        <td>Real Betis C</td>
+                        <td>9</td><td>5</td><td>2</td><td>2</td>
+                        <td><strong>17</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="pos-badge">4</span></td>
+                        <td>Sevilla FC C</td>
+                        <td>9</td><td>4</td><td>3</td><td>2</td>
+                        <td><strong>15</strong></td>
+                    </tr>
+                    <tr>
+                        <td><span class="pos-badge">5</span></td>
+                        <td>CD Utrera</td>
+                        <td>9</td><td>4</td><td>2</td><td>3</td>
+                        <td><strong>14</strong></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
 
-    <footer class="footer" style="margin-top: 2rem;">
-        <p>El fútbol sevillano, desde dentro.</p>
-    </footer>
-
-    <!-- Script para el menú desplegable -->
     <script>
-    function toggleDropdown(event) {
-        event.stopPropagation();
-        document.getElementById("projectDropdown").classList.toggle("show");
-    }
+    const subgroups = {
+        '3rfef': ['Grupo X'],
+        'div-honor': ['Grupo 1 (Andalucía Occ.)'],
+        '1-andaluza': ['Grupo Único Sevilla'],
+        '2-andaluza': ['Grupo 1 (Sevilla)', 'Grupo 2 (Sevilla)']
+    };
 
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropdown > a')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
+    function updateSubgroups() {
+        const cat = document.getElementById('catSelect').value;
+        const groupSelect = document.getElementById('groupSelect');
+        groupSelect.innerHTML = '';
+
+        subgroups[cat].forEach(group => {
+            const opt = document.createElement('option');
+            opt.value = group.toLowerCase().replace(/[^a-z0-9]/g, '-');
+            opt.textContent = group;
+            groupSelect.appendChild(opt);
+        });
     }
     </script>
 </body>
