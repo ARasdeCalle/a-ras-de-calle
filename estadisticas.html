@@ -64,6 +64,7 @@
             padding-top: 0.75rem;
             padding-bottom: 0.25rem;
             white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
         }
 
         .nav-scroll::-webkit-scrollbar { display: none; }
@@ -191,6 +192,7 @@
             <a href="foro.html" class="nav-pill">Foro</a>
             <a href="equipos.html" class="nav-pill">Equipos</a>
             <a href="noticias.html" class="nav-pill">Noticias</a>
+            <a href="proyecto.html" class="nav-pill">El Proyecto</a>
         </nav>
     </header>
 
@@ -210,7 +212,7 @@
             
             <div class="select-group">
                 <label for="groupSelect">Grupo / Subgrupo</label>
-                <select id="groupSelect" onchange="filterTable()">
+                <select id="groupSelect">
                     <option value="gx">Grupo X</option>
                 </select>
             </div>
