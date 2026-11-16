@@ -3,240 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Ras de Calle - Foro de Debate</title>
+    <title>A Ras de Calle - Foro</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --bg-dark: #0b1f3b;
+            --bg-card: #132a4a;
+            --gold: #d4af37;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #071324;
+            color: var(--text-light);
+        }
+
+        .mobile-header {
+            background: var(--bg-dark);
+            border-bottom: 2px solid var(--gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 0.75rem 1rem;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-badge {
+            background: var(--gold);
+            color: var(--bg-dark);
+            font-weight: 900;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .logo-text {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+        }
+
+        .nav-scroll {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding-top: 0.75rem;
+            padding-bottom: 0.25rem;
+            white-space: nowrap;
+        }
+
+        .nav-scroll::-webkit-scrollbar { display: none; }
+
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            padding: 6px 14px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.82rem;
+            font-weight: 600;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-pill.active {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-color: var(--gold);
+        }
+
+        .container {
+            padding: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .forum-form {
+            background: var(--bg-card);
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-title {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 0.8rem;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .btn-submit {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            font-weight: 900;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .thread-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--gold);
+        }
+
+        .thread-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .thread-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .thread-text {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            margin-bottom: 0.8rem;
+            line-height: 1.4;
+        }
+
+        .replies-container {
+            background: var(--bg-dark);
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+        }
+
+        .reply-item {
+            font-size: 0.82rem;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .reply-item:last-child { border-bottom: none; }
+    </style>
 </head>
 <body>
-    <!-- Encabezado / Menú Navegación -->
-    <header class="header">
-        <div class="nav-container">
-            <div class="logo-area">
-                <span class="logo-badge">FÚTBOL SEVILLANO</span>
-                <span class="logo-title">A RAS DE CALLE</span>
-            </div>
-            <nav class="nav-links">
-                <a href="index.html">Inicio</a>
-                
-                <!-- Menú desplegable por clic -->
-                <div class="dropdown">
-                    <a href="javascript:void(0);" onclick="toggleDropdown(event)" style="cursor: pointer;">El Proyecto ▾</a>
-                    <div class="dropdown-content" id="projectDropdown">
-                        <a href="proyecto.html">Sobre el proyecto</a>
-                        <a href="nosotros.html">Sobre nosotros</a>
-                        <a href="contacto.html">Contacto</a>
-                    </div>
-                </div>
 
-                <a href="foro.html" class="active">Foro</a>
-                <a href="equipos.html">Equipos</a>
-                <a href="competiciones.html">Competiciones</a>
-                <a href="partido.html">Resultados</a>
-                <a href="noticias.html">Noticias</a>
-                <a href="estadisticas.html">Estadísticas</a>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn-login">Iniciar sesión</button>
-                <button class="btn-register">Registrarse</button>
+    <header class="mobile-header">
+        <div class="brand-container">
+            <div class="brand-logo">
+                <span class="logo-badge">⚽ ARC</span>
+                <span class="logo-text">A RAS DE CALLE</span>
             </div>
         </div>
+        <nav class="nav-scroll">
+            <a href="index.html" class="nav-pill">Inicio</a>
+            <a href="partido.html" class="nav-pill">Resultados</a>
+            <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-pill">Categorías</a>
+            <a href="foro.html" class="nav-pill active">Foro</a>
+            <a href="equipos.html" class="nav-pill">Equipos</a>
+            <a href="noticias.html" class="nav-pill">Noticias</a>
+        </nav>
     </header>
 
-    <main class="main-container">
-        <!-- Layout Central de 2 Columnas (Panel Lateral Izquierdo) -->
-        <div style="display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; margin-top: 1rem;">
+    <main class="container">
+        <!-- Formulario para publicar nuevo tema -->
+        <div class="forum-form">
+            <h3 class="form-title">💬 Crear nuevo debate</h3>
+            <input type="text" id="authorInput" placeholder="Tu nombre o usuario...">
+            <select id="categoryInput">
+                <option value="3ª RFEF">3ª RFEF</option>
+                <option value="División de Honor">División de Honor</option>
+                <option value="1ª Andaluza">1ª Andaluza</option>
+                <option value="2ª Andaluza">2ª Andaluza</option>
+            </select>
+            <input type="text" id="titleInput" placeholder="Título del tema...">
+            <textarea id="messageInput" rows="3" placeholder="Escribe tu mensaje..."></textarea>
+            <button class="btn-submit" onclick="addThread()">Publicar en el Foro</button>
+        </div>
+
+        <!-- Lista de Debates -->
+        <div id="forumThreads">
             
-            <!-- Columna Izquierda: Panel de Categorías con Enlaces -->
-            <div>
-                <div class="card" style="padding: 1.25rem;">
-                    <h3 style="color: #0b1a30; font-size: 1.2rem; margin-top: 0; margin-bottom: 1rem;">Categorías</h3>
-                    <div style="display: flex; flex-direction: column; gap: 0.25rem;">
-                        <a href="foro.html" id="cat-todas" class="cat-link" style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; color: #475569; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">
-                            <span>Todas las categorías</span>
-                            <span style="font-size: 0.85rem;">842</span>
-                        </a>
-                        <a href="foro.html?cat=tercera-rfef" id="cat-tercera-rfef" class="cat-link" style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; color: #475569; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">
-                            <span>Tercera Federación</span>
-                            <span style="font-size: 0.85rem; color: #64748b;">248</span>
-                        </a>
-                        <a href="foro.html?cat=division-honor" id="cat-division-honor" class="cat-link" style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; color: #475569; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">
-                            <span>División de Honor</span>
-                            <span style="font-size: 0.85rem; color: #64748b;">176</span>
-                        </a>
-                        <a href="foro.html?cat=primera-andaluza" id="cat-primera-andaluza" class="cat-link" style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; color: #475569; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">
-                            <span>Primera Andaluza</span>
-                            <span style="font-size: 0.85rem; color: #64748b;">142</span>
-                        </a>
-                        <a href="foro.html?cat=segunda-andaluza" id="cat-segunda-andaluza" class="cat-link" style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; color: #475569; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">
-                            <span>Segunda Andaluza</span>
-                            <span style="font-size: 0.85rem; color: #64748b;">115</span>
-                        </a>
-                        <a href="foro.html?cat=tercera-andaluza" id="cat-tercera-andaluza" class="cat-link" style="display: flex; justify-content: space-between; align-items: center; padding: 0.6rem 0.8rem; color: #475569; text-decoration: none; border-radius: 6px; font-size: 0.9rem;">
-                            <span>Tercera Andaluza</span>
-                            <span style="font-size: 0.85rem; color: #64748b;">161</span>
-                        </a>
-                    </div>
+            <div class="thread-card">
+                <div class="thread-header">
+                    <span><strong>Manolo_Nazareno</strong> en <span style="color:var(--gold);">3ª RFEF</span></span>
+                    <span>Hace 15 min</span>
                 </div>
-            </div>
+                <h4 class="thread-title">Gran ambiente en el partido del Dos Hermanas CF</h4>
+                <p class="thread-text">Vaya partidazo el 4-3 de esta jornada. ¿Cómo veis las opciones del equipo para mantener el ritmo arriba?</p>
+                
+                <div class="replies-container">
+                    <div class="reply-item"><strong>Socio_Utrera:</strong> Estuvo muy igualado, el Betis C apretó al final.</div>
+                </div>
 
-            <!-- Columna Derecha: Foro de Debate Dinámico -->
-            <div>
-                <div class="card" style="padding: 1.5rem;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                        <div>
-                            <h2 style="color: #0b1a30; font-size: 1.5rem; margin: 0;" id="forum-title">Foro de Debate</h2>
-                            <span id="forum-subtitle" style="font-size: 0.85rem; color: #64748b;">Mostrando todos los temas activos</span>
-                        </div>
-                        <button style="background: #d4af37; color: #0b1a30; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; font-size: 0.9rem; cursor: pointer;">+ Nuevo tema</button>
-                    </div>
-
-                    <!-- Hilo 1: Tercera RFEF -->
-                    <div class="thread-item" data-cat="tercera-rfef" style="padding: 1rem 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #0b1a30; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;">2</div>
-                            <div>
-                                <h4 style="margin: 0 0 0.2rem 0; font-size: 1.05rem;"><a href="#" style="color: #0b1a30; text-decoration: none;">¿Qué os ha parecido el partido del Sanluqueño?</a></h4>
-                                <span style="font-size: 0.8rem; color: #64748b;">por <strong>alvar7</strong> • Tercera RFEF</span>
-                            </div>
-                        </div>
-                        <span style="font-size: 0.85rem; color: #64748b; white-space: nowrap;">145 respuestas</span>
-                    </div>
-
-                    <!-- Hilo 2: Tercera RFEF -->
-                    <div class="thread-item" data-cat="tercera-rfef" style="padding: 1rem 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #0b1a30; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;">E</div>
-                            <div>
-                                <h4 style="margin: 0 0 0.2rem 0; font-size: 1.05rem;"><a href="#" style="color: #0b1a30; text-decoration: none;">El Écija puede dar la sorpresa este año en la categoría</a></h4>
-                                <span style="font-size: 0.8rem; color: #64748b;">por <strong>sevillista99</strong> • Tercera RFEF</span>
-                            </div>
-                        </div>
-                        <span style="font-size: 0.85rem; color: #64748b; white-space: nowrap;">89 respuestas</span>
-                    </div>
-
-                    <!-- Hilo 3: División de Honor -->
-                    <div class="thread-item" data-cat="division-honor" style="padding: 1rem 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #0b1a30; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;">D</div>
-                            <div>
-                                <h4 style="margin: 0 0 0.2rem 0; font-size: 1.05rem;"><a href="#" style="color: #0b1a30; text-decoration: none;">Análisis de la lucha por el ascenso en División de Honor Senior</a></h4>
-                                <span style="font-size: 0.8rem; color: #64748b;">por <strong>dh_fan</strong> • División de Honor</span>
-                            </div>
-                        </div>
-                        <span style="font-size: 0.85rem; color: #64748b; white-space: nowrap;">42 respuestas</span>
-                    </div>
-
-                    <!-- Hilo 4: Primera Andaluza -->
-                    <div class="thread-item" data-cat="primera-andaluza" style="padding: 1rem 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #0b1a30; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;">P</div>
-                            <div>
-                                <h4 style="margin: 0 0 0.2rem 0; font-size: 1.05rem;"><a href="#" style="color: #0b1a30; text-decoration: none;">Resultados y sorpresas en la jornada de Primera Andaluza Sevilla</a></h4>
-                                <span style="font-size: 0.8rem; color: #64748b;">por <strong>provincial_sev</strong> • Primera Andaluza</span>
-                            </div>
-                        </div>
-                        <span style="font-size: 0.85rem; color: #64748b; white-space: nowrap;">31 respuestas</span>
-                    </div>
-
-                    <!-- Hilo 5: Segunda Andaluza -->
-                    <div class="thread-item" data-cat="segunda-andaluza" style="padding: 1rem 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #0b1a30; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;">S</div>
-                            <div>
-                                <h4 style="margin: 0 0 0.2rem 0; font-size: 1.05rem;"><a href="#" style="color: #0b1a30; text-decoration: none;">¿Qué equipos se perfilan como favoritos en Segunda Andaluza?</a></h4>
-                                <span style="font-size: 0.8rem; color: #64748b;">por <strong>aljarafe_futbol</strong> • Segunda Andaluza</span>
-                            </div>
-                        </div>
-                        <span style="font-size: 0.85rem; color: #64748b; white-space: nowrap;">19 respuestas</span>
-                    </div>
-
-                    <!-- Hilo 6: Tercera Andaluza -->
-                    <div class="thread-item" data-cat="tercera-andaluza" style="padding: 1rem 0; display: flex; justify-content: space-between; align-items: center;">
-                        <div style="display: flex; align-items: center; gap: 1rem;">
-                            <div style="width: 40px; height: 40px; background: #0b1a30; color: #ffffff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; flex-shrink: 0;">T</div>
-                            <div>
-                                <h4 style="margin: 0 0 0.2rem 0; font-size: 1.05rem;"><a href="#" style="color: #0b1a30; text-decoration: none;">Debate sobre el nivel del fútbol base y modesto en Tercera Andaluza</a></h4>
-                                <span style="font-size: 0.8rem; color: #64748b;">por <strong>cantera_sevillana</strong> • Tercera Andaluza</span>
-                            </div>
-                        </div>
-                        <span style="font-size: 0.85rem; color: #64748b; white-space: nowrap;">25 respuestas</span>
-                    </div>
-
+                <div style="margin-top: 0.6rem; display: flex; gap: 0.5rem;">
+                    <input type="text" placeholder="Escribir respuesta..." style="margin-bottom:0; font-size:0.8rem; padding:6px;" onkeypress="handleReply(event, this)">
                 </div>
             </div>
 
         </div>
     </main>
 
-    <footer class="footer" style="margin-top: 2rem;">
-        <p>El fútbol sevillano, desde dentro.</p>
-    </footer>
-
-    <!-- Scripts para el menú desplegable y filtro de categorías del foro -->
     <script>
-    function toggleDropdown(event) {
-        event.stopPropagation();
-        document.getElementById("projectDropdown").classList.toggle("show");
+    function addThread() {
+        const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
+        const cat = document.getElementById('categoryInput').value;
+        const title = document.getElementById('titleInput').value.trim();
+        const msg = document.getElementById('messageInput').value.trim();
+
+        if (!title || !msg) {
+            alert('Por favor, rellena el título y el mensaje.');
+            return;
+        }
+
+        const threadsContainer = document.getElementById('forumThreads');
+        const newThread = document.createElement('div');
+        newThread.className = 'thread-card';
+        newThread.innerHTML = `
+            <div class="thread-header">
+                <span><strong>${author}</strong> en <span style="color:var(--gold);">${cat}</span></span>
+                <span>Ahora mismo</span>
+            </div>
+            <h4 class="thread-title">${title}</h4>
+            <p class="thread-text">${msg}</p>
+            <div class="replies-container" style="display:none;"></div>
+            <div style="margin-top: 0.6rem; display: flex; gap: 0.5rem;">
+                <input type="text" placeholder="Escribir respuesta..." style="margin-bottom:0; font-size:0.8rem; padding:6px;" onkeypress="handleReply(event, this)">
+            </div>
+        `;
+
+        threadsContainer.prepend(newThread);
+        document.getElementById('titleInput').value = '';
+        document.getElementById('messageInput').value = '';
     }
 
-    window.onclick = function(event) {
-        if (!event.target.matches('.dropdown > a')) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            for (var i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
+    function handleReply(e, input) {
+        if (e.key === 'Enter' && input.value.trim() !== '') {
+            const card = input.closest('.thread-card');
+            let replies = card.querySelector('.replies-container');
+            replies.style.display = 'block';
+
+            const newReply = document.createElement('div');
+            newReply.className = 'reply-item';
+            newReply.innerHTML = `<strong>Tú:</strong> ${input.value.trim()}`;
+            replies.appendChild(newReply);
+            input.value = '';
         }
     }
-
-    // Lógica para filtrar hilos según la categoría seleccionada
-    document.addEventListener("DOMContentLoaded", function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const category = urlParams.get('cat');
-        
-        const catMap = {
-            'tercera-rfef': { title: 'Foro: Tercera Federación', name: 'Tercera Federación', id: 'cat-tercera-rfef' },
-            'division-honor': { title: 'Foro: División de Honor Senior', name: 'División de Honor', id: 'cat-division-honor' },
-            'primera-andaluza': { title: 'Foro: Primera Andaluza (Sevilla)', name: 'Primera Andaluza', id: 'cat-primera-andaluza' },
-            'segunda-andaluza': { title: 'Foro: Segunda Andaluza (Sevilla)', name: 'Segunda Andaluza', id: 'cat-segunda-andaluza' },
-            'tercera-andaluza': { title: 'Foro: Tercera Andaluza (Sevilla)', name: 'Tercera Andaluza', id: 'cat-tercera-andaluza' }
-        };
-
-        const threads = document.querySelectorAll('.thread-item');
-        const titleEl = document.getElementById('forum-title');
-        const subtitleEl = document.getElementById('forum-subtitle');
-
-        if (category && catMap[category]) {
-            // Marcar categoría activa
-            document.getElementById(catMap[category].id).style.background = '#e2e8f0';
-            document.getElementById(catMap[category].id).style.fontWeight = 'bold';
-            document.getElementById(catMap[category].id).style.color = '#0b1a30';
-
-            // Actualizar títulos
-            titleEl.textContent = catMap[category].title;
-            subtitleEl.textContent = `Temas de debate de ${catMap[category].name}`;
-
-            // Filtrar hilos
-            threads.forEach(thread => {
-                if (thread.getAttribute('data-cat') === category) {
-                    thread.style.display = 'flex';
-                } else {
-                    thread.style.display = 'none';
-                }
-            });
-        } else {
-            // "Todas las categorías" por defecto
-            const defaultCat = document.getElementById('cat-todas');
-            defaultCat.style.background = '#e2e8f0';
-            defaultCat.style.fontWeight = 'bold';
-            defaultCat.style.color = '#0b1a30';
-
-            threads.forEach(thread => {
-                thread.style.display = 'flex';
-            });
-        }
-    });
     </script>
 </body>
 </html>
