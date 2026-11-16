@@ -21,7 +21,6 @@
             color: var(--text-light);
         }
 
-        /* Cabecera optimizada para móvil */
         .mobile-header {
             background: var(--bg-dark);
             border-bottom: 2px solid var(--gold);
@@ -55,11 +54,9 @@
         .logo-text {
             font-size: 1.1rem;
             font-weight: 800;
-            letter-spacing: 0.5px;
             color: #ffffff;
         }
 
-        /* Menú deslisable horizontal general */
         .nav-scroll {
             display: flex;
             gap: 0.5rem;
@@ -70,9 +67,7 @@
             -webkit-overflow-scrolling: touch;
         }
 
-        .nav-scroll::-webkit-scrollbar {
-            display: none;
-        }
+        .nav-scroll::-webkit-scrollbar { display: none; }
 
         .nav-pill {
             background: rgba(255, 255, 255, 0.08);
@@ -91,14 +86,12 @@
             border-color: var(--gold);
         }
 
-        /* Layout */
         .container {
             padding: 1rem;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        /* Selector táctil de Categorías (Las 4 seleccionadas) */
         .category-filter {
             display: flex;
             gap: 0.5rem;
@@ -117,7 +110,6 @@
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
-            transition: all 0.2s ease;
         }
 
         .cat-btn.active {
@@ -126,7 +118,6 @@
             border-color: var(--gold);
         }
 
-        /* Cabecera de Categoría y Jornada */
         .category-header {
             background: linear-gradient(90deg, var(--bg-dark) 0%, var(--bg-card) 100%);
             border-left: 4px solid var(--gold);
@@ -155,7 +146,6 @@
             color: var(--text-light);
         }
 
-        /* Tarjeta de Partido individual */
         .match-row {
             background: var(--bg-card);
             border-radius: 8px;
@@ -197,7 +187,6 @@
 </head>
 <body>
 
-    <!-- Cabecera Mobile-First -->
     <header class="mobile-header">
         <div class="brand-container">
             <div class="brand-logo">
@@ -205,12 +194,11 @@
                 <span class="logo-text">A RAS DE CALLE</span>
             </div>
         </div>
-        
-        <!-- Menú de Navegación -->
         <nav class="nav-scroll">
             <a href="index.html" class="nav-pill">Inicio</a>
             <a href="partido.html" class="nav-pill active">Resultados</a>
             <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-pill">Categorías</a>
             <a href="foro.html" class="nav-pill">Foro</a>
             <a href="equipos.html" class="nav-pill">Equipos</a>
             <a href="noticias.html" class="nav-pill">Noticias</a>
@@ -229,10 +217,9 @@
             <button class="cat-btn" onclick="filterCategory('2-andaluza', this)">2ª Andaluza</button>
         </div>
 
-        <!-- Contenedor Principal con Scroll Continuo de Partidos -->
         <div id="matches-list">
             
-            <!-- SECCIÓN 1: 3ª FEDERACIÓN (GRUPO X) -->
+            <!-- 3ª RFEF -->
             <div class="category-block 3rfef">
                 <div class="category-header">
                     <h2 class="category-title">3ª RFEF - Grupo X</h2>
@@ -272,7 +259,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 2: DIVISIÓN DE HONOR -->
+            <!-- DIVISIÓN DE HONOR -->
             <div class="category-block div-honor">
                 <div class="category-header">
                     <h2 class="category-title">División de Honor Senior</h2>
@@ -296,7 +283,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 3: PRIMERA ANDALUZA -->
+            <!-- 1ª ANDALUZA -->
             <div class="category-block 1-andaluza">
                 <div class="category-header">
                     <h2 class="category-title">1ª Andaluza Sevilla</h2>
@@ -320,7 +307,7 @@
                 </div>
             </div>
 
-            <!-- SECCIÓN 4: SEGUNDA ANDALUZA -->
+            <!-- 2ª ANDALUZA -->
             <div class="category-block 2-andaluza">
                 <div class="category-header">
                     <h2 class="category-title">2ª Andaluza Sevilla</h2>
@@ -339,14 +326,11 @@
         </div>
     </main>
 
-    <!-- Script de filtrado instantáneo -->
     <script>
     function filterCategory(cat, btn) {
-        // Cambiar botón activo
         document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // Filtrar bloques
         const blocks = document.querySelectorAll('.category-block');
         blocks.forEach(block => {
             if (cat === 'todas') {
