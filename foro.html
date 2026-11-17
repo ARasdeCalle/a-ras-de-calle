@@ -211,7 +211,7 @@
         </div>
     </main>
 
-    <!-- Importar Firebase SDK y lógica -->
+   <!-- Importar Firebase SDK y lógica -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -229,7 +229,7 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Función para escapar HTML y evitar fallos
+        // Función para escapar HTML de forma segura
         function escapeHtml(text) {
             if (!text) return '';
             return text
@@ -240,7 +240,7 @@
                 .replace(/'/g, "'");
         }
 
-        // Manejar el clic del botón mediante listener para evitar errores de ámbito
+        // Manejar el clic del botón
         document.getElementById('submitBtn').addEventListener('click', async function() {
             const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
             const cat = document.getElementById('categoryInput').value;
@@ -296,5 +296,3 @@
             });
         });
     </script>
-</body>
-</html>
