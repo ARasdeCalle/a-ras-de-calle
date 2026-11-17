@@ -87,44 +87,119 @@
         }
 
         .container {
-            padding: 1rem;
-            max-width: 800px;
+            padding: 1.75rem 1.25rem;
+            max-width: 900px;
             margin: 0 auto;
+        }
+
+        .page-title-box {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .page-title-box h1 {
+            color: var(--gold);
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin: 0 0 0.5rem 0;
+        }
+
+        .page-title-box p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        @media (min-width: 650px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .cat-card {
             background: var(--bg-card);
             border-radius: 10px;
-            padding: 1.25rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--gold);
-            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-left: 5px solid var(--gold);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.2s ease;
+        }
+
+        .cat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .cat-header {
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
         }
 
-        .cat-info h3 {
-            margin: 0 0 0.3rem 0;
-            color: #ffffff;
+        .cat-badge {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .cat-name {
             font-size: 1.1rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0 0 0.5rem 0;
         }
 
-        .cat-info p {
-            margin: 0;
-            color: var(--text-muted);
+        .cat-desc {
+            font-size: 0.88rem;
+            color: #cbd5e1;
+            line-height: 1.5;
+            margin: 0 0 1.25rem 0;
+        }
+
+        .cat-footer {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-action {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-light);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 8px 12px;
+            border-radius: 6px;
             font-size: 0.82rem;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.15s ease;
         }
 
-        .btn-link {
+        .btn-action:hover {
             background: var(--gold);
             color: var(--bg-dark);
-            padding: 8px 14px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 800;
-            font-size: 0.8rem;
-            white-space: nowrap;
+            border-color: var(--gold);
         }
     </style>
 </head>
@@ -150,40 +225,102 @@
     </header>
 
     <main class="container">
-        <h2 style="color: var(--gold); font-size: 1.2rem; margin-bottom: 1rem;">Categorías Sevillanas</h2>
-
-        <div class="cat-card">
-            <div class="cat-info">
-                <h3>3ª Federación (Grupo X)</h3>
-                <p>Equipos sevillanos en competición nacional RFEF.</p>
-            </div>
-            <a href="estadisticas.html" class="btn-link">Ver Tabla →</a>
+        <div class="page-title-box">
+            <h1>🏆 Mapa de Competiciones</h1>
+            <p>Estructura completa del fútbol sevillano y andaluz cubierto en A Ras de Calle, desde el escaparate nacional hasta el fútbol provincial más cercano.</p>
         </div>
 
-        <div class="cat-card">
-            <div class="cat-info">
-                <h3>División de Honor Senior</h3>
-                <p>Competición autonómica en Andalucía Occidental.</p>
+        <div class="categories-grid">
+            <!-- Segunda Federación -->
+            <div class="cat-card">
+                <div>
+                    <div class="cat-header">
+                        <span class="cat-badge">Nacional</span>
+                    </div>
+                    <h3 class="cat-name">Segunda Federación (Grupo 4)</h3>
+                    <p class="cat-desc">Máxima categoría cubierta en el portal. Presencia de filiales y equipos históricos de la región.</p>
+                </div>
+                <div class="cat-footer">
+                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
+                    <a href="equipos.html" class="btn-action">Equipos</a>
+                </div>
             </div>
-            <a href="estadisticas.html" class="btn-link">Ver Tabla →</a>
-        </div>
 
-        <div class="cat-card">
-            <div class="cat-info">
-                <h3>Primera Andaluza Sevilla</h3>
-                <p>Máxima categoría del fútbol provincial de Sevilla.</p>
+            <!-- Tercera Federación -->
+            <div class="cat-card">
+                <div>
+                    <div class="cat-header">
+                        <span class="cat-badge">Nacional / RFEF</span>
+                    </div>
+                    <h3 class="cat-name">Tercera Federación (Grupo 10)</h3>
+                    <p class="cat-desc">El puente competitivo entre el fútbol autonómico y la élite nacional con clubes andaluces de referencia.</p>
+                </div>
+                <div class="cat-footer">
+                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
+                    <a href="equipos.html" class="btn-action">Equipos</a>
+                </div>
             </div>
-            <a href="estadisticas.html" class="btn-link">Ver Tabla →</a>
-        </div>
 
-        <div class="cat-card">
-            <div class="cat-info">
-                <h3>Segunda Andaluza Sevilla</h3>
-                <p>Fase de grupos provincial (Grupo 1 y Grupo 2).</p>
+            <!-- División de Honor -->
+            <div class="cat-card">
+                <div>
+                    <div class="cat-header">
+                        <span class="cat-badge">Autonómica</span>
+                    </div>
+                    <h3 class="cat-name">División de Honor Andaluza (Grupo 1)</h3>
+                    <p class="cat-desc">La élite del fútbol autonómico andaluz occidental luchando por dar el salto a categoría nacional.</p>
+                </div>
+                <div class="cat-footer">
+                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
+                    <a href="equipos.html" class="btn-action">Equipos</a>
+                </div>
             </div>
-            <a href="estadisticas.html" class="btn-link">Ver Tabla →</a>
+
+            <!-- Primera Andaluza -->
+            <div class="cat-card">
+                <div>
+                    <div class="cat-header">
+                        <span class="cat-badge">Provincial Sevilla</span>
+                    </div>
+                    <h3 class="cat-name">Primera Andaluza Sevilla</h3>
+                    <p class="cat-desc">Grupo único de máxima exigencia provincial donde cada jornada define el pulso por el ascenso.</p>
+                </div>
+                <div class="cat-footer">
+                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
+                    <a href="equipos.html" class="btn-action">Equipos</a>
+                </div>
+            </div>
+
+            <!-- Segunda Andaluza -->
+            <div class="cat-card">
+                <div>
+                    <div class="cat-header">
+                        <span class="cat-badge">Provincial Sevilla</span>
+                    </div>
+                    <h3 class="cat-name">Segunda Andaluza Sevilla (Grupos 1 y 2)</h3>
+                    <p class="cat-desc">Emoción dividida en dos grupos con los mejores conjuntos de los municipios y barrios de la provincia.</p>
+                </div>
+                <div class="cat-footer">
+                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
+                    <a href="equipos.html" class="btn-action">Equipos</a>
+                </div>
+            </div>
+
+            <!-- Tercera Andaluza -->
+            <div class="cat-card">
+                <div>
+                    <div class="cat-header">
+                        <span class="cat-badge">Fútbol Base / Local</span>
+                    </div>
+                    <h3 class="cat-name">Tercera Andaluza Sevilla (Grupos 1 al 6)</h3>
+                    <p class="cat-desc">El alma del fútbol más puro y cercano de Sevilla repartido en 6 grupos llenos de pasión local.</p>
+                </div>
+                <div class="cat-footer">
+                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
+                    <a href="equipos.html" class="btn-action">Equipos</a>
+                </div>
+            </div>
         </div>
     </main>
-
 </body>
 </html>
