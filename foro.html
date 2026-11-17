@@ -160,20 +160,12 @@
             line-height: 1.4;
         }
 
-        .replies-container {
-            background: var(--bg-dark);
-            border-radius: 6px;
-            padding: 0.75rem;
-            margin-top: 0.75rem;
+        .loading-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            padding: 1rem;
         }
-
-        .reply-item {
-            font-size: 0.82rem;
-            padding: 6px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .reply-item:last-child { border-bottom: none; }
     </style>
 </head>
 <body>
@@ -213,75 +205,91 @@
             <button class="btn-submit" onclick="addThread()">Publicar en el Foro</button>
         </div>
 
-        <!-- Lista de Debates -->
+        <!-- Lista de Debates en Directo -->
         <div id="forumThreads">
-            
-            <div class="thread-card">
-                <div class="thread-header">
-                    <span><strong>Manolo_Nazareno</strong> en <span style="color:var(--gold);">3ª RFEF</span></span>
-                    <span>Hace 15 min</span>
-                </div>
-                <h4 class="thread-title">Gran ambiente en el partido del Dos Hermanas CF</h4>
-                <p class="thread-text">Vaya partidazo el 4-3 de esta jornada. ¿Cómo veis las opciones del equipo para mantener el ritmo arriba?</p>
-                
-                <div class="replies-container">
-                    <div class="reply-item"><strong>Socio_Utrera:</strong> Estuvo muy igualado, el Betis C apretó al final.</div>
-                </div>
-
-                <div style="margin-top: 0.6rem; display: flex; gap: 0.5rem;">
-                    <input type="text" placeholder="Escribir respuesta..." style="margin-bottom:0; font-size:0.8rem; padding:6px;" onkeypress="handleReply(event, this)">
-                </div>
-            </div>
-
+            <div class="loading-text">Cargando debates en directo...</div>
         </div>
     </main>
 
-    <script>
-    function addThread() {
-        const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
-        const cat = document.getElementById('categoryInput').value;
-        const title = document.getElementById('titleInput').value.trim();
-        const msg = document.getElementById('messageInput').value.trim();
+    <!-- Importar Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        if (!title || !msg) {
-            alert('Por favor, rellena el título y el mensaje.');
-            return;
+        // CONFIGURACIÓN DE FIREBASE (Tus claves reales integradas)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAxV8DvFapxP3Q3x-xR7q-bOoJSh2c8Iss",
+            authDomain: "a-ras-de-calle.firebaseapp.com",
+            projectId: "a-ras-de-calle",
+            storageBucket: "a-ras-de-calle.firebasestorage.app",
+            messagingSenderId: "842000224026",
+            appId: "1:842000224026:web:9bdccfad45d002a67026a3",
+            measurementId: "G-02ETYTFN8R"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Hacer la función global para el botón
+        window.addThread = async function() {
+            const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
+            const cat = document.getElementById('categoryInput').value;
+            const title = document.getElementById('titleInput').value.trim();
+            const msg = document.getElementById('messageInput').value.trim();
+
+            if (!title || !msg) {
+                alert('Por favor, rellena el título y el mensaje.');
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "threads"), {
+                    author: author,
+                    category: cat,
+                    title: title,
+                    message: msg,
+                    createdAt: serverTimestamp()
+                });
+
+                document.getElementById('titleInput').value = '';
+                document.getElementById('messageInput').value = '';
+            } catch (e) {
+                console.error("Error al publicar: ", e);
+                alert("Hubo un error al publicar el mensaje.");
+            }
+        };
+
+        // Escuchar cambios en tiempo real desde Firestore
+        const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
+        onSnapshot(q, (snapshot) => {
+            const threadsContainer = document.getElementById('forumThreads');
+            threadsContainer.innerHTML = '';
+
+            if (snapshot.empty) {
+                threadsContainer.innerHTML = '<div class="loading-text">No hay debates todavía. ¡Sé el primero en escribir!</div>';
+                return;
+            }
+
+            snapshot.forEach((doc) => {
+                const data = doc.data();
+                const threadDiv = document.createElement('div');
+                threadDiv.className = 'thread-card';
+                threadDiv.innerHTML = `
+                    <div class="thread-header">
+                        <span><strong>${escapeHtml(data.author)}</strong> en <span style="color:var(--gold);">${escapeHtml(data.category)}</span></span>
+                        <span>Reciente</span>
+                    </div>
+                    <h4 class="thread-title">${escapeHtml(data.title)}</h4>
+                    <p class="thread-text">${escapeHtml(data.message)}</p>
+                `;
+                threadsContainer.appendChild(threadDiv);
+            });
+        });
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, """).replace(/'/g, "'");
         }
-
-        const threadsContainer = document.getElementById('forumThreads');
-        const newThread = document.createElement('div');
-        newThread.className = 'thread-card';
-        newThread.innerHTML = `
-            <div class="thread-header">
-                <span><strong>${author}</strong> en <span style="color:var(--gold);">${cat}</span></span>
-                <span>Ahora mismo</span>
-            </div>
-            <h4 class="thread-title">${title}</h4>
-            <p class="thread-text">${msg}</p>
-            <div class="replies-container" style="display:none;"></div>
-            <div style="margin-top: 0.6rem; display: flex; gap: 0.5rem;">
-                <input type="text" placeholder="Escribir respuesta..." style="margin-bottom:0; font-size:0.8rem; padding:6px;" onkeypress="handleReply(event, this)">
-            </div>
-        `;
-
-        threadsContainer.prepend(newThread);
-        document.getElementById('titleInput').value = '';
-        document.getElementById('messageInput').value = '';
-    }
-
-    function handleReply(e, input) {
-        if (e.key === 'Enter' && input.value.trim() !== '') {
-            const card = input.closest('.thread-card');
-            let replies = card.querySelector('.replies-container');
-            replies.style.display = 'block';
-
-            const newReply = document.createElement('div');
-            newReply.className = 'reply-item';
-            newReply.innerHTML = `<strong>Tú:</strong> ${input.value.trim()}`;
-            replies.appendChild(newReply);
-            input.value = '';
-        }
-    }
     </script>
 </body>
 </html>
