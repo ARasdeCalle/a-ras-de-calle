@@ -88,50 +88,63 @@
 
         .container {
             padding: 1rem;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
         }
 
-        .selectors-box {
+        .filter-panel {
             background: var(--bg-card);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 1.25rem;
             border-radius: 8px;
-            padding: 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             margin-bottom: 1.25rem;
-            display: flex;
-            flex-direction: column;
+        }
+
+        .panel-title {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+        }
+
+        .selectors-grid {
+            display: grid;
+            grid-template-columns: 1fr;
             gap: 0.75rem;
         }
 
-        .select-group {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
+        @media (min-width: 600px) {
+            .selectors-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        .select-group label {
-            font-size: 0.75rem;
-            color: var(--gold);
-            font-weight: bold;
-            text-transform: uppercase;
+        .field-group label {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+            font-weight: 600;
         }
 
         select {
+            width: 100%;
             background: var(--bg-dark);
             color: var(--text-light);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 10px 12px;
             border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
             font-size: 0.9rem;
-            font-weight: 600;
-            outline: none;
         }
 
-        .table-card {
+        .table-container {
             background: var(--bg-card);
             border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             overflow-x: auto;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -139,39 +152,53 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 0.85rem;
+            white-space: nowrap;
         }
 
         th {
             background: var(--bg-dark);
             color: var(--gold);
-            padding: 10px;
-            font-weight: 800;
-            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 10px 8px;
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid var(--gold);
         }
 
         td {
-            padding: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 10px 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            color: #e2e8f0;
         }
 
-        tr:nth-child(1), tr:nth-child(2) {
-            border-left: 4px solid var(--gold);
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.03);
         }
 
-        .pos-badge {
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        .font-bold { font-weight: 700; }
+        .gold-text { color: var(--gold); }
+
+        .table-header-title {
+            padding: 1rem;
+            font-size: 1rem;
             font-weight: 800;
-            display: inline-block;
-            width: 20px;
-            text-align: center;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @media (min-width: 600px) {
-            .selectors-box {
-                flex-direction: row;
-            }
-            .select-group {
-                flex: 1;
-            }
+        .table-badge {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -197,97 +224,388 @@
     </header>
 
     <main class="container">
-        
-        <!-- Selectores por Categoría y Grupo -->
-        <div class="selectors-box">
-            <div class="select-group">
-                <label for="catSelect">Categoría</label>
-                <select id="catSelect" onchange="updateSubgroups()">
-                    <option value="3rfef">3ª RFEF</option>
-                    <option value="div-honor">División de Honor</option>
-                    <option value="1-andaluza">1ª Andaluza</option>
-                    <option value="2-andaluza">2ª Andaluza</option>
-                </select>
+        <section class="filter-panel">
+            <h2 class="panel-title">📊 Clasificaciones Oficiales (Sevilla y Andalucía)</h2>
+            <div class="selectors-grid">
+                <div class="field-group">
+                    <label for="categorySelect">Categoría</label>
+                    <select id="categorySelect"></select>
+                </div>
+                <div class="field-group">
+                    <label for="groupSelect">Grupo</label>
+                    <select id="groupSelect"></select>
+                </div>
             </div>
-            
-            <div class="select-group">
-                <label for="groupSelect">Grupo / Subgrupo</label>
-                <select id="groupSelect">
-                    <option value="gx">Grupo X</option>
-                </select>
-            </div>
-        </div>
+        </section>
 
-        <!-- Tabla de Clasificación -->
-        <div class="table-card">
+        <div class="table-container">
+            <div class="table-header-title">
+                <span id="tableTitle">Clasificación</span>
+                <span class="table-badge" id="tableJornada">Jornada Actual</span>
+            </div>
             <table>
                 <thead>
                     <tr>
-                        <th>Pos</th>
+                        <th class="text-center" style="width: 40px;">#</th>
                         <th>Equipo</th>
-                        <th>PJ</th>
-                        <th>PG</th>
-                        <th>PE</th>
-                        <th>PP</th>
-                        <th>Pts</th>
+                        <th class="text-center">Pts</th>
+                        <th class="text-center">J</th>
+                        <th class="text-center">G</th>
+                        <th class="text-center">E</th>
+                        <th class="text-center">P</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody">
-                    <tr>
-                        <td><span class="pos-badge">1</span></td>
-                        <td><strong>Dos Hermanas CF 1971</strong></td>
-                        <td>9</td><td>7</td><td>1</td><td>1</td>
-                        <td><strong style="color: var(--gold);">22</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span class="pos-badge">2</span></td>
-                        <td>CD Pozoblanco</td>
-                        <td>9</td><td>6</td><td>2</td><td>1</td>
-                        <td><strong>20</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span class="pos-badge">3</span></td>
-                        <td>Real Betis C</td>
-                        <td>9</td><td>5</td><td>2</td><td>2</td>
-                        <td><strong>17</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span class="pos-badge">4</span></td>
-                        <td>Sevilla FC C</td>
-                        <td>9</td><td>4</td><td>3</td><td>2</td>
-                        <td><strong>15</strong></td>
-                    </tr>
-                    <tr>
-                        <td><span class="pos-badge">5</span></td>
-                        <td>CD Utrera</td>
-                        <td>9</td><td>4</td><td>2</td><td>3</td>
-                        <td><strong>14</strong></td>
-                    </tr>
+                <tbody id="standingsBody">
+                    <!-- Dinámico -->
                 </tbody>
             </table>
         </div>
     </main>
 
     <script>
-    const subgroups = {
-        '3rfef': ['Grupo X'],
-        'div-honor': ['Grupo 1 (Andalucía Occ.)'],
-        '1-andaluza': ['Grupo Único Sevilla'],
-        '2-andaluza': ['Grupo 1 (Sevilla)', 'Grupo 2 (Sevilla)']
-    };
+        // Datos reales estructurados a fecha de 17 de noviembre de 2026 basados en tus capturas oficiales
+        const standingsData = {
+            "Segunda Federación": {
+                "Grupo 4": [
+                    { pos: 1, name: "RC Recreativo de Huelva", pts: 21, j: 10, g: 6, e: 3, p: 1 },
+                    { pos: 2, name: "CD Don Benito", pts: 20, j: 11, g: 6, e: 2, p: 3 },
+                    { pos: 3, name: "CD Badajoz", pts: 20, j: 11, g: 5, e: 5, p: 1 },
+                    { pos: 4, name: "CD Ciudad de Lucena", pts: 19, j: 11, g: 5, e: 4, p: 2 },
+                    { pos: 5, name: "Xerez CD", pts: 18, j: 11, g: 5, e: 3, p: 3 },
+                    { pos: 6, name: "Betis Deportivo", pts: 18, j: 10, g: 5, e: 3, p: 2 },
+                    { pos: 7, name: "CD Estepona Fútbol Senior", pts: 18, j: 11, g: 5, e: 3, p: 3 },
+                    { pos: 8, name: "Linares Deportivo", pts: 17, j: 11, g: 4, e: 5, p: 2 },
+                    { pos: 9, name: "CP Mijas Las Lagunas", pts: 15, j: 11, g: 3, e: 6, p: 2 },
+                    { pos: 10, name: "Salerm Cosmetics Puente Genil FC", pts: 15, j: 11, g: 4, e: 3, p: 4 },
+                    { pos: 11, name: "Atlético Central", pts: 15, j: 11, g: 5, e: 0, p: 6 },
+                    { pos: 12, name: "Sevilla Atlético", pts: 14, j: 10, g: 3, e: 5, p: 2 },
+                    { pos: 13, name: "Marbella FC", pts: 13, j: 11, g: 3, e: 4, p: 4 },
+                    { pos: 14, name: "Atlético Sanluqueño CF", pts: 10, j: 11, g: 2, e: 4, p: 5 },
+                    { pos: 15, name: "CD Tenerife 'B'", pts: 10, j: 10, g: 3, e: 1, p: 6 },
+                    { pos: 16, name: "UD Las Palmas Atlético", pts: 8, j: 11, g: 2, e: 2, p: 7 },
+                    { pos: 17, name: "Club Atlético Antoniano", pts: 6, j: 11, g: 1, e: 3, p: 7 },
+                    { pos: 18, name: "UD Tamaraceite", pts: 6, j: 11, g: 2, e: 0, p: 9 }
+                ]
+            },
+            "Tercera Federación": {
+                "Grupo 10": [
+                    { pos: 1, name: "Dos Hermanas Club de Fútbol 1971", pts: 23, j: 11, g: 7, e: 2, p: 2 },
+                    { pos: 2, name: "San Roque de Lepe C.D., S.A.D.", pts: 23, j: 11, g: 7, e: 2, p: 2 },
+                    { pos: 3, name: "Racing Club Portuense", pts: 21, j: 11, g: 6, e: 3, p: 2 },
+                    { pos: 4, name: "Real Betis Balompié S.A.D.", pts: 20, j: 11, g: 6, e: 2, p: 3 },
+                    { pos: 5, name: "Xerez Deportivo F.C.", pts: 19, j: 11, g: 5, e: 4, p: 2 },
+                    { pos: 6, name: "C.D. Utrera", pts: 19, j: 10, g: 6, e: 1, p: 3 },
+                    { pos: 7, name: "C.D. Espejeña", pts: 17, j: 11, g: 5, e: 2, p: 4 },
+                    { pos: 8, name: "U.D. Tomares", pts: 17, j: 11, g: 5, e: 2, p: 4 },
+                    { pos: 9, name: "C.D. Pozoblanco", pts: 13, j: 11, g: 3, e: 4, p: 4 },
+                    { pos: 10, name: "Real Balompédica Linense", pts: 13, j: 11, g: 3, e: 4, p: 4 },
+                    { pos: 11, name: "Chiclana C.F.", pts: 12, j: 11, g: 3, e: 3, p: 5 },
+                    { pos: 12, name: "A.D. Ceuta F.C.", pts: 12, j: 11, g: 3, e: 3, p: 5 },
+                    { pos: 13, name: "Conil C.F.", pts: 12, j: 11, g: 3, e: 3, p: 5 },
+                    { pos: 14, name: "Cádiz C.F., S.A.D.", pts: 10, j: 11, g: 1, e: 7, p: 3 },
+                    { pos: 15, name: "Córdoba C.F.", pts: 10, j: 10, g: 2, e: 4, p: 4 },
+                    { pos: 16, name: "Sevilla F.C., S.A.D.", pts: 9, j: 11, g: 1, e: 6, p: 4 },
+                    { pos: 17, name: "Atlético Onubense", pts: 8, j: 11, g: 2, e: 2, p: 7 },
+                    { pos: 18, name: "Bollullos C.F.", pts: 7, j: 11, g: 1, e: 4, p: 6 }
+                ]
+            },
+            "División de Honor Andaluza": {
+                "Grupo 1": [
+                    { pos: 1, name: "Palma del Río Atlético C.F.", pts: 23, j: 10, g: 7, e: 2, p: 1 },
+                    { pos: 2, name: "La Palma C.F.", pts: 21, j: 11, g: 7, e: 0, p: 4 },
+                    { pos: 3, name: "Montilla C.F.", pts: 21, j: 11, g: 6, e: 3, p: 2 },
+                    { pos: 4, name: "C.D. Cabecense", pts: 19, j: 10, g: 5, e: 4, p: 1 },
+                    { pos: 5, name: "Arcos C.F.", pts: 19, j: 10, g: 5, e: 4, p: 1 },
+                    { pos: 6, name: "Coria C.F.", pts: 18, j: 10, g: 5, e: 3, p: 2 },
+                    { pos: 7, name: "C.D. Montalbeño", pts: 17, j: 11, g: 4, e: 5, p: 2 },
+                    { pos: 8, name: "Almodóvar del Río C.F.", pts: 16, j: 10, g: 4, e: 4, p: 2 },
+                    { pos: 9, name: "Unión Balompédica Lebrijana", pts: 15, j: 9, g: 4, e: 3, p: 2 },
+                    { pos: 10, name: "Castilleja C.F.", pts: 14, j: 11, g: 3, e: 5, p: 3 },
+                    { pos: 11, name: "Rayo Sanluqueño C.D.", pts: 13, j: 10, g: 3, e: 4, p: 3 },
+                    { pos: 12, name: "Isla Cristina C.F.", pts: 12, j: 10, g: 3, e: 3, p: 4 },
+                    { pos: 13, name: "U.P. Viso", pts: 11, j: 10, g: 3, e: 2, p: 5 },
+                    { pos: 14, name: "C.D. Moguer", pts: 10, j: 10, g: 3, e: 1, p: 6 },
+                    { pos: 15, name: "U.D. Rinconada", pts: 10, j: 11, g: 3, e: 1, p: 7 },
+                    { pos: 16, name: "C.D. Atlético Espeleño", pts: 9, j: 11, g: 2, e: 3, p: 6 },
+                    { pos: 17, name: "C.D. Internacional de Sevilla", pts: 8, j: 10, g: 2, e: 2, p: 6 },
+                    { pos: 18, name: "Cádiz C.F., S.A.D.", pts: 7, j: 11, g: 1, e: 4, p: 6 },
+                    { pos: 19, name: "Aroche C.F.", pts: 3, j: 10, g: 0, e: 3, p: 7 }
+                ]
+            },
+            "Primera Andaluza Sevilla": {
+                "Grupo Único": [
+                    { pos: 1, name: "U.D. Pilas", pts: 22, j: 10, g: 7, e: 1, p: 2 },
+                    { pos: 2, name: "A.D. San José", pts: 21, j: 10, g: 6, e: 3, p: 1 },
+                    { pos: 3, name: "C.D. Mairena", pts: 21, j: 10, g: 6, e: 3, p: 1 },
+                    { pos: 4, name: "La Barrera C.F.", pts: 21, j: 10, g: 6, e: 3, p: 1 },
+                    { pos: 5, name: "A.D. Mosqueo", pts: 19, j: 10, g: 6, e: 1, p: 3 },
+                    { pos: 6, name: "C.D. Ventippo Balompié", pts: 18, j: 10, g: 5, e: 3, p: 2 },
+                    { pos: 7, name: "Torreblanca C.F.", pts: 15, j: 10, g: 4, e: 3, p: 3 },
+                    { pos: 8, name: "Osuna Bote Club", pts: 14, j: 10, g: 3, e: 5, p: 2 },
+                    { pos: 9, name: "C.D. Alcalá", pts: 14, j: 10, g: 4, e: 2, p: 4 },
+                    { pos: 10, name: "Palomares C.F.", pts: 14, j: 10, g: 4, e: 2, p: 4 },
+                    { pos: 11, name: "C.D. Pedrera", pts: 13, j: 10, g: 3, e: 4, p: 3 },
+                    { pos: 12, name: "C.D. San Marcos", pts: 10, j: 10, g: 3, e: 1, p: 6 },
+                    { pos: 13, name: "Camas C.F.", pts: 10, j: 10, g: 3, e: 1, p: 6 },
+                    { pos: 14, name: "Lora C.F.", pts: 10, j: 10, g: 2, e: 4, p: 4 },
+                    { pos: 15, name: "U.D. Villaverde", pts: 9, j: 10, g: 3, e: 0, p: 7 },
+                    { pos: 16, name: "C.D. Montequinto", pts: 8, j: 10, g: 2, e: 2, p: 6 },
+                    { pos: 17, name: "C.D. Arahal Balompié", pts: 6, j: 10, g: 2, e: 0, p: 8 },
+                    { pos: 18, name: "U.D. Bellavista", pts: 6, j: 10, g: 2, e: 0, p: 8 }
+                ]
+            },
+            "Segunda Andaluza Sevilla": {
+                "Grupo 1": [
+                    { pos: 1, name: "C.D. El Palmar Vereda Real", pts: 20, j: 10, g: 6, e: 2, p: 2 },
+                    { pos: 2, name: "U.D. Morón C.F.", pts: 19, j: 10, g: 6, e: 1, p: 3 },
+                    { pos: 3, name: "C.D. Los Palacios C.F.", pts: 19, j: 10, g: 6, e: 1, p: 3 },
+                    { pos: 4, name: "P.D. Rociera", pts: 19, j: 10, g: 6, e: 1, p: 3 },
+                    { pos: 5, name: "Calavera C.F.", pts: 18, j: 10, g: 5, e: 3, p: 2 },
+                    { pos: 6, name: "Écija Balompié, S.A.D.", pts: 17, j: 10, g: 5, e: 2, p: 3 },
+                    { pos: 7, name: "A.D. Cerro del Águila", pts: 17, j: 10, g: 5, e: 2, p: 3 },
+                    { pos: 8, name: "La Liara Balompié", pts: 14, j: 10, g: 4, e: 2, p: 4 },
+                    { pos: 9, name: "Dos Hermanas Club de Fútbol 1971 B", pts: 14, j: 10, g: 4, e: 2, p: 4 },
+                    { pos: 10, name: "C.D. Utrera", pts: 14, j: 10, g: 4, e: 2, p: 4 },
+                    { pos: 11, name: "C.D. Demo", pts: 13, j: 10, g: 3, e: 4, p: 3 },
+                    { pos: 12, name: "Club Atlético Central", pts: 12, j: 10, g: 3, e: 3, p: 4 },
+                    { pos: 13, name: "La Motilla F.C.", pts: 11, j: 10, g: 3, e: 3, p: 4 },
+                    { pos: 14, name: "C.D. Asoc. Dva. Nervión", pts: 10, j: 10, g: 2, e: 4, p: 4 },
+                    { pos: 15, name: "Estrella San Agustín", pts: 10, j: 10, g: 2, e: 4, p: 4 },
+                    { pos: 16, name: "C.D. Fuentes", pts: 10, j: 10, g: 3, e: 1, p: 6 },
+                    { pos: 17, name: "C.D. de Fútbol Herrera", pts: 7, j: 10, g: 2, e: 1, p: 7 },
+                    { pos: 18, name: "C.D. Cabecense", pts: 5, j: 10, g: 1, e: 2, p: 7 }
+                ],
+                "Grupo 2": [
+                    { pos: 1, name: "Olivarense Atlético", pts: 24, j: 10, g: 7, e: 3, p: 0 },
+                    { pos: 2, name: "Atco. Algabeño", pts: 22, j: 10, g: 7, e: 1, p: 2 },
+                    { pos: 3, name: "C.D. Minas", pts: 18, j: 10, g: 5, e: 3, p: 2 },
+                    { pos: 4, name: "C.D. Aznalcázar", pts: 18, j: 10, g: 5, e: 3, p: 2 },
+                    { pos: 5, name: "Triana C.F.", pts: 17, j: 10, g: 5, e: 2, p: 3 },
+                    { pos: 6, name: "Vistahermosa C.F.", pts: 16, j: 10, g: 5, e: 1, p: 4 },
+                    { pos: 7, name: "Atlético Sanlúcar C.F.", pts: 16, j: 10, g: 5, e: 1, p: 4 },
+                    { pos: 8, name: "Espartinas C.F.", pts: 15, j: 10, g: 5, e: 0, p: 5 },
+                    { pos: 9, name: "U.D. Loreto", pts: 13, j: 10, g: 4, e: 1, p: 5 },
+                    { pos: 10, name: "Benacazón C.F.", pts: 13, j: 10, g: 3, e: 4, p: 3 },
+                    { pos: 11, name: "C.D. Valencina F.C.", pts: 13, j: 10, g: 3, e: 4, p: 3 },
+                    { pos: 12, name: "Puebla C.F.", pts: 13, j: 10, g: 4, e: 2, p: 4 },
+                    { pos: 13, name: "C.M.D. San Juan", pts: 9, j: 10, g: 2, e: 3, p: 5 },
+                    { pos: 14, name: "Villafranco C.F.", pts: 9, j: 10, g: 2, e: 3, p: 5 },
+                    { pos: 15, name: "Campana Balompié", pts: 9, j: 10, g: 2, e: 3, p: 5 },
+                    { pos: 16, name: "Villanueva Atlético", pts: 9, j: 10, g: 3, e: 0, p: 7 },
+                    { pos: 17, name: "C.D. Gelves", pts: 7, j: 10, g: 2, e: 2, p: 6 },
+                    { pos: 18, name: "Camino Viejo C.F.", pts: 7, j: 10, g: 1, e: 4, p: 5 }
+                ]
+            },
+            "Tercera Andaluza Sevilla": {
+                "Grupo 1": [
+                    { pos: 1, name: "Guadalcanal C.D.", pts: 21, j: 9, g: 6, e: 3, p: 0 },
+                    { pos: 2, name: "C.D. Peñaflor F.S.", pts: 17, j: 8, g: 5, e: 2, p: 1 },
+                    { pos: 3, name: "C.D. de Fútbol Cazalla Sierra", pts: 17, j: 9, g: 5, e: 2, p: 2 },
+                    { pos: 4, name: "U.D. Constantina", pts: 16, j: 9, g: 5, e: 1, p: 3 },
+                    { pos: 5, name: "C.D. Celti Puebla", pts: 14, j: 8, g: 4, e: 2, p: 2 },
+                    { pos: 6, name: "Brenes Balompié", pts: 14, j: 8, g: 4, e: 2, p: 2 },
+                    { pos: 7, name: "Alcalá del Río C.F.", pts: 13, j: 9, g: 4, e: 1, p: 4 },
+                    { pos: 8, name: "C.D. Cantillana", pts: 12, j: 8, g: 3, e: 3, p: 2 },
+                    { pos: 9, name: "Club Deportivo Oduciarosal", pts: 11, j: 8, g: 3, e: 2, p: 3 },
+                    { pos: 10, name: "CD Priorato Juventud de Fútbol", pts: 11, j: 9, g: 3, e: 2, p: 4 },
+                    { pos: 11, name: "Burguillos C.D.", pts: 9, j: 8, g: 3, e: 0, p: 5 },
+                    { pos: 12, name: "C.D. Alcolea del Río F.C.", pts: 8, j: 8, g: 2, e: 2, p: 4 },
+                    { pos: 13, name: "Cañada Rosal Club de Fútbol", pts: 8, j: 9, g: 2, e: 2, p: 5 },
+                    { pos: 14, name: "C.D. Unión Deportiva El Pedroso", pts: 5, j: 8, g: 1, e: 2, p: 5 },
+                    { pos: 15, name: "C.D. Unión Deportiva San Nicolás del Puerto", pts: 0, j: 8, g: 0, e: 0, p: 8 }
+                ],
+                "Grupo 2": [
+                    { pos: 1, name: "C.D. Coronil", pts: 19, j: 8, g: 6, e: 1, p: 1 },
+                    { pos: 2, name: "Badalotosa C.F.", pts: 18, j: 7, g: 6, e: 0, p: 1 },
+                    { pos: 3, name: "Peña Bética Alcalá", pts: 14, j: 8, g: 4, e: 2, p: 2 },
+                    { pos: 4, name: "Paradas Balompié", pts: 12, j: 7, g: 3, e: 3, p: 1 },
+                    { pos: 5, name: "Unión Dva. La Jara", pts: 12, j: 8, g: 3, e: 3, p: 2 },
+                    { pos: 6, name: "Marchena Bpié.", pts: 12, j: 8, g: 3, e: 3, p: 2 },
+                    { pos: 7, name: "U.D. Marinaleda", pts: 11, j: 8, g: 3, e: 2, p: 3 },
+                    { pos: 8, name: "Gilena C.F.", pts: 11, j: 8, g: 3, e: 2, p: 3 },
+                    { pos: 9, name: "Agr. Dva. Carmona", pts: 10, j: 6, g: 3, e: 1, p: 2 },
+                    { pos: 10, name: "La Barrera C.F.", pts: 10, j: 7, g: 3, e: 1, p: 3 },
+                    { pos: 11, name: "La Roda C.F.", pts: 9, j: 8, g: 3, e: 0, p: 5 },
+                    { pos: 12, name: "Estepa Industrial C.D.", pts: 4, j: 7, g: 1, e: 1, p: 5 },
+                    { pos: 13, name: "C.D. Mosquito B", pts: 4, j: 8, g: 1, e: 1, p: 6 },
+                    { pos: 14, name: "U.D. Consolación", pts: 3, j: 9, g: 1, e: 0, p: 8 }
+                ],
+                "Grupo 3": [
+                    { pos: 1, name: "C.D. Tabladilla", pts: 20, j: 9, g: 6, e: 2, p: 1 },
+                    { pos: 2, name: "Cuervo Deportivo", pts: 19, j: 9, g: 6, e: 1, p: 2 },
+                    { pos: 3, name: "C.D. Miguel de Unamuno", pts: 19, j: 8, g: 6, e: 1, p: 1 },
+                    { pos: 4, name: "C.D. Doctor Fleming", pts: 17, j: 7, g: 5, e: 2, p: 0 },
+                    { pos: 5, name: "C.D. Montequinto", pts: 14, j: 9, g: 4, e: 2, p: 3 },
+                    { pos: 6, name: "U.D. Fuente del Rey", pts: 13, j: 7, g: 4, e: 1, p: 2 },
+                    { pos: 7, name: "C.D. Marismillas", pts: 13, j: 8, g: 4, e: 1, p: 3 },
+                    { pos: 8, name: "C.D. Sam-Cam Dos Hermanas", pts: 10, j: 7, g: 3, e: 1, p: 3 },
+                    { pos: 9, name: "C.D. Lebrija Alma", pts: 10, j: 8, g: 2, e: 4, p: 2 },
+                    { pos: 10, name: "C.D. Cantely", pts: 6, j: 7, g: 1, e: 3, p: 3 },
+                    { pos: 11, name: "C.D. Atlético Maribáñez", pts: 5, j: 8, g: 1, e: 2, p: 5 },
+                    { pos: 12, name: "C.D. David Castedo B (DC 3)", pts: 4, j: 7, g: 1, e: 1, p: 5 },
+                    { pos: 13, name: "La Motilla F.C.", pts: 4, j: 8, g: 1, e: 1, p: 6 },
+                    { pos: 14, name: "Club Deportivo Fútbol Eterna Juventud", pts: 0, j: 8, g: 0, e: 0, p: 8 }
+                ],
+                "Grupo 4": [
+                    { pos: 1, name: "Sevilla F.C., S.A.D.", pts: 27, j: 9, g: 9, e: 0, p: 0 },
+                    { pos: 2, name: "Triaca F.C.", pts: 18, j: 9, g: 5, e: 3, p: 1 },
+                    { pos: 3, name: "C.D. Montellano", pts: 17, j: 8, g: 5, e: 2, p: 1 },
+                    { pos: 4, name: "Ciudad Jardín C.F.", pts: 17, j: 9, g: 5, e: 2, p: 2 },
+                    { pos: 5, name: "Ibarburu C.F.", pts: 16, j: 8, g: 4, e: 4, p: 0 },
+                    { pos: 6, name: "C.D. Colegio Claret", pts: 15, j: 8, g: 4, e: 3, p: 1 },
+                    { pos: 7, name: "U.D. Bellavista", pts: 15, j: 9, g: 4, e: 3, p: 2 },
+                    { pos: 8, name: "C.D. Mosquito A", pts: 14, j: 7, g: 4, e: 2, p: 1 },
+                    { pos: 9, name: "C.D. Mairena", pts: 12, j: 7, g: 3, e: 3, p: 1 },
+                    { pos: 10, name: "Andalucía Este C.F.", pts: 10, j: 9, g: 3, e: 1, p: 5 },
+                    { pos: 11, name: "C.D. Rabesa", pts: 6, j: 8, g: 2, e: 0, p: 6 },
+                    { pos: 12, name: "La Vino Tinto", pts: 4, j: 8, g: 1, e: 1, p: 6 },
+                    { pos: 13, name: "C.D. Ishbiliya Balompié", pts: 3, j: 8, g: 1, e: 0, p: 7 },
+                    { pos: 14, name: "Coripe C.F.", pts: 0, j: 8, g: 0, e: 0, p: 8 },
+                    { pos: 15, name: "Club Jorge Juan Antonio Ulloa", pts: 0, j: 9, g: 0, e: 0, p: 9 }
+                ],
+                "Grupo 5": [
+                    { pos: 1, name: "U.D. Soleá", pts: 24, j: 8, g: 8, e: 0, p: 0 },
+                    { pos: 2, name: "C.D. Santiponce", pts: 24, j: 8, g: 8, e: 0, p: 0 },
+                    { pos: 3, name: "Guillena C.F.", pts: 22, j: 9, g: 7, e: 1, p: 1 },
+                    { pos: 4, name: "C.D. Unión Gerena", pts: 15, j: 8, g: 5, e: 0, p: 3 },
+                    { pos: 5, name: "J.D. Bormujos", pts: 14, j: 9, g: 4, e: 2, p: 3 },
+                    { pos: 6, name: "U.D. Loreto", pts: 14, j: 9, g: 4, e: 2, p: 3 },
+                    { pos: 7, name: "C.D. San Jerónimo", pts: 14, j: 8, g: 4, e: 2, p: 2 },
+                    { pos: 8, name: "C.D. Atlético San Juan", pts: 12, j: 9, g: 4, e: 0, p: 5 },
+                    { pos: 9, name: "C.D. Aznalcóllar Fútbol Base", pts: 11, j: 9, g: 3, e: 2, p: 4 },
+                    { pos: 10, name: "C.D. Castilblanco F.C.", pts: 9, j: 8, g: 3, e: 0, p: 5 },
+                    { pos: 11, name: "C.D. Torre Reina", pts: 7, j: 8, g: 2, e: 1, p: 5 },
+                    { pos: 12, name: "Real Betis Balompié S.A.D.", pts: 7, j: 9, g: 3, e: 1, p: 5 },
+                    { pos: 13, name: "AA.AA. Colspe", pts: 6, j: 8, g: 2, e: 0, p: 6 },
+                    { pos: 14, name: "Club Deportivo Galeones", pts: 1, j: 8, g: 0, e: 1, p: 7 },
+                    { pos: 15, name: "El Ronquillo C.F.", pts: 0, j: 8, g: 0, e: 0, p: 8 }
+                ],
+                "Grupo 6": [
+                    { pos: 1, name: "Mures C.F.", pts: 24, j: 8, g: 8, e: 0, p: 0 },
+                    { pos: 2, name: "Huevar C.F.", pts: 16, j: 9, g: 4, e: 4, p: 1 },
+                    { pos: 3, name: "C.D. Salteras", pts: 16, j: 9, g: 5, e: 1, p: 3 },
+                    { pos: 4, name: "C.D. Almensilla", pts: 15, j: 9, g: 5, e: 0, p: 4 },
+                    { pos: 5, name: "C.D. Albaida", pts: 13, j: 8, g: 4, e: 1, p: 3 },
+                    { pos: 6, name: "U.D. Mairena del Aljarafe", pts: 13, j: 8, g: 4, e: 1, p: 3 },
+                    { pos: 7, name: "Juventud Dva. Ginés", pts: 10, j: 7, g: 2, e: 4, p: 1 },
+                    { pos: 8, name: "C.D. San Martín", pts: 10, j: 7, g: 3, e: 1, p: 3 },
+                    { pos: 9, name: "C.D. Cantarrana", pts: 8, j: 8, g: 2, e: 2, p: 4 },
+                    { pos: 10, name: "Umbrete C.F.", pts: 8, j: 8, g: 2, e: 2, p: 4 },
+                    { pos: 11, name: "C.D. Carrión de los Céspedes", pts: 7, j: 7, g: 2, e: 1, p: 4 },
+                    { pos: 12, name: "Atlético Libertad", pts: 7, j: 7, g: 2, e: 1, p: 4 },
+                    { pos: 13, name: "R.C.D. Nueva Sevilla", pts: 6, j: 8, g: 1, e: 3, p: 4 },
+                    { pos: 14, name: "Bormujos GSport F.S. Ciudad Inmobiliaria", pts: 1, j: 7, g: 0, e: 1, p: 6 }
+                ]
+            }
+        };
 
-    function updateSubgroups() {
-        const cat = document.getElementById('catSelect').value;
+        const categorySelect = document.getElementById('categorySelect');
         const groupSelect = document.getElementById('groupSelect');
-        groupSelect.innerHTML = '';
+        const standingsBody = document.getElementById('standingsBody');
+        const tableTitle = document.getElementById('tableTitle');
+        const tableJornada = document.getElementById('tableJornada');
 
-        subgroups[cat].forEach(group => {
-            const opt = document.createElement('option');
-            opt.value = group.toLowerCase().replace(/[^a-z0-9]/g, '-');
-            opt.textContent = group;
-            groupSelect.appendChild(opt);
-        });
-    }
+        function populateCategories() {
+            const categories = Object.keys(standingsData);
+            categorySelect.innerHTML = '';
+            categories.forEach(cat => {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                categorySelect.appendChild(option);
+            });
+            populateGroups();
+        }
+
+        function populateGroups() {
+            const selectedCat = categorySelect.value;
+            const groups = Object.keys(standingsData[selectedCat]);
+            groupSelect.innerHTML = '';
+            groups.forEach(grp => {
+                const option = document.createElement('option');
+                option.value = grp;
+                option.textContent = grp;
+                groupSelect.appendChild(option);
+            });
+            renderTable();
+        }
+
+        function renderTable() {
+            const selectedCat = categorySelect.value;
+            const selectedGrp = groupSelect.value;
+            const rows = standingsData[selectedCat][selectedGrp] || [];
+
+            tableTitle.textContent = selectedCat + ' (' + selectedGrp + ')';
+            tableJornada.textContent = 'Actualizado 17 Nov 2026';
+
+            standingsBody.innerHTML = '';
+
+            if (rows.length === 0) {
+                const tr = document.createElement('tr');
+                const td = document.createElement('td');
+                td.colSpan = 7;
+                td.className = 'text-center';
+                td.style.padding = '2rem';
+                td.textContent = 'No hay datos de clasificación disponibles para este grupo.';
+                tr.appendChild(td);
+                standingsBody.appendChild(tr);
+                return;
+            }
+
+            rows.forEach(team => {
+                const tr = document.createElement('tr');
+
+                // Posición
+                const tdPos = document.createElement('td');
+                tdPos.className = 'text-center font-bold gold-text';
+                tdPos.textContent = team.pos;
+
+                // Nombre
+                const tdName = document.createElement('td');
+                tdName.className = 'font-bold';
+                tdName.textContent = team.name;
+
+                // Puntos
+                const tdPts = document.createElement('td');
+                tdPts.className = 'text-center font-bold gold-text';
+                tdPts.textContent = team.pts;
+
+                // Jugados
+                const tdJ = document.createElement('td');
+                tdJ.className = 'text-center';
+                tdJ.textContent = team.j;
+
+                // Ganados
+                const tdG = document.createElement('td');
+                tdG.className = 'text-center';
+                tdG.textContent = team.g;
+
+                // Empatados
+                const tdE = document.createElement('td');
+                tdE.className = 'text-center';
+                tdE.textContent = team.e;
+
+                // Perdidos
+                const tdP = document.createElement('td');
+                tdP.className = 'text-center';
+                tdP.textContent = team.p;
+
+                tr.appendChild(tdPos);
+                tr.appendChild(tdName);
+                tr.appendChild(tdPts);
+                tr.appendChild(tdJ);
+                tr.appendChild(tdG);
+                tr.appendChild(tdE);
+                tr.appendChild(tdP);
+
+                standingsBody.appendChild(tr);
+            });
+        }
+
+        categorySelect.addEventListener('change', populateGroups);
+        groupSelect.addEventListener('change', renderTable);
+
+        populateCategories();
     </script>
 </body>
 </html>
