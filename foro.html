@@ -202,7 +202,7 @@
             </select>
             <input type="text" id="titleInput" placeholder="Título del tema...">
             <textarea id="messageInput" rows="3" placeholder="Escribe tu mensaje..."></textarea>
-            <button class="btn-submit" onclick="addThread()">Publicar en el Foro</button>
+            <button class="btn-submit" id="submitBtn">Publicar en el Foro</button>
         </div>
 
         <!-- Lista de Debates en Directo -->
@@ -211,12 +211,11 @@
         </div>
     </main>
 
-    <!-- Importar Firebase SDK -->
+    <!-- Importar Firebase SDK y lógica -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // CONFIGURACIÓN DE FIREBASE (Tus claves reales integradas)
         const firebaseConfig = {
             apiKey: "AIzaSyAxV8DvFapxP3Q3x-xR7q-bOoJSh2c8Iss",
             authDomain: "a-ras-de-calle.firebaseapp.com",
@@ -230,8 +229,19 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Hacer la función global para el botón
-        window.addThread = async function() {
+        // Función para escapar HTML y evitar fallos
+        function escapeHtml(text) {
+            if (!text) return '';
+            return text
+                .replace(/&/g, "&")
+                .replace(/</g, "<")
+                .replace(/>/g, ">")
+                .replace(/"/g, """)
+                .replace(/'/g, "'");
+        }
+
+        // Manejar el clic del botón mediante listener para evitar errores de ámbito
+        document.getElementById('submitBtn').addEventListener('click', async function() {
             const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
             const cat = document.getElementById('categoryInput').value;
             const title = document.getElementById('titleInput').value.trim();
@@ -257,7 +267,7 @@
                 console.error("Error al publicar: ", e);
                 alert("Hubo un error al publicar el mensaje.");
             }
-        };
+        });
 
         // Escuchar cambios en tiempo real desde Firestore
         const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
@@ -285,11 +295,6 @@
                 threadsContainer.appendChild(threadDiv);
             });
         });
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            return text.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">").replace(/"/g, """).replace(/'/g, "'");
-        }
     </script>
 </body>
 </html>
