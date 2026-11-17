@@ -211,7 +211,7 @@
         </div>
     </main>
 
-    <!-- Importar Firebase SDK y lógica -->
+    <!-- Importar Firebase SDK y lógica segura -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
@@ -228,16 +228,6 @@
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
-
-        function escapeHtml(text) {
-            if (!text) return '';
-            return text
-                .replace(/&/g, "&")
-                .replace(/</g, "<")
-                .replace(/>/g, ">")
-                .replace(/"/g, """)
-                .replace(/'/g, "'");
-        }
 
         document.getElementById('submitBtn').addEventListener('click', async function() {
             const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
@@ -279,17 +269,27 @@
 
             snapshot.forEach((doc) => {
                 const data = doc.data();
-                const threadDiv = document.createElement('div');
-                threadDiv.className = 'thread-card';
-                threadDiv.innerHTML = `
-                    <div class="thread-header">
-                        <span><strong>${escapeHtml(data.author)}</strong> en <span style="color:var(--gold);">${escapeHtml(data.category)}</span></span>
-                        <span>Reciente</span>
-                    </div>
-                    <h4 class="thread-title">${escapeHtml(data.title)}</h4>
-                    <p class="thread-text">${escapeHtml(data.message)}</p>
-                `;
-                threadsContainer.appendChild(threadDiv);
+                
+                const card = document.createElement('div');
+                card.className = 'thread-card';
+
+                const header = document.createElement('div');
+                header.className = 'thread-header';
+                header.innerHTML = '<span><strong>' + (data.author || '') + '</strong> en <span style="color:var(--gold);">' + (data.category || '') + '</span></span><span>Reciente</span>';
+
+                const h4 = document.createElement('h4');
+                h4.className = 'thread-title';
+                h4.textContent = data.title || '';
+
+                const p = document.createElement('p');
+                p.className = 'thread-text';
+                p.textContent = data.message || '';
+
+                card.appendChild(header);
+                card.appendChild(h4);
+                card.appendChild(p);
+
+                threadsContainer.appendChild(card);
             });
         });
     </script>
