@@ -229,6 +229,9 @@
         <div class="filter-box">
             <label for="categoriaSelect">Selecciona Categoría y Grupo</label>
             <select id="categoriaSelect">
+                <option value="tercera_rfef">Tercera Federación - Grupo 10</option>
+                <option value="div_honor">División de Honor Sénior - Grupo 1</option>
+                <option value="1andaluza">1ª Andaluza Sénior (Sevilla) - Grupo Único</option>
                 <option value="2and_g1">2ª Andaluza Sénior (Sevilla) - Grupo 1</option>
                 <option value="2and_g2">2ª Andaluza Sénior (Sevilla) - Grupo 2</option>
                 <option value="3and_g1">3ª Andaluza Sénior (Sevilla) - Grupo 1</option>
@@ -237,7 +240,6 @@
                 <option value="3and_g4">3ª Andaluza Sénior (Sevilla) - Grupo 4</option>
                 <option value="3and_g5">3ª Andaluza Sénior (Sevilla) - Grupo 5</option>
                 <option value="3and_g6">3ª Andaluza Sénior (Sevilla) - Grupo 6</option>
-                <!-- SI TIENES MÁS CATEGORÍAS (Tercera RFEF, División de Honor, 1ª Andaluza), AÑADE AQUÍ SU <option> -->
             </select>
         </div>
 
@@ -253,13 +255,379 @@
     </div>
 
     <script>
-        // =========================================================================
-        // BASE DE DATOS DE RESULTADOS (AQUÍ ES DONDE TIENES QUE PEGAR LO QUE FALTA)
-        // =========================================================================
         const DATOS_LIGA = {
             
             // ---------------------------------------------------------------------
-            // 2ª ANDALUZA SÉNIOR - GRUPO 1 (Jornadas 1 a 10 completas)
+            // TERCERA FEDERACIÓN - GRUPO 10 (Jornadas 1 a 11 completas)
+            // ---------------------------------------------------------------------
+            "tercera_rfef": {
+                1: [
+                    { local: "Conil", res: "1-0", visitante: "Pozoblanco" },
+                    { local: "Chiclana CF", res: "2-1", visitante: "R. Balompédica Linense" },
+                    { local: "Atlético Onubense", res: "2-0", visitante: "Bollullos" },
+                    { local: "Dos Hermanas CF 1971", res: "3-0", visitante: "Utrera" },
+                    { local: "Tomares", res: "2-2", visitante: "Cádiz B" },
+                    { local: "Egabrense", res: "4-2", visitante: "Córdoba B" },
+                    { local: "Real Betis C", res: "2-0", visitante: "Sevilla C" },
+                    { local: "San Roque de Lepe", res: "1-1", visitante: "AD Ceuta FC B" },
+                    { local: "Xerez Deportivo", res: "0-1", visitante: "Racing Club Portuense" }
+                ],
+                2: [
+                    { local: "AD Ceuta FC B", res: "1-3", visitante: "Egabrense" },
+                    { local: "Utrera", res: "2-0", visitante: "Conil" },
+                    { local: "Córdoba B", res: "0-0", visitante: "Chiclana CF" },
+                    { local: "Racing Club Portuense", res: "2-0", visitante: "San Roque de Lepe" },
+                    { local: "Cádiz B", res: "0-0", visitante: "Dos Hermanas CF 1971" },
+                    { local: "Sevilla C", res: "2-3", visitante: "Xerez Deportivo" },
+                    { local: "Pozoblanco", res: "3-0", visitante: "Atlético Onubense" },
+                    { local: "R. Balompédica Linense", res: "2-0", visitante: "Tomares" },
+                    { local: "Bollullos", res: "3-3", visitante: "Real Betis C" }
+                ],
+                3: [
+                    { local: "Chiclana CF", res: "0-1", visitante: "AD Ceuta FC B" },
+                    { local: "Atlético Onubense", res: "2-4", visitante: "Real Betis C" },
+                    { local: "Xerez Deportivo", res: "1-0", visitante: "Bollullos" },
+                    { local: "Dos Hermanas CF 1971", res: "3-1", visitante: "R. Balompédica Linense" },
+                    { local: "Tomares", res: "2-0", visitante: "Córdoba B" },
+                    { local: "Sevilla C", res: "2-1", visitante: "San Roque de Lepe" },
+                    { local: "Pozoblanco", res: "1-2", visitante: "Utrera" },
+                    { local: "Egabrense", res: "1-3", visitante: "Racing Club Portuense" },
+                    { local: "Conil", res: "0-2", visitante: "Cádiz B" }
+                ],
+                4: [
+                    { local: "Cádiz B", res: "0-1", visitante: "Pozoblanco" },
+                    { local: "Córdoba B", res: "1-2", visitante: "Dos Hermanas CF 1971" },
+                    { local: "AD Ceuta FC B", res: "0-1", visitante: "Tomares" },
+                    { local: "Utrera", res: "2-1", visitante: "Atlético Onubense" },
+                    { local: "Racing Club Portuense", res: "2-3", visitante: "Chiclana CF" },
+                    { local: "Sevilla C", res: "0-0", visitante: "Egabrense" },
+                    { local: "R. Balompédica Linense", res: "3-1", visitante: "Conil" },
+                    { local: "Real Betis C", res: "2-0", visitante: "Xerez Deportivo" },
+                    { local: "Bollullos", res: "1-2", visitante: "San Roque de Lepe" }
+                ],
+                5: [
+                    { local: "Dos Hermanas CF 1971", res: "5-0", visitante: "AD Ceuta FC B" },
+                    { local: "Utrera", res: "1-0", visitante: "Cádiz B" },
+                    { local: "Tomares", res: "1-1", visitante: "Racing Club Portuense" },
+                    { local: "Atlético Onubense", res: "1-1", visitante: "Xerez Deportivo" },
+                    { local: "Chiclana CF", res: "1-1", visitante: "Sevilla C" },
+                    { local: "Egabrense", res: "2-2", visitante: "Bollullos" },
+                    { local: "Pozoblanco", res: "3-1", visitante: "R. Balompédica Linense" },
+                    { local: "Conil", res: "2-0", visitante: "Córdoba B" },
+                    { local: "San Roque de Lepe", res: "1-0", visitante: "Real Betis C" }
+                ],
+                6: [
+                    { local: "Sevilla C", res: "1-2", visitante: "Tomares" },
+                    { local: "Bollullos", res: "2-0", visitante: "Chiclana CF" },
+                    { local: "AD Ceuta FC B", res: "3-0", visitante: "Conil" },
+                    { local: "Real Betis C", res: "3-2", visitante: "Egabrense" },
+                    { local: "Cádiz B", res: "0-1", visitante: "Atlético Onubense" },
+                    { local: "Córdoba B", res: "2-2", visitante: "Pozoblanco" },
+                    { local: "Racing Club Portuense", res: "3-0", visitante: "Dos Hermanas CF 1971" },
+                    { local: "R. Balompédica Linense", res: "0-1", visitante: "Utrera" },
+                    { local: "Xerez Deportivo", res: "2-2", visitante: "San Roque de Lepe" }
+                ],
+                7: [
+                    { local: "Dos Hermanas CF 1971", res: "5-1", visitante: "Sevilla C" },
+                    { local: "Pozoblanco", res: "1-1", visitante: "AD Ceuta FC B" },
+                    { local: "Cádiz B", res: "1-1", visitante: "R. Balompédica Linense" },
+                    { local: "Tomares", res: "1-0", visitante: "Bollullos" },
+                    { local: "Chiclana CF", res: "2-2", visitante: "Real Betis C" },
+                    { local: "Atlético Onubense", res: "0-3", visitante: "San Roque de Lepe" },
+                    { local: "Egabrense", res: "1-2", visitante: "Xerez Deportivo" },
+                    { local: "Conil", res: "2-1", visitante: "Racing Club Portuense" },
+                    { local: "Utrera", res: "11/11 19:30", visitante: "Córdoba B" }
+                ],
+                8: [
+                    { local: "AD Ceuta FC B", res: "5-2", visitante: "Utrera" },
+                    { local: "Xerez Deportivo", res: "3-2", visitante: "Chiclana CF" },
+                    { local: "Real Betis C", res: "0-1", visitante: "Tomares" },
+                    { local: "Córdoba B", res: "0-0", visitante: "Cádiz B" },
+                    { local: "Racing Club Portuense", res: "3-1", visitante: "Pozoblanco" },
+                    { local: "Sevilla C", res: "0-0", visitante: "Conil" },
+                    { local: "R. Balompédica Linense", res: "1-1", visitante: "Atlético Onubense" },
+                    { local: "Bollullos", res: "0-1", visitante: "Dos Hermanas CF 1971" },
+                    { local: "San Roque de Lepe", res: "1-0", visitante: "Egabrense" }
+                ],
+                9: [
+                    { local: "Cádiz B", res: "0-0", visitante: "AD Ceuta FC B" },
+                    { local: "R. Balompédica Linense", res: "1-1", visitante: "Córdoba B" },
+                    { local: "Utrera", res: "1-2", visitante: "Racing Club Portuense" },
+                    { local: "Pozoblanco", res: "2-2", visitante: "Sevilla C" },
+                    { local: "Dos Hermanas CF 1971", res: "4-3", visitante: "Real Betis C" },
+                    { local: "Tomares", res: "0-1", visitante: "Xerez Deportivo" },
+                    { local: "Chiclana CF", res: "0-2", visitante: "San Roque de Lepe" },
+                    { local: "Conil", res: "0-0", visitante: "Bollullos" },
+                    { local: "Atlético Onubense", res: "1-2", visitante: "Egabrense" }
+                ],
+                10: [
+                    { local: "Córdoba B", res: "3-0", visitante: "Atlético Onubense" },
+                    { local: "Sevilla C", res: "3-3", visitante: "Utrera" },
+                    { local: "AD Ceuta FC B", res: "1-2", visitante: "R. Balompédica Linense" },
+                    { local: "Racing Club Portuense", res: "1-1", visitante: "Cádiz B" },
+                    { local: "Bollullos", res: "1-1", visitante: "Pozoblanco" },
+                    { local: "Xerez Deportivo", res: "1-1", visitante: "Dos Hermanas CF 1971" },
+                    { local: "San Roque de Lepe", res: "2-1", visitante: "Tomares" },
+                    { local: "Egabrense", res: "3-1", visitante: "Chiclana CF" },
+                    { local: "Real Betis C", res: "4-3", visitante: "Conil" }
+                ],
+                11: [
+                    { local: "Cádiz B", res: "1-1", visitante: "Sevilla C" },
+                    { local: "Córdoba B", res: "2-0", visitante: "AD Ceuta FC B" },
+                    { local: "Utrera", res: "3-1", visitante: "Bollullos" },
+                    { local: "Pozoblanco", res: "1-2", visitante: "Real Betis C" },
+                    { local: "Dos Hermanas CF 1971", res: "1-2", visitante: "San Roque de Lepe" },
+                    { local: "Tomares", res: "1-3", visitante: "Egabrense" },
+                    { local: "Atlético Onubense", res: "0-2", visitante: "Chiclana CF" },
+                    { local: "R. Balompédica Linense", res: "0-0", visitante: "Racing Club Portuense" },
+                    { local: "Conil", res: "0-0", visitante: "Xerez Deportivo" }
+                ]
+            },
+
+            // ---------------------------------------------------------------------
+            // DIVISIÓN DE HONOR SÉNIOR - GRUPO 1 (Jornadas 1 a 10 completas)
+            // ---------------------------------------------------------------------
+            "div_honor": {
+                1: [
+                    { local: "U.D. Rinconada", res: "1-4", visitante: "La Palma C.F." },
+                    { local: "Montilla C.F.", res: "2-1", visitante: "U.P. Viso" },
+                    { local: "Coria C.F.", res: "2-1", visitante: "Atco. Palma del Río" },
+                    { local: "Cádiz C.F. C", res: "2-0", visitante: "Rayo Sanluqueño" },
+                    { local: "Castilleja C.F.", res: "1-1", visitante: "Montalbeño C.D." },
+                    { local: "Arcos C.F.", res: "5-0", visitante: "C.D. Inter Sevilla" },
+                    { local: "Atlético Espeleño", res: "1-2", visitante: "Isla Cristina F.C." },
+                    { local: "C.D. Moguer", res: "6-3", visitante: "Aroche C.F." },
+                    { local: "C.D. Cabecense", res: "2-2", visitante: "U.B. Lebrijana" },
+                    { local: "Almodóvar del Río", res: "DESCANSA", visitante: "-" }
+                ],
+                2: [
+                    { local: "La Palma C.F.", res: "3-1", visitante: "Montilla C.F." },
+                    { local: "Isla Cristina F.C.", res: "1-1", visitante: "Cádiz C.F. C" },
+                    { local: "U.P. Viso", res: "0-3", visitante: "Coria C.F." },
+                    { local: "Rayo Sanluqueño", res: "3-1", visitante: "C.D. Moguer" },
+                    { local: "U.B. Lebrijana", res: "0-1", visitante: "Arcos C.F." },
+                    { local: "Atco. Palma del Río", res: "2-1", visitante: "C.D. Cabecense" },
+                    { local: "Almodóvar del Río", res: "1-1", visitante: "Castilleja C.F." },
+                    { local: "Montalbeño C.D.", res: "1-2", visitante: "U.D. Rinconada" },
+                    { local: "C.D. Inter Sevilla", res: "1-4", visitante: "Atlético Espeleño" },
+                    { local: "Aroche C.F.", res: "DESCANSA", visitante: "-" }
+                ],
+                3: [
+                    { local: "Arcos C.F.", res: "1-1", visitante: "Atco. Palma del Río" },
+                    { local: "C.D. Cabecense", res: "3-2", visitante: "U.P. Viso" },
+                    { local: "Castilleja C.F.", res: "3-3", visitante: "Aroche C.F." },
+                    { local: "U.D. Rinconada", res: "1-2", visitante: "Almodóvar del Río" },
+                    { local: "Cádiz C.F. C", res: "3-3", visitante: "C.D. Inter Sevilla" },
+                    { local: "Montilla C.F.", res: "3-1", visitante: "Coria C.F." },
+                    { local: "C.D. Moguer", res: "2-2", visitante: "Isla Cristina F.C." },
+                    { local: "La Palma C.F.", res: "0-2", visitante: "Montalbeño C.D." },
+                    { local: "Atlético Espeleño", res: "1-1", visitante: "U.B. Lebrijana" },
+                    { local: "Rayo Sanluqueño", res: "DESCANSA", visitante: "-" }
+                ],
+                4: [
+                    { local: "Almodóvar del Río", res: "2-0", visitante: "La Palma C.F." },
+                    { local: "Rayo Sanluqueño", res: "0-1", visitante: "Castilleja C.F." },
+                    { local: "Aroche C.F.", res: "0-2", visitante: "U.D. Rinconada" },
+                    { local: "Atco. Palma del Río", res: "4-1", visitante: "Atlético Espeleño" },
+                    { local: "U.B. Lebrijana", res: "3-1", visitante: "Cádiz C.F. C" },
+                    { local: "Coria C.F.", res: "1-1", visitante: "C.D. Cabecense" },
+                    { local: "U.P. Viso", res: "2-2", visitante: "Arcos C.F." },
+                    { local: "Montalbeño C.D.", res: "1-2", visitante: "Montilla C.F." },
+                    { local: "C.D. Inter Sevilla", res: "0-3", visitante: "C.D. Moguer" },
+                    { local: "Isla Cristina F.C.", res: "DESCANSA", visitante: "-" }
+                ],
+                5: [
+                    { local: "Castilleja C.F.", res: "1-1", visitante: "Isla Cristina F.C." },
+                    { local: "U.D. Rinconada", res: "1-1", visitante: "Rayo Sanluqueño" },
+                    { local: "La Palma C.F.", res: "4-0", visitante: "Aroche C.F." },
+                    { local: "Montilla C.F.", res: "1-1", visitante: "C.D. Cabecense" },
+                    { local: "Arcos C.F.", res: "2-1", visitante: "Coria C.F." },
+                    { local: "Atlético Espeleño", res: "0-0", visitante: "U.P. Viso" },
+                    { local: "Cádiz C.F. C", res: "0-4", visitante: "Atco. Palma del Río" },
+                    { local: "Montalbeño C.D.", res: "2-2", visitante: "Almodóvar del Río" },
+                    { local: "C.D. Moguer", res: "SUSP.", visitante: "U.B. Lebrijana" },
+                    { local: "C.D. Inter Sevilla", res: "DESCANSA", visitante: "-" }
+                ],
+                6: [
+                    { local: "Rayo Sanluqueño", res: "1-3", visitante: "La Palma C.F." },
+                    { local: "U.P. Viso", res: "1-0", visitante: "Cádiz C.F. C" },
+                    { local: "C.D. Cabecense", res: "2-1", visitante: "Arcos C.F." },
+                    { local: "Isla Cristina F.C.", res: "4-1", visitante: "U.D. Rinconada" },
+                    { local: "Coria C.F.", res: "1-1", visitante: "Atlético Espeleño" },
+                    { local: "C.D. Inter Sevilla", res: "0-3", visitante: "Castilleja C.F." },
+                    { local: "Atco. Palma del Río", res: "4-0", visitante: "C.D. Moguer" },
+                    { local: "Aroche C.F.", res: "0-3", visitante: "Montalbeño C.D." },
+                    { local: "Almodóvar del Río", res: "3-2", visitante: "Montilla C.F." },
+                    { local: "U.B. Lebrijana", res: "DESCANSA", visitante: "-" }
+                ],
+                7: [
+                    { local: "U.D. Rinconada", res: "2-1", visitante: "C.D. Inter Sevilla" },
+                    { local: "La Palma C.F.", res: "1-0", visitante: "Isla Cristina F.C." },
+                    { local: "Cádiz C.F. C", res: "1-2", visitante: "Coria C.F." },
+                    { local: "Castilleja C.F.", res: "0-2", visitante: "U.B. Lebrijana" },
+                    { local: "Montilla C.F.", res: "1-1", visitante: "Arcos C.F." },
+                    { local: "Atlético Espeleño", res: "0-5", visitante: "C.D. Cabecense" },
+                    { local: "Montalbeño C.D.", res: "2-2", visitante: "Rayo Sanluqueño" },
+                    { local: "C.D. Moguer", res: "1-2", visitante: "U.P. Viso" },
+                    { local: "Almodóvar del Río", res: "1-1", visitante: "Aroche C.F." },
+                    { local: "Atco. Palma del Río", res: "DESCANSA", visitante: "-" }
+                ],
+                8: [
+                    { local: "C.D. Cabecense", res: "1-1", visitante: "Cádiz C.F. C" },
+                    { local: "C.D. Inter Sevilla", res: "1-0", visitante: "La Palma C.F." },
+                    { local: "Isla Cristina F.C.", res: "1-2", visitante: "Montalbeño C.D." },
+                    { local: "Coria C.F.", res: "1-0", visitante: "C.D. Moguer" },
+                    { local: "Rayo Sanluqueño", res: "5-0", visitante: "Almodóvar del Río" },
+                    { local: "Aroche C.F.", res: "0-5", visitante: "Montilla C.F." },
+                    { local: "U.B. Lebrijana", res: "3-1", visitante: "U.D. Rinconada" },
+                    { local: "Arcos C.F.", res: "2-0", visitante: "Atlético Espeleño" },
+                    { local: "Atco. Palma del Río", res: "1-0", visitante: "Castilleja C.F." },
+                    { local: "U.P. Viso", res: "DESCANSA", visitante: "-" }
+                ],
+                9: [
+                    { local: "Montilla C.F.", res: "1-0", visitante: "Atlético Espeleño" },
+                    { local: "Castilleja C.F.", res: "2-0", visitante: "U.P. Viso" },
+                    { local: "La Palma C.F.", res: "2-1", visitante: "U.B. Lebrijana" },
+                    { local: "Cádiz C.F. C", res: "1-1", visitante: "Arcos C.F." },
+                    { local: "C.D. Moguer", res: "1-4", visitante: "C.D. Cabecense" },
+                    { local: "Aroche C.F.", res: "2-2", visitante: "Rayo Sanluqueño" },
+                    { local: "Montalbeño C.D.", res: "1-0", visitante: "C.D. Inter Sevilla" },
+                    { local: "Almodóvar del Río", res: "7-4", visitante: "Isla Cristina F.C." },
+                    { local: "U.D. Rinconada", res: "0-1", visitante: "Atco. Palma del Río" },
+                    { local: "Coria C.F.", res: "DESCANSA", visitante: "-" }
+                ],
+                10: [
+                    { local: "C.D. Inter Sevilla", res: "4-4", visitante: "Almodóvar del Río" },
+                    { local: "Coria C.F.", res: "1-1", visitante: "Castilleja C.F." },
+                    { local: "Isla Cristina F.C.", res: "2-0", visitante: "Aroche C.F." },
+                    { local: "Rayo Sanluqueño", res: "1-1", visitante: "Montilla C.F." },
+                    { local: "U.P. Viso", res: "2-0", visitante: "U.D. Rinconada" },
+                    { local: "U.B. Lebrijana", res: "0-0", visitante: "Montalbeño C.D." },
+                    { local: "Atco. Palma del Río", res: "2-1", visitante: "La Palma C.F." },
+                    { local: "Atlético Espeleño", res: "1-0", visitante: "Cádiz C.F. C" },
+                    { local: "Arcos C.F.", res: "3-1", visitante: "C.D. Moguer" },
+                    { local: "C.D. Cabecense", res: "DESCANSA", visitante: "-" }
+                ]
+            },
+
+            // ---------------------------------------------------------------------
+            // 1ª ANDALUZA SÉNIOR (SEVILLA) - GRUPO ÚNICO (Jornadas 1 a 10)
+            // ---------------------------------------------------------------------
+            "1andaluza": {
+                1: [
+                    { local: "OSUNA BOTE CLUB", res: "0-1", visitante: "PALOMARES C.F." },
+                    { local: "C.D. ALCALA", res: "1-0", visitante: "C.D. SAN MARCOS" },
+                    { local: "C.D. PEDRERA", res: "2-1", visitante: "A.D. SAN JOSE" },
+                    { local: "LORA C.F.", res: "1-0", visitante: "U.D. VILLAVERDE" },
+                    { local: "TORREBLANCA C.F.", res: "0-1", visitante: "C.D. MAIRENA" },
+                    { local: "LA BARRERA C.F.", res: "2-0", visitante: "U.D. PILAS" },
+                    { local: "C.D. ARAHAL BALOMPIE", res: "2-0", visitante: "C.D. MONTEQUINTO" },
+                    { local: "A.D. MOSQUEO", res: "1-1", visitante: "C.D. VENTIPPO BALOMPIE" },
+                    { local: "U.D. BELLAVISTA", res: "2-1", visitante: "CAMAS C.F." }
+                ],
+                2: [
+                    { local: "A.D. SAN JOSE", res: "0-0", visitante: "C.D. ALCALA" },
+                    { local: "CAMAS C.F.", res: "2-5", visitante: "OSUNA BOTE CLUB" },
+                    { local: "U.D. PILAS", res: "2-0", visitante: "LORA C.F." },
+                    { local: "C.D. MONTEQUINTO", res: "1-3", visitante: "LA BARRERA C.F." },
+                    { local: "PALOMARES C.F.", res: "1-5", visitante: "A.D. MOSQUEO" },
+                    { local: "C.D. MAIRENA", res: "3-1", visitante: "U.D. BELLAVISTA" },
+                    { local: "C.D. SAN MARCOS", res: "0-2", visitante: "TORREBLANCA C.F." },
+                    { local: "C.D. VENTIPPO BALOMPIE", res: "1-0", visitante: "C.D. ARAHAL BALOMPIE" },
+                    { local: "U.D. VILLAVERDE", res: "4-0", visitante: "C.D. PEDRERA" }
+                ],
+                3: [
+                    { local: "TORREBLANCA C.F.", res: "0-1", visitante: "A.D. SAN JOSE" },
+                    { local: "U.D. VILLAVERDE", res: "0-1", visitante: "U.D. PILAS" },
+                    { local: "LA BARRERA C.F.", res: "1-0", visitante: "C.D. VENTIPPO BALOMPIE" },
+                    { local: "C.D. ARAHAL BALOMPIE", res: "1-3", visitante: "PALOMARES C.F." },
+                    { local: "OSUNA BOTE CLUB", res: "1-1", visitante: "C.D. MAIRENA" },
+                    { local: "U.D. BELLAVISTA", res: "0-6", visitante: "C.D. SAN MARCOS" },
+                    { local: "A.D. MOSQUEO", res: "3-0", visitante: "CAMAS C.F." },
+                    { local: "C.D. PEDRERA", res: "1-0", visitante: "C.D. ALCALA" },
+                    { local: "LORA C.F.", res: "0-0", visitante: "C.D. MONTEQUINTO" }
+                ],
+                4: [
+                    { local: "PALOMARES C.F.", res: "2-2", visitante: "LA BARRERA C.F." },
+                    { local: "C.D. ALCALA", res: "1-2", visitante: "TORREBLANCA C.F." },
+                    { local: "CAMAS C.F.", res: "2-1", visitante: "C.D. ARAHAL BALOMPIE" },
+                    { local: "C.D. MAIRENA", res: "5-0", visitante: "A.D. MOSQUEO" },
+                    { local: "C.D. SAN MARCOS", res: "2-1", visitante: "OSUNA BOTE CLUB" },
+                    { local: "A.D. SAN JOSE", res: "4-0", visitante: "U.D. BELLAVISTA" },
+                    { local: "U.D. PILAS", res: "1-0", visitante: "C.D. PEDRERA" },
+                    { local: "C.D. MONTEQUINTO", res: "2-1", visitante: "U.D. VILLAVERDE" },
+                    { local: "C.D. VENTIPPO BALOMPIE", res: "3-0", visitante: "LORA C.F." }
+                ],
+                5: [
+                    { local: "LA BARRERA C.F.", res: "2-2", visitante: "CAMAS C.F." },
+                    { local: "C.D. PEDRERA", res: "0-0", visitante: "TORREBLANCA C.F." },
+                    { local: "U.D. PILAS", res: "4-1", visitante: "C.D. MONTEQUINTO" },
+                    { local: "U.D. VILLAVERDE", res: "1-3", visitante: "C.D. VENTIPPO BALOMPIE" },
+                    { local: "LORA C.F.", res: "2-1", visitante: "PALOMARES C.F." },
+                    { local: "C.D. ARAHAL BALOMPIE", res: "0-3", visitante: "C.D. MAIRENA" },
+                    { local: "A.D. MOSQUEO", res: "1-0", visitante: "C.D. SAN MARCOS" },
+                    { local: "OSUNA BOTE CLUB", res: "1-1", visitante: "A.D. SAN JOSE" },
+                    { local: "U.D. BELLAVISTA", res: "0-2", visitante: "C.D. ALCALA" }
+                ],
+                6: [
+                    { local: "TORREBLANCA C.F.", res: "1-0", visitante: "U.D. BELLAVISTA" },
+                    { local: "C.D. MAIRENA", res: "0-1", visitante: "LA BARRERA C.F." },
+                    { local: "C.D. SAN MARCOS", res: "4-0", visitante: "C.D. ARAHAL BALOMPIE" },
+                    { local: "A.D. SAN JOSE", res: "2-0", visitante: "A.D. MOSQUEO" },
+                    { local: "C.D. ALCALA", res: "1-1", visitante: "OSUNA BOTE CLUB" },
+                    { local: "C.D. MONTEQUINTO", res: "1-4", visitante: "C.D. PEDRERA" },
+                    { local: "CAMAS C.F.", res: "3-1", visitante: "LORA C.F." },
+                    { local: "C.D. VENTIPPO BALOMPIE", res: "4-1", visitante: "U.D. PILAS" },
+                    { local: "PALOMARES C.F.", res: "3-0", visitante: "U.D. VILLAVERDE" }
+                ],
+                7: [
+                    { local: "U.D. PILAS", res: "3-1", visitante: "PALOMARES C.F." },
+                    { local: "U.D. VILLAVERDE", res: "4-3", visitante: "CAMAS C.F." },
+                    { local: "LORA C.F.", res: "1-1", visitante: "C.D. MAIRENA" },
+                    { local: "LA BARRERA C.F.", res: "2-1", visitante: "C.D. SAN MARCOS" },
+                    { local: "C.D. ARAHAL BALOMPIE", res: "0-2", visitante: "A.D. SAN JOSE" },
+                    { local: "A.D. MOSQUEO", res: "3-0", visitante: "C.D. ALCALA" },
+                    { local: "OSUNA BOTE CLUB", res: "1-1", visitante: "TORREBLANCA C.F." },
+                    { local: "C.D. MONTEQUINTO", res: "0-0", visitante: "C.D. VENTIPPO BALOMPIE" },
+                    { local: "C.D. PEDRERA", res: "0-3", visitante: "U.D. BELLAVISTA" }
+                ],
+                8: [
+                    { local: "CAMAS C.F.", res: "0-3", visitante: "U.D. PILAS" },
+                    { local: "TORREBLANCA C.F.", res: "2-4", visitante: "A.D. MOSQUEO" },
+                    { local: "C.D. MAIRENA", res: "2-0", visitante: "U.D. VILLAVERDE" },
+                    { local: "C.D. SAN MARCOS", res: "0-0", visitante: "LORA C.F." },
+                    { local: "A.D. SAN JOSE", res: "3-0", visitante: "LA BARRERA C.F." },
+                    { local: "C.D. ALCALA", res: "2-0", visitante: "C.D. ARAHAL BALOMPIE" },
+                    { local: "U.D. BELLAVISTA", res: "1-2", visitante: "OSUNA BOTE CLUB" },
+                    { local: "C.D. VENTIPPO BALOMPIE", res: "1-1", visitante: "C.D. PEDRERA" },
+                    { local: "PALOMARES C.F.", res: "1-0", visitante: "C.D. MONTEQUINTO" }
+                ],
+                9: [
+                    { local: "U.D. PILAS", res: "1-1", visitante: "C.D. MAIRENA" },
+                    { local: "U.D. VILLAVERDE", res: "1-0", visitante: "C.D. SAN MARCOS" },
+                    { local: "LORA C.F.", res: "2-2", visitante: "A.D. SAN JOSE" },
+                    { local: "LA BARRERA C.F.", res: "5-1", visitante: "C.D. ALCALA" },
+                    { local: "A.D. MOSQUEO", res: "4-1", visitante: "U.D. BELLAVISTA" },
+                    { local: "C.D. MONTEQUINTO", res: "3-1", visitante: "CAMAS C.F." },
+                    { local: "C.D. ARAHAL BALOMPIE", res: "0-1", visitante: "TORREBLANCA C.F." },
+                    { local: "C.D. PEDRERA", res: "0-0", visitante: "OSUNA BOTE CLUB" },
+                    { local: "C.D. VENTIPPO BALOMPIE", res: "1-0", visitante: "PALOMARES C.F." }
+                ],
+                10: [
+                    { local: "CAMAS C.F.", res: "2-0", visitante: "C.D. VENTIPPO BALOMPIE" },
+                    { local: "TORREBLANCA C.F.", res: "0-0", visitante: "LA BARRERA C.F." },
+                    { local: "C.D. MAIRENA", res: "2-0", visitante: "C.D. MONTEQUINTO" },
+                    { local: "C.D. SAN MARCOS", res: "2-3", visitante: "U.D. PILAS" },
+                    { local: "U.D. BELLAVISTA", res: "1-2", visitante: "C.D. ARAHAL BALOMPIE" },
+                    { local: "OSUNA BOTE CLUB", res: "1-0", visitante: "A.D. MOSQUEO" },
+                    { local: "C.D. ALCALA", res: "5-0", visitante: "LORA C.F." },
+                    { local: "A.D. SAN JOSE", res: "4-0", visitante: "U.D. VILLAVERDE" },
+                    { local: "PALOMARES C.F.", res: "1-1", visitante: "C.D. PEDRERA" }
+                ]
+            },
+
+            // ---------------------------------------------------------------------
+            // 2ª ANDALUZA SÉNIOR - GRUPO 1
             // ---------------------------------------------------------------------
             "2and_g1": {
                 1: [
@@ -375,7 +743,7 @@
             },
 
             // ---------------------------------------------------------------------
-            // 2ª ANDALUZA SÉNIOR - GRUPO 2 (Jornadas 1 a 10 completas)
+            // 2ª ANDALUZA SÉNIOR - GRUPO 2
             // ---------------------------------------------------------------------
             "2and_g2": {
                 1: [
@@ -491,7 +859,7 @@
             },
 
             // ---------------------------------------------------------------------
-            // 3ª ANDALUZA SÉNIOR - GRUPO 1 (Jornadas 1 a 9 completas)
+            // 3ª ANDALUZA SÉNIOR - GRUPOS 1 AL 6
             // ---------------------------------------------------------------------
             "3and_g1": {
                 1: [
@@ -585,20 +953,98 @@
                     { local: "MINAS C.F.", res: "2-2", visitante: "C.D. ALCALA DEL RIO" }
                 ]
             },
-
-            // =========================================================================
-            // PEGA AQUÍ EL CÓDIGO DE TUS OTRAS JORNADAS QUE TIENES GUARDADO
-            // Ejemplo: "3and_g2": { 1: [...], 2: [...] },
-            // =========================================================================
             "3and_g2": {
                 1: [
-                    { local: "PEGA AQUÍ LOS PARTIDOS DE 3ª ANDALUZA G2", res: "0-0", visitante: "O SUSTITUYE ESTE BLOQUE" }
+                    { local: "C.D. CORONIL", res: "4-0", visitante: "U.D. CONSOLACION" },
+                    { local: "BADOLATOSA C.F.", res: "4-1", visitante: "AGR.DVA. CARMONA" },
+                    { local: "LA BARRERA C.F.", res: "1-2", visitante: "C.D. MOSQUITO \"B\"" },
+                    { local: "PARADAS BALOMPIE", res: "DESCANSA", visitante: "-" },
+                    { local: "MARCHENA BPIE.", res: "1-3", visitante: "PEÑA BETICA ALCALA" },
+                    { local: "GILENA C.F.", res: "1-0", visitante: "LA RODA C.F." },
+                    { local: "UNION DVA. LA JARA", res: "2-1", visitante: "U.D. MARINALEDA" },
+                    { local: "ESTEPA INDUSTRIAL C.D.", res: "DESCANSA", visitante: "U.D. LOS CORRALES" }
+                ],
+                2: [
+                    { local: "DESCANSA", res: "-", visitante: "C.D. CORONIL" },
+                    { local: "AGR.DVA. CARMONA", res: "3-3", visitante: "PARADAS BALOMPIE" },
+                    { local: "U.D. CONSOLACION", res: "0-1", visitante: "MARCHENA BPIE." },
+                    { local: "LA RODA C.F.", res: "1-6", visitante: "BADOLATOSA C.F." },
+                    { local: "U.D. MARINALEDA", res: "1-2", visitante: "ESTEPA INDUSTRIAL C.D." },
+                    { local: "U.D. LOS CORRALES", res: "DESCANSA", visitante: "LA BARRERA C.F." },
+                    { local: "PEÑA BETICA ALCALA", res: "1-1", visitante: "UNION DVA. LA JARA" },
+                    { local: "C.D. MOSQUITO \"B\"", res: "0-1", visitante: "GILENA C.F." }
+                ],
+                3: [
+                    { local: "BADOLATOSA C.F.", res: "6-3", visitante: "C.D. MOSQUITO \"B\"" },
+                    { local: "MARCHENA BPIE.", res: "DESCANSA", visitante: "-" },
+                    { local: "PARADAS BALOMPIE", res: "0-0", visitante: "C.D. CORONIL" },
+                    { local: "UNION DVA. LA JARA", res: "4-1", visitante: "U.D. CONSOLACION" },
+                    { local: "GILENA C.F.", res: "DESCANSA", visitante: "U.D. LOS CORRALES" },
+                    { local: "LA BARRERA C.F.", res: "2-3", visitante: "U.D. MARINALEDA" },
+                    { local: "ESTEPA INDUSTRIAL C.D.", res: "0-2", visitante: "PEÑA BETICA ALCALA" },
+                    { local: "AGR.DVA. CARMONA", res: "4-2", visitante: "LA RODA C.F." }
+                ],
+                4: [
+                    { local: "U.D. CONSOLACION", res: "2-1", visitante: "ESTEPA INDUSTRIAL C.D." },
+                    { local: "DESCANSA", res: "-", visitante: "UNION DVA. LA JARA" },
+                    { local: "C.D. MOSQUITO \"B\"", res: "1-4", visitante: "AGR.DVA. CARMONA" },
+                    { local: "C.D. CORONIL", res: "3-1", visitante: "MARCHENA BPIE." },
+                    { local: "U.D. LOS CORRALES", res: "DESCANSA", visitante: "BADOLATOSA C.F." },
+                    { local: "LA RODA C.F.", res: "0-3", visitante: "PARADAS BALOMPIE" },
+                    { local: "U.D. MARINALEDA", res: "0-0", visitante: "GILENA C.F." },
+                    { local: "PEÑA BETICA ALCALA", res: "3-1", visitante: "LA BARRERA C.F." }
+                ],
+                5: [
+                    { local: "LA BARRERA C.F.", res: "6-2", visitante: "U.D. CONSOLACION" },
+                    { local: "ESTEPA INDUSTRIAL C.D.", res: "DESCANSA", visitante: "-" },
+                    { local: "BADOLATOSA C.F.", res: "1-0", visitante: "U.D. MARINALEDA" },
+                    { local: "UNION DVA. LA JARA", res: "1-2", visitante: "C.D. CORONIL" },
+                    { local: "PARADAS BALOMPIE", res: "5-6", visitante: "MARCHENA BPIE." },
+                    { local: "AGR.DVA. CARMONA", res: "DESCANSA", visitante: "U.D. LOS CORRALES" },
+                    { local: "LA RODA C.F.", res: "4-2", visitante: "C.D. MOSQUITO \"B\"" },
+                    { local: "GILENA C.F.", res: "1-1", visitante: "PEÑA BETICA ALCALA" }
+                ],
+                6: [
+                    { local: "C.D. CORONIL", res: "1-0", visitante: "ESTEPA INDUSTRIAL C.D." },
+                    { local: "U.D. LOS CORRALES", res: "DESCANSA", visitante: "LA RODA C.F." },
+                    { local: "DESCANSA", res: "-", visitante: "LA BARRERA C.F." },
+                    { local: "MARCHENA BPIE.", res: "1-1", visitante: "UNION DVA. LA JARA" },
+                    { local: "U.D. CONSOLACION", res: "0-3", visitante: "GILENA C.F." },
+                    { local: "PEÑA BETICA ALCALA", res: "1-3", visitante: "BADOLATOSA C.F." },
+                    { local: "U.D. MARINALEDA", res: "2-1", visitante: "AGR.DVA. CARMONA" },
+                    { local: "C.D. MOSQUITO \"B\"", res: "0-2", visitante: "PARADAS BALOMPIE" }
+                ],
+                7: [
+                    { local: "LA RODA C.F.", res: "0-2", visitante: "U.D. MARINALEDA" },
+                    { local: "LA BARRERA C.F.", res: "2-1", visitante: "C.D. CORONIL" },
+                    { local: "BADOLATOSA C.F.", res: "2-0", visitante: "U.D. CONSOLACION" },
+                    { local: "C.D. MOSQUITO \"B\"", res: "DESCANSA", visitante: "-" },
+                    { local: "GILENA C.F.", res: "DESCANSA", visitante: "-" },
+                    { local: "PARADAS BALOMPIE", res: "0-0", visitante: "UNION DVA. LA JARA" },
+                    { local: "ESTEPA INDUSTRIAL C.D.", res: "1-1", visitante: "MARCHENA BPIE." },
+                    { local: "AGR.DVA. CARMONA", res: "DESCANSA", visitante: "PEÑA BETICA ALCALA" }
+                ],
+                8: [
+                    { local: "U.D. CONSOLACION", res: "2-5", visitante: "AGR.DVA. CARMONA" },
+                    { local: "U.D. LOS CORRALES", res: "DESCANSA", visitante: "PARADAS BALOMPIE" },
+                    { local: "DESCANSA", res: "-", visitante: "BADOLATOSA C.F." },
+                    { local: "C.D. CORONIL", res: "3-0", visitante: "GILENA C.F." },
+                    { local: "MARCHENA BPIE.", res: "2-2", visitante: "LA BARRERA C.F." },
+                    { local: "UNION DVA. LA JARA", res: "1-0", visitante: "ESTEPA INDUSTRIAL C.D." },
+                    { local: "U.D. MARINALEDA", res: "2-2", visitante: "C.D. MOSQUITO \"B\"" },
+                    { local: "PEÑA BETICA ALCALA", res: "1-2", visitante: "LA RODA C.F." }
+                ],
+                9: [
+                    { local: "LA RODA C.F.", res: "2-1", visitante: "UNION DVA. LA JARA" },
+                    { local: "LA BARRERA C.F.", res: "4-2", visitante: "UNION DVA. LA JARA" },
+                    { local: "C.D. MOSQUITO \"B\"", res: "0-1", visitante: "PEÑA BETICA ALCALA" },
+                    { local: "U.D. LOS CORRALES", res: "DESCANSA", visitante: "U.D. MARINALEDA" },
+                    { local: "AGR.DVA. CARMONA", res: "DESCANSA", visitante: "-" },
+                    { local: "BADOLATOSA C.F.", res: "0-3", visitante: "C.D. CORONIL" },
+                    { local: "PARADAS BALOMPIE", res: "2-1", visitante: "ESTEPA INDUSTRIAL C.D." },
+                    { local: "GILENA C.F.", res: "1-2", visitante: "MARCHENA BPIE." }
                 ]
             },
-
-            // ---------------------------------------------------------------------
-            // 3ª ANDALUZA SÉNIOR - GRUPO 3 (Jornadas 1 a 9 completas)
-            // ---------------------------------------------------------------------
             "3and_g3": {
                 1: [
                     { local: "C.D. LEBRIJA ALMA", res: "0-4", visitante: "C.D. MIGUEL DE UNAMUNO" },
@@ -691,10 +1137,6 @@
                     { local: "C.D. SAM-CAM DOS HERMANAS", res: "2-1", visitante: "C.D. MARISMILLAS" }
                 ]
             },
-
-            // ---------------------------------------------------------------------
-            // 3ª ANDALUZA SÉNIOR - GRUPO 4 (Jornadas 1 a 9 completas)
-            // ---------------------------------------------------------------------
             "3and_g4": {
                 1: [
                     { local: "C.D. ISBILIYA BALOMPIE", res: "DESCANSA", visitante: "-" },
@@ -787,10 +1229,6 @@
                     { local: "C.D. MAIRENA", res: "1-2", visitante: "SEVILLA F.C., S.A.D." }
                 ]
             },
-
-            // ---------------------------------------------------------------------
-            // 3ª ANDALUZA SÉNIOR - GRUPO 5 (Jornadas 1 a 9 completas)
-            // ---------------------------------------------------------------------
             "3and_g5": {
                 1: [
                     { local: "C.D. UNIÓN GERENA", res: "5-2", visitante: "C.D. SAN JERONIMO" },
@@ -883,10 +1321,6 @@
                     { local: "J.D. BORMUJOS", res: "1-2", visitante: "C.D. SANTIPONCE" }
                 ]
             },
-
-            // ---------------------------------------------------------------------
-            // 3ª ANDALUZA SÉNIOR - GRUPO 6 (Jornadas 1 a 9 completas)
-            // ---------------------------------------------------------------------
             "3and_g6": {
                 1: [
                     { local: "C.D. SAN MARTIN", res: "2-1", visitante: "C.D. ALMENSILLA" },
@@ -979,537 +1413,9 @@
                     { local: "C.D. ALBAIDA", res: "2-3", visitante: "C.D. SALTERAS" }
                 ]
             }
-
-         // Base de datos completa de competiciones con resultados y estados reales (Jornadas 1 a 11)
-const dbCompeticiones = {
-    "division-honor": {
-        name: "División de Honor Senior (Grupo 1)",
-        jornadas: [
-            {
-                jornada: 1,
-                fecha: "13/09/2026",
-                matches: [
-                    { home: "Castilleja C.F.", away: "Montalbeño C.D.", score: "1 - 1", status: "Jugado" },
-                    { home: "U.D. Rinconada", away: "La Palma C.F.", score: "1 - 4", status: "Jugado" },
-                    { home: "Montilla C.F.", away: "U.P. Viso", score: "2 - 1", status: "Jugado" },
-                    { home: "Coria C.F.", away: "Atco. Palma del Río", score: "2 - 1", status: "Jugado" },
-                    { home: "Cádiz C.F. C", away: "Rayo Sanluqueño", score: "2 - 0", status: "Jugado" },
-                    { home: "C.D. Moguer", away: "Aroche C.F.", score: "6 - 3", status: "Jugado" },
-                    { home: "Arcos C.F.", away: "C.D. Inter Sevilla", score: "5 - 0", status: "Jugado" },
-                    { home: "Atlético Espeleño", away: "Isla Cristina F.C.", score: "1 - 2", status: "Jugado" },
-                    { home: "C.D. Cabecense", away: "U.B. Lebrijana", score: "2 - 2", status: "Jugado" },
-                    { home: "Almodóvar del Río", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 2,
-                fecha: "20/09/2026",
-                matches: [
-                    { home: "La Palma C.F.", away: "Montilla C.F.", score: "3 - 1", status: "Jugado" },
-                    { home: "Isla Cristina F.C.", away: "Cádiz C.F. C", score: "1 - 1", status: "Jugado" },
-                    { home: "U.P. Viso", away: "Coria C.F.", score: "0 - 3", status: "Jugado" },
-                    { home: "Rayo Sanluqueño", away: "C.D. Moguer", score: "3 - 1", status: "Jugado" },
-                    { home: "U.B. Lebrijana", away: "Arcos C.F.", score: "0 - 1", status: "Jugado" },
-                    { home: "Atco. Palma del Río", away: "C.D. Cabecense", score: "2 - 1", status: "Jugado" },
-                    { home: "Almodóvar del Río", away: "Castilleja C.F.", score: "1 - 1", status: "Jugado" },
-                    { home: "Montalbeño C.D.", away: "U.D. Rinconada", score: "1 - 2", status: "Jugado" },
-                    { home: "C.D. Inter Sevilla", away: "Atlético Espeleño", score: "1 - 4", status: "Jugado" },
-                    { home: "Aroche C.F.", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 3,
-                fecha: "27/09/2026",
-                matches: [
-                    { home: "Arcos C.F.", away: "Atco. Palma del Río", score: "1 - 1", status: "Jugado" },
-                    { home: "U.D. Rinconada", away: "Almodóvar del Río", score: "1 - 2", status: "Jugado" },
-                    { home: "Cádiz C.F. C", away: "C.D. Inter Sevilla", score: "3 - 3", status: "Jugado" },
-                    { home: "Montilla C.F.", away: "Coria C.F.", score: "3 - 1", status: "Jugado" },
-                    { home: "C.D. Cabecense", away: "U.P. Viso", score: "3 - 2", status: "Jugado" },
-                    { home: "Castilleja C.F.", away: "Aroche C.F.", score: "3 - 3", status: "Jugado" },
-                    { home: "La Palma C.F.", away: "Montalbeño C.D.", score: "0 - 2", status: "Jugado" },
-                    { home: "C.D. Moguer", away: "Isla Cristina F.C.", score: "2 - 2", status: "Jugado" },
-                    { home: "Atlético Espeleño", away: "U.B. Lebrijana", score: "1 - 1", status: "Jugado" },
-                    { home: "Rayo Sanluqueño", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 4,
-                fecha: "30/09/2026",
-                matches: [
-                    { home: "Almodóvar del Río", away: "La Palma C.F.", score: "2 - 0", status: "Jugado" },
-                    { home: "Rayo Sanluqueño", away: "Castilleja C.F.", score: "0 - 1", status: "Jugado" },
-                    { home: "Aroche C.F.", away: "U.D. Rinconada", score: "0 - 2", status: "Jugado" },
-                    { home: "Atco. Palma del Río", away: "Atlético Espeleño", score: "4 - 1", status: "Jugado" },
-                    { home: "U.B. Lebrijana", away: "Cádiz C.F. C", score: "3 - 1", status: "Jugado" },
-                    { home: "Coria C.F.", away: "C.D. Cabecense", score: "1 - 1", status: "Jugado" },
-                    { home: "U.P. Viso", away: "Arcos C.F.", score: "2 - 2", status: "Jugado" },
-                    { home: "Montalbeño C.D.", away: "Montilla C.F.", score: "1 - 2", status: "Jugado" },
-                    { home: "C.D. Inter Sevilla", away: "C.D. Moguer", score: "0 - 3", status: "Jugado" },
-                    { home: "Isla Cristina F.C.", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 5,
-                fecha: "04/10/2026",
-                matches: [
-                    { home: "Castilleja C.F.", away: "Isla Cristina F.C.", score: "1 - 1", status: "Jugado" },
-                    { home: "U.D. Rinconada", away: "Rayo Sanluqueño", score: "1 - 1", status: "Jugado" },
-                    { home: "La Palma C.F.", away: "Aroche C.F.", score: "4 - 0", status: "Jugado" },
-                    { home: "Montilla C.F.", away: "C.D. Cabecense", score: "1 - 1", status: "Jugado" },
-                    { home: "Arcos C.F.", away: "Coria C.F.", score: "2 - 1", status: "Jugado" },
-                    { home: "Atlético Espeleño", away: "U.P. Viso", score: "0 - 0", status: "Jugado" },
-                    { home: "Cádiz C.F. C", away: "Atco. Palma del Río", score: "0 - 4", status: "Jugado" },
-                    { home: "Montalbeño C.D.", away: "Almodóvar del Río", score: "2 - 2", status: "Jugado" },
-                    { home: "C.D. Moguer", away: "U.B. Lebrijana", score: "SUSP.", status: "Suspendido" },
-                    { home: "C.D. Inter Sevilla", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 6,
-                fecha: "11/10/2026",
-                matches: [
-                    { home: "Rayo Sanluqueño", away: "La Palma C.F.", score: "1 - 3", status: "Jugado" },
-                    { home: "C.D. Cabecense", away: "Arcos C.F.", score: "2 - 1", status: "Jugado" },
-                    { home: "Isla Cristina F.C.", away: "U.D. Rinconada", score: "4 - 1", status: "Jugado" },
-                    { home: "Coria C.F.", away: "Atlético Espeleño", score: "1 - 1", status: "Jugado" },
-                    { home: "U.P. Viso", away: "Cádiz C.F. C", score: "1 - 0", status: "Jugado" },
-                    { home: "C.D. Inter Sevilla", away: "Castilleja C.F.", score: "0 - 3", status: "Jugado" },
-                    { home: "Atco. Palma del Río", away: "C.D. Moguer", score: "4 - 0", status: "Jugado" },
-                    { home: "Aroche C.F.", away: "Montalbeño C.D.", score: "0 - 3", status: "Jugado" },
-                    { home: "Almodóvar del Río", away: "Montilla C.F.", score: "3 - 2", status: "Jugado" },
-                    { home: "U.B. Lebrijana", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 7,
-                fecha: "18/10/2026",
-                matches: [
-                    { home: "Castilleja C.F.", away: "U.B. Lebrijana", score: "0 - 2", status: "Jugado" },
-                    { home: "U.D. Rinconada", away: "C.D. Inter Sevilla", score: "2 - 1", status: "Jugado" },
-                    { home: "La Palma C.F.", away: "Isla Cristina F.C.", score: "1 - 0", status: "Jugado" },
-                    { home: "Cádiz C.F. C", away: "Coria C.F.", score: "1 - 2", status: "Jugado" },
-                    { home: "Montilla C.F.", away: "Arcos C.F.", score: "1 - 1", status: "Jugado" },
-                    { home: "Montalbeño C.D.", away: "Rayo Sanluqueño", score: "2 - 2", status: "Jugado" },
-                    { home: "C.D. Moguer", away: "U.P. Viso", score: "1 - 2", status: "Jugado" },
-                    { home: "Atlético Espeleño", away: "C.D. Cabecense", score: "0 - 5", status: "Jugado" },
-                    { home: "Almodóvar del Río", away: "Aroche C.F.", score: "1 - 1", status: "Jugado" },
-                    { home: "Atco. Palma del Río", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 8,
-                fecha: "25/10/2026",
-                matches: [
-                    { home: "C.D. Cabecense", away: "Cádiz C.F. C", score: "1 - 1", status: "Jugado" },
-                    { home: "Isla Cristina F.C.", away: "Montalbeño C.D.", score: "1 - 2", status: "Jugado" },
-                    { home: "Coria C.F.", away: "C.D. Moguer", score: "1 - 0", status: "Jugado" },
-                    { home: "Rayo Sanluqueño", away: "Almodóvar del Río", score: "5 - 0", status: "Jugado" },
-                    { home: "Aroche C.F.", away: "Montilla C.F.", score: "0 - 5", status: "Jugado" },
-                    { home: "C.D. Inter Sevilla", away: "La Palma C.F.", score: "1 - 0", status: "Jugado" },
-                    { home: "U.B. Lebrijana", away: "U.D. Rinconada", score: "3 - 1", status: "Jugado" },
-                    { home: "Arcos C.F.", away: "Atlético Espeleño", score: "2 - 0", status: "Jugado" },
-                    { home: "Atco. Palma del Río", away: "Castilleja C.F.", score: "1 - 0", status: "Jugado" },
-                    { home: "U.P. Viso", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 9,
-                fecha: "01/11/2026",
-                matches: [
-                    { home: "Montilla C.F.", away: "Atlético Espeleño", score: "1 - 0", status: "Jugado" },
-                    { home: "Castilleja C.F.", away: "U.P. Viso", score: "2 - 0", status: "Jugado" },
-                    { home: "La Palma C.F.", away: "U.B. Lebrijana", score: "2 - 1", status: "Jugado" },
-                    { home: "Cádiz C.F. C", away: "Arcos C.F.", score: "1 - 1", status: "Jugado" },
-                    { home: "C.D. Moguer", away: "C.D. Cabecense", score: "1 - 4", status: "Jugado" },
-                    { home: "Montalbeño C.D.", away: "C.D. Inter Sevilla", score: "1 - 0", status: "Jugado" },
-                    { home: "Aroche C.F.", away: "Rayo Sanluqueño", score: "2 - 2", status: "Jugado" },
-                    { home: "Almodóvar del Río", away: "Isla Cristina F.C.", score: "7 - 4", status: "Jugado" },
-                    { home: "U.D. Rinconada", away: "Atco. Palma del Río", score: "0 - 1", status: "Jugado" },
-                    { home: "Coria C.F.", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 10,
-                fecha: "08/11/2026",
-                matches: [
-                    { home: "C.D. Inter Sevilla", away: "Almodóvar del Río", score: "4 - 4", status: "Jugado" },
-                    { home: "Coria C.F.", away: "Castilleja C.F.", score: "1 - 1", status: "Jugado" },
-                    { home: "Isla Cristina F.C.", away: "Aroche C.F.", score: "2 - 0", status: "Jugado" },
-                    { home: "Rayo Sanluqueño", away: "Montilla C.F.", score: "1 - 1", status: "Jugado" },
-                    { home: "U.P. Viso", away: "U.D. Rinconada", score: "2 - 0", status: "Jugado" },
-                    { home: "U.B. Lebrijana", away: "Montalbeño C.D.", score: "0 - 0", status: "Jugado" },
-                    { home: "Atco. Palma del Río", away: "La Palma C.F.", score: "2 - 1", status: "Jugado" },
-                    { home: "Atlético Espeleño", away: "Cádiz C.F. C", score: "1 - 0", status: "Jugado" },
-                    { home: "Arcos C.F.", away: "C.D. Moguer", score: "3 - 1", status: "Jugado" },
-                    { home: "C.D. Cabecense", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            },
-            {
-                jornada: 11,
-                fecha: "15/11/2026",
-                matches: [
-                    { home: "Castilleja C.F.", away: "C.D. Cabecense", score: "0 - 1", status: "Jugado" },
-                    { home: "U.D. Rinconada", away: "Coria C.F.", score: "0 - 2", status: "Jugado" },
-                    { home: "Rayo Sanluqueño", away: "Isla Cristina F.C.", score: "3 - 1", status: "Jugado" },
-                    { home: "La Palma C.F.", away: "U.P. Viso", score: "4 - 0", status: "Jugado" },
-                    { home: "C.D. Moguer", away: "Atlético Espeleño", score: "1 - 0", status: "Jugado" },
-                    { home: "Aroche C.F.", away: "C.D. Inter Sevilla", score: "1 - 2", status: "Jugado" },
-                    { home: "Montilla C.F.", away: "Cádiz C.F. C", score: "2 - 1", status: "Jugado" },
-                    { home: "Montalbeño C.D.", away: "Atco. Palma del Río", score: "2 - 2", status: "Jugado" },
-                    { home: "Almodóvar del Río", away: "U.B. Lebrijana", score: "0 - 3", status: "Jugado" },
-                    { home: "Arcos C.F.", away: "Descansa", score: "-", status: "Descansa" }
-                ]
-            }
-        ]
-    },
-    "segunda-rfef": {
-        name: "Segunda Federación (Grupo 4)",
-        jornadas: [
-            {
-                jornada: 1,
-                fecha: "06/09/2026",
-                matches: [
-                    { home: "CD Estepona", away: "Xerez CD", score: "0 - 0", status: "Jugado" },
-                    { home: "CD Badajoz", away: "Tenerife B", score: "2 - 1", status: "Jugado" },
-                    { home: "UD Las Palmas Atlético", away: "Betis Deportivo", score: "0 - 1", status: "Jugado" },
-                    { home: "Tamaraceite", away: "Sevilla Atlético", score: "0 - 1", status: "Jugado" },
-                    { home: "Linares Deportivo", away: "Ciudad de Lucena", score: "1 - 1", status: "Jugado" },
-                    { home: "Marbella", away: "Atlético Sanluqueño", score: "2 - 2", status: "Jugado" },
-                    { home: "Atlético Antoniano", away: "Don Benito", score: "1 - 2", status: "Jugado" },
-                    { home: "Puente Genil", away: "CP Mijas Las Lagunas", score: "4 - 0", status: "Jugado" },
-                    { home: "Atlético Central", away: "Recreativo", score: "2 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 2,
-                fecha: "13/09/2026",
-                matches: [
-                    { home: "CD Estepona", away: "Linares Deportivo", score: "1 - 4", status: "Jugado" },
-                    { home: "Don Benito", away: "UD Las Palmas Atlético", score: "3 - 0", status: "Jugado" },
-                    { home: "Sevilla Atlético", away: "Marbella", score: "3 - 0", status: "Jugado" },
-                    { home: "Atlético Sanluqueño", away: "Tamaraceite", score: "1 - 0", status: "Jugado" },
-                    { home: "Tenerife B", away: "Atlético Central", score: "3 - 1", status: "Jugado" },
-                    { home: "Betis Deportivo", away: "Atlético Antoniano", score: "0 - 0", status: "Jugado" },
-                    { home: "CP Mijas Las Lagunas", away: "Ciudad de Lucena", score: "1 - 1", status: "Jugado" },
-                    { home: "Xerez CD", away: "CD Badajoz", score: "1 - 2", status: "Jugado" },
-                    { home: "Recreativo", away: "Puente Genil", score: "2 - 1", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 3,
-                fecha: "20/09/2026",
-                matches: [
-                    { home: "Puente Genil", away: "CD Estepona", score: "0 - 2", status: "Jugado" },
-                    { home: "Linares Deportivo", away: "UD Las Palmas Atlético", score: "0 - 1", status: "Jugado" },
-                    { home: "Sevilla Atlético", away: "Atlético Sanluqueño", score: "2 - 2", status: "Jugado" },
-                    { home: "Ciudad de Lucena", away: "Tenerife B", score: "1 - 2", status: "Jugado" },
-                    { home: "Tamaraceite", away: "Recreativo", score: "1 - 3", status: "Jugado" },
-                    { home: "CD Badajoz", away: "Betis Deportivo", score: "0 - 1", status: "Jugado" },
-                    { home: "Marbella", away: "Atlético Central", score: "4 - 1", status: "Jugado" },
-                    { home: "Atlético Antoniano", away: "CP Mijas Las Lagunas", score: "1 - 1", status: "Jugado" },
-                    { home: "Xerez CD", away: "Don Benito", score: "0 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 4,
-                fecha: "27/09/2026",
-                matches: [
-                    { home: "Don Benito", away: "Atlético Sanluqueño", score: "1 - 0", status: "Jugado" },
-                    { home: "Betis Deportivo", away: "Linares Deportivo", score: "4 - 0", status: "Jugado" },
-                    { home: "CP Mijas Las Lagunas", away: "Tamaraceite", score: "6 - 2", status: "Jugado" },
-                    { home: "Tenerife B", away: "CD Estepona", score: "2 - 1", status: "Jugado" },
-                    { home: "UD Las Palmas Atlético", away: "CD Badajoz", score: "0 - 0", status: "Jugado" },
-                    { home: "Puente Genil", away: "Marbella", score: "0 - 0", status: "Jugado" },
-                    { home: "Atlético Antoniano", away: "Ciudad de Lucena", score: "0 - 3", status: "Jugado" },
-                    { home: "Atlético Central", away: "Sevilla Atlético", score: "2 - 0", status: "Jugado" },
-                    { home: "Recreativo", away: "Xerez CD", score: "1 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 5,
-                fecha: "04/10/2026",
-                matches: [
-                    { home: "CD Estepona", away: "Don Benito", score: "3 - 1", status: "Jugado" },
-                    { home: "Sevilla Atlético", away: "CD Badajoz", score: "2 - 2", status: "Jugado" },
-                    { home: "Recreativo", away: "UD Las Palmas Atlético", score: "4 - 0", status: "Jugado" },
-                    { home: "Atlético Sanluqueño", away: "CP Mijas Las Lagunas", score: "2 - 2", status: "Jugado" },
-                    { home: "Xerez CD", away: "Tenerife B", score: "2 - 1", status: "Jugado" },
-                    { home: "Tamaraceite", away: "Atlético Antoniano", score: "1 - 0", status: "Jugado" },
-                    { home: "Marbella", away: "Betis Deportivo", score: "0 - 2", status: "Jugado" },
-                    { home: "Atlético Central", away: "Linares Deportivo", score: "0 - 1", status: "Jugado" },
-                    { home: "Ciudad de Lucena", away: "Puente Genil", score: "1 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 6,
-                fecha: "11/10/2026",
-                matches: [
-                    { home: "Betis Deportivo", away: "Xerez CD", score: "1 - 1", status: "Jugado" },
-                    { home: "Puente Genil", away: "Tamaraceite", score: "1 - 0", status: "Jugado" },
-                    { home: "Linares Deportivo", away: "Atlético Antoniano", score: "2 - 1", status: "Jugado" },
-                    { home: "UD Las Palmas Atlético", away: "Tenerife B", score: "1 - 1", status: "Jugado" },
-                    { home: "CD Badajoz", away: "Marbella", score: "1 - 0", status: "Jugado" },
-                    { home: "Ciudad de Lucena", away: "Don Benito", score: "4 - 2", status: "Jugado" },
-                    { home: "CP Mijas Las Lagunas", away: "Sevilla Atlético", score: "3 - 1", status: "Jugado" },
-                    { home: "Atlético Sanluqueño", away: "Recreativo", score: "3 - 3", status: "Jugado" },
-                    { home: "CD Estepona", away: "Atlético Central", score: "3 - 2", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 7,
-                fecha: "18/10/2026",
-                matches: [
-                    { home: "Atlético Antoniano", away: "Sevilla Atlético", score: "3 - 3", status: "Jugado" },
-                    { home: "Linares Deportivo", away: "Recreativo", score: "0 - 0", status: "Jugado" },
-                    { home: "Marbella", away: "CD Estepona", score: "0 - 0", status: "Jugado" },
-                    { home: "Tenerife B", away: "CP Mijas Las Lagunas", score: "1 - 3", status: "Jugado" },
-                    { home: "UD Las Palmas Atlético", away: "Puente Genil", score: "1 - 2", status: "Jugado" },
-                    { home: "Tamaraceite", away: "Betis Deportivo", score: "3 - 2", status: "Jugado" },
-                    { home: "CD Badajoz", away: "Atlético Sanluqueño", score: "1 - 0", status: "Jugado" },
-                    { home: "Don Benito", away: "Atlético Central", score: "4 - 2", status: "Jugado" },
-                    { home: "Xerez CD", away: "Ciudad de Lucena", score: "0 - 1", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 8,
-                fecha: "25/10/2026",
-                matches: [
-                    { home: "CP Mijas Las Lagunas", away: "Betis Deportivo", score: "1 - 1", status: "Jugado" },
-                    { home: "Don Benito", away: "Linares Deportivo", score: "1 - 1", status: "Jugado" },
-                    { home: "Recreativo", away: "Atlético Antoniano", score: "5 - 0", status: "Jugado" },
-                    { home: "CD Estepona", away: "Ciudad de Lucena", score: "2 - 2", status: "Jugado" },
-                    { home: "Sevilla Atlético", away: "Tenerife B", score: "2 - 0", status: "Jugado" },
-                    { home: "Puente Genil", away: "CD Badajoz", score: "0 - 0", status: "Jugado" },
-                    { home: "Atlético Central", away: "Tamaraceite", score: "1 - 0", status: "Jugado" },
-                    { home: "Atlético Sanluqueño", away: "UD Las Palmas Atlético", score: "4 - 1", status: "Jugado" },
-                    { home: "Xerez CD", away: "Marbella", score: "1 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 9,
-                fecha: "01/11/2026",
-                matches: [
-                    { home: "Sevilla Atlético", away: "Puente Genil", score: "1 - 1", status: "Jugado" },
-                    { home: "Marbella", away: "CP Mijas Las Lagunas", score: "0 - 0", status: "Jugado" },
-                    { home: "Atlético Antoniano", away: "CD Estepona", score: "4 - 1", status: "Jugado" },
-                    { home: "UD Las Palmas Atlético", away: "Atlético Central", score: "0 - 1", status: "Jugado" },
-                    { home: "Betis Deportivo", away: "Recreativo", score: "0 - 2", status: "Jugado" },
-                    { home: "Tamaraceite", away: "Xerez CD", score: "1 - 3", status: "Jugado" },
-                    { home: "CD Badajoz", away: "Linares Deportivo", score: "1 - 1", status: "Jugado" },
-                    { home: "Ciudad de Lucena", away: "Atlético Sanluqueño", score: "2 - 1", status: "Jugado" },
-                    { home: "Tenerife B", away: "Don Benito", score: "0 - 1", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 10,
-                fecha: "08/11/2026",
-                matches: [
-                    { home: "Recreativo", away: "CP Mijas Las Lagunas", score: "1 - 1", status: "Jugado" },
-                    { home: "Ciudad de Lucena", away: "CD Badajoz", score: "1 - 1", status: "Jugado" },
-                    { home: "Betis Deportivo", away: "Tenerife B", score: "11/11 11:30", status: "Jugado" },
-                    { home: "Don Benito", away: "Puente Genil", score: "3 - 2", status: "Jugado" },
-                    { home: "CD Estepona", away: "Tamaraceite", score: "5 - 0", status: "Jugado" },
-                    { home: "Linares Deportivo", away: "Sevilla Atlético", score: "3 - 3", status: "Jugado" },
-                    { home: "Marbella", away: "UD Las Palmas Atlético", score: "2 - 1", status: "Jugado" },
-                    { home: "Atlético Sanluqueño", away: "Xerez CD", score: "0 - 4", status: "Jugado" },
-                    { home: "Atlético Central", away: "Atlético Antoniano", score: "1 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 11,
-                fecha: "15/11/2026",
-                matches: [
-                    { home: "Atlético Sanluqueño", away: "Betis Deportivo", score: "0 - 1", status: "Jugado" },
-                    { home: "Puente Genil", away: "Atlético Central", score: "2 - 0", status: "Jugado" },
-                    { home: "Tenerife B", away: "Linares Deportivo", score: "1 - 2", status: "Jugado" },
-                    { home: "UD Las Palmas Atlético", away: "Ciudad de Lucena", score: "4 - 3", status: "Jugado" },
-                    { home: "Tamaraceite", away: "Marbella", score: "0 - 1", status: "Jugado" },
-                    { home: "CD Badajoz", away: "Don Benito", score: "2 - 1", status: "Jugado" },
-                    { home: "CP Mijas Las Lagunas", away: "CD Estepona", score: "3 - 4", status: "Jugado" },
-                    { home: "Xerez CD", away: "Atlético Antoniano", score: "2 - 0", status: "Jugado" },
-                    { home: "Sevilla Atlético", away: "Recreativo", score: "25/11 18:00", status: "Aplazado" }
-                ]
-            }
-        ]
-    },
-    "tercera-rfef": {
-        name: "Tercera Federación (Grupo 10)",
-        jornadas: [
-            {
-                jornada: 1,
-                fecha: "06/09/2026",
-                matches: [
-                    { home: "Conil", away: "Pozoblanco", score: "1 - 0", status: "Jugado" },
-                    { home: "Chiclana CF", away: "R. Balompédica Linense", score: "2 - 1", status: "Jugado" },
-                    { home: "Atlético Onubense", away: "Bollullos", score: "2 - 0", status: "Jugado" },
-                    { home: "Dos Hermanas CF 1971", away: "Utrera", score: "3 - 0", status: "Jugado" },
-                    { home: "Tomares", away: "Cádiz B", score: "2 - 2", status: "Jugado" },
-                    { home: "Egabrense", away: "Córdoba B", score: "4 - 2", status: "Jugado" },
-                    { home: "Real Betis C", away: "Sevilla C", score: "2 - 0", status: "Jugado" },
-                    { home: "San Roque de Lepe", away: "AD Ceuta FC B", score: "1 - 1", status: "Jugado" },
-                    { home: "Xerez Deportivo", away: "Racing Club Portuense", score: "0 - 1", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 2,
-                fecha: "13/09/2026",
-                matches: [
-                    { home: "AD Ceuta FC B", away: "Egabrense", score: "1 - 3", status: "Jugado" },
-                    { home: "Utrera", away: "Conil", score: "2 - 0", status: "Jugado" },
-                    { home: "Córdoba B", away: "Chiclana CF", score: "0 - 0", status: "Jugado" },
-                    { home: "Racing Club Portuense", away: "San Roque de Lepe", score: "2 - 0", status: "Jugado" },
-                    { home: "Cádiz B", away: "Dos Hermanas CF 1971", score: "0 - 0", status: "Jugado" },
-                    { home: "Sevilla C", away: "Xerez Deportivo", score: "2 - 3", status: "Jugado" },
-                    { home: "Pozoblanco", away: "Atlético Onubense", score: "3 - 0", status: "Jugado" },
-                    { home: "R. Balompédica Linense", away: "Tomares", score: "2 - 0", status: "Jugado" },
-                    { home: "Bollullos", away: "Real Betis C", score: "3 - 3", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 3,
-                fecha: "20/09/2026",
-                matches: [
-                    { home: "Chiclana CF", away: "AD Ceuta FC B", score: "0 - 1", status: "Jugado" },
-                    { home: "Atlético Onubense", away: "Real Betis C", score: "2 - 4", status: "Jugado" },
-                    { home: "Xerez Deportivo", away: "Bollullos", score: "1 - 0", status: "Jugado" },
-                    { home: "Dos Hermanas CF 1971", away: "R. Balompédica Linense", score: "3 - 1", status: "Jugado" },
-                    { home: "Tomares", away: "Córdoba B", score: "2 - 0", status: "Jugado" },
-                    { home: "Sevilla C", away: "San Roque de Lepe", score: "2 - 1", status: "Jugado" },
-                    { home: "Pozoblanco", away: "Utrera", score: "1 - 2", status: "Jugado" },
-                    { home: "Egabrense", away: "Racing Club Portuense", score: "1 - 3", status: "Jugado" },
-                    { home: "Conil", away: "Cádiz B", score: "0 - 2", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 4,
-                fecha: "27/09/2026",
-                matches: [
-                    { home: "Cádiz B", away: "Pozoblanco", score: "0 - 1", status: "Jugado" },
-                    { home: "Córdoba B", away: "Dos Hermanas CF 1971", score: "1 - 2", status: "Jugado" },
-                    { home: "AD Ceuta FC B", away: "Tomares", score: "0 - 1", status: "Jugado" },
-                    { home: "Utrera", away: "Atlético Onubense", score: "2 - 1", status: "Jugado" },
-                    { home: "Racing Club Portuense", away: "Chiclana CF", score: "2 - 3", status: "Jugado" },
-                    { home: "Sevilla C", away: "Egabrense", score: "0 - 0", status: "Jugado" },
-                    { home: "R. Balompédica Linense", away: "Conil", score: "3 - 1", status: "Jugado" },
-                    { home: "Real Betis C", away: "Xerez Deportivo", score: "2 - 0", status: "Jugado" },
-                    { home: "Bollullos", away: "San Roque de Lepe", score: "1 - 2", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 5,
-                fecha: "04/10/2026",
-                matches: [
-                    { home: "Dos Hermanas CF 1971", away: "AD Ceuta FC B", score: "5 - 0", status: "Jugado" },
-                    { home: "Utrera", away: "Cádiz B", score: "1 - 0", status: "Jugado" },
-                    { home: "Tomares", away: "Racing Club Portuense", score: "1 - 1", status: "Jugado" },
-                    { home: "Atlético Onubense", away: "Xerez Deportivo", score: "1 - 1", status: "Jugado" },
-                    { home: "Chiclana CF", away: "Sevilla C", score: "1 - 1", status: "Jugado" },
-                    { home: "Egabrense", away: "Bollullos", score: "2 - 2", status: "Jugado" },
-                    { home: "Pozoblanco", away: "R. Balompédica Linense", score: "3 - 1", status: "Jugado" },
-                    { home: "Conil", away: "Córdoba B", score: "2 - 0", status: "Jugado" },
-                    { home: "San Roque de Lepe", away: "Real Betis C", score: "1 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 6,
-                fecha: "11/10/2026",
-                matches: [
-                    { home: "Sevilla C", away: "Tomares", score: "1 - 2", status: "Jugado" },
-                    { home: "Bollullos", away: "Chiclana CF", score: "2 - 0", status: "Jugado" },
-                    { home: "AD Ceuta FC B", away: "Conil", score: "3 - 0", status: "Jugado" },
-                    { home: "Real Betis C", away: "Egabrense", score: "3 - 2", status: "Jugado" },
-                    { home: "Cádiz B", away: "Atlético Onubense", score: "0 - 1", status: "Jugado" },
-                    { home: "Córdoba B", away: "Pozoblanco", score: "2 - 2", status: "Jugado" },
-                    { home: "Racing Club Portuense", away: "Dos Hermanas CF 1971", score: "3 - 0", status: "Jugado" },
-                    { home: "R. Balompédica Linense", away: "Utrera", score: "0 - 1", status: "Jugado" },
-                    { home: "Xerez Deportivo", away: "San Roque de Lepe", score: "2 - 2", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 7,
-                fecha: "18/10/2026",
-                matches: [
-                    { home: "Dos Hermanas CF 1971", away: "Sevilla C", score: "5 - 1", status: "Jugado" },
-                    { home: "Pozoblanco", away: "AD Ceuta FC B", score: "1 - 1", status: "Jugado" },
-                    { home: "Cádiz B", away: "R. Balompédica Linense", score: "1 - 1", status: "Jugado" },
-                    { home: "Tomares", away: "Bollullos", score: "1 - 0", status: "Jugado" },
-                    { home: "Chiclana CF", away: "Real Betis C", score: "2 - 2", status: "Jugado" },
-                    { home: "Atlético Onubense", away: "San Roque de Lepe", score: "0 - 3", status: "Jugado" },
-                    { home: "Egabrense", away: "Xerez Deportivo", score: "1 - 2", status: "Jugado" },
-                    { home: "Conil", away: "Racing Club Portuense", score: "2 - 1", status: "Jugado" },
-                    { home: "Utrera", away: "Córdoba B", score: "11/11 19:30", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 8,
-                fecha: "25/10/2026",
-                matches: [
-                    { home: "AD Ceuta FC B", away: "Utrera", score: "5 - 2", status: "Jugado" },
-                    { home: "Xerez Deportivo", away: "Chiclana CF", score: "3 - 2", status: "Jugado" },
-                    { home: "Real Betis C", away: "Tomares", score: "0 - 1", status: "Jugado" },
-                    { home: "Córdoba B", away: "Cádiz B", score: "0 - 0", status: "Jugado" },
-                    { home: "Racing Club Portuense", away: "Pozoblanco", score: "3 - 1", status: "Jugado" },
-                    { home: "Sevilla C", away: "Conil", score: "0 - 0", status: "Jugado" },
-                    { home: "R. Balompédica Linense", away: "Atlético Onubense", score: "1 - 1", status: "Jugado" },
-                    { home: "Bollullos", away: "Dos Hermanas CF 1971", score: "0 - 1", status: "Jugado" },
-                    { home: "San Roque de Lepe", away: "Egabrense", score: "1 - 0", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 9,
-                fecha: "01/11/2026",
-                matches: [
-                    { home: "Cádiz B", away: "AD Ceuta FC B", score: "0 - 0", status: "Jugado" },
-                    { home: "R. Balompédica Linense", away: "Córdoba B", score: "1 - 1", status: "Jugado" },
-                    { home: "Utrera", away: "Racing Club Portuense", score: "1 - 2", status: "Jugado" },
-                    { home: "Pozoblanco", away: "Sevilla C", score: "2 - 2", status: "Jugado" },
-                    { home: "Dos Hermanas CF 1971", away: "Real Betis C", score: "4 - 3", status: "Jugado" },
-                    { home: "Tomares", away: "Xerez Deportivo", score: "0 - 1", status: "Jugado" },
-                    { home: "Chiclana CF", away: "San Roque de Lepe", score: "0 - 2", status: "Jugado" },
-                    { home: "Conil", away: "Bollullos", score: "0 - 0", status: "Jugado" },
-                    { home: "Atlético Onubense", away: "Egabrense", score: "1 - 2", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 10,
-                fecha: "08/11/2026",
-                matches: [
-                    { home: "Córdoba B", away: "Atlético Onubense", score: "3 - 0", status: "Jugado" },
-                    { home: "Sevilla C", away: "Utrera", score: "3 - 3", status: "Jugado" },
-                    { home: "AD Ceuta FC B", away: "R. Balompédica Linense", score: "1 - 2", status: "Jugado" },
-                    { home: "Racing Club Portuense", away: "Cádiz B", score: "1 - 1", status: "Jugado" },
-                    { home: "Bollullos", away: "Pozoblanco", score: "1 - 1", status: "Jugado" },
-                    { home: "Xerez Deportivo", away: "Dos Hermanas CF 1971", score: "1 - 1", status: "Jugado" },
-                    { home: "San Roque de Lepe", away: "Tomares", score: "2 - 1", status: "Jugado" },
-                    { home: "Egabrense", away: "Chiclana CF", score: "3 - 1", status: "Jugado" },
-                    { home: "Real Betis C", away: "Conil", score: "4 - 3", status: "Jugado" }
-                ]
-            },
-            {
-                jornada: 11,
-                fecha: "15/11/2026",
-                matches: [
-                    { home: "Cádiz B", away: "Sevilla C", score: "1 - 1", status: "Jugado" },
-                    { home: "Córdoba B", away: "AD Ceuta FC B", score: "2 - 0", status: "Jugado" },
-                    { home: "Utrera", away: "Bollullos", score: "3 - 1", status: "Jugado" },
-                    { home: "Pozoblanco", away: "Real Betis C", score: "1 - 2", status: "Jugado" },
-                    { home: "Dos Hermanas CF 1971", away: "San Roque de Lepe", score: "1 - 2", status: "Jugado" },
-                    { home: "Tomares", away: "Egabrense", score: "1 - 3", status: "Jugado" },
-                    { home: "Atlético Onubense", away: "Chiclana CF", score: "0 - 2", status: "Jugado" },
-                    { home: "R. Balompédica Linense", away: "Racing Club Portuense", score: "0 - 0", status: "Jugado" },
-                    { home: "Conil", away: "Xerez Deportivo", score: "0 - 0", status: "Jugado" }
-                ]
-            }
-        ]
-    }
-};
         };
 
-        // =========================================================================
-        // LÓGICA DE NAVEGACIÓN Y RENDERIZADO
-        // =========================================================================
-        let categoriaActual = "2and_g1";
+        let categoriaActual = "tercera_rfef";
         let jornadaActual = 1;
 
         const selectCategoria = document.getElementById("categoriaSelect");
@@ -1518,7 +1424,6 @@ const dbCompeticiones = {
         const btnPrev = document.getElementById("btnPrev");
         const btnNext = document.getElementById("btnNext");
 
-        // Detectar última jornada disponible de una categoría para mostrarla por defecto
         function obtenerUltimaJornada(cat) {
             if (!DATOS_LIGA[cat]) return 1;
             const jornadas = Object.keys(DATOS_LIGA[cat]).map(Number);
@@ -1582,7 +1487,6 @@ const dbCompeticiones = {
             renderizarPartidos();
         });
 
-        // Inicializar en la última jornada de la primera categoría
         jornadaActual = obtenerUltimaJornada(categoriaActual);
         renderizarPartidos();
     </script>
