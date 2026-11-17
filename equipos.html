@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Ras de Calle - Equipos</title>
+    <title>A Ras de Calle - Equipos de Sevilla</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         :root {
@@ -88,56 +88,161 @@
 
         .container {
             padding: 1rem;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
-        .team-search {
-            width: 100%;
+        .filter-panel {
             background: var(--bg-card);
-            color: var(--text-light);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 10px 14px;
+            padding: 1.25rem;
             border-radius: 8px;
-            font-size: 0.9rem;
+            border: 1px solid rgba(212, 175, 55, 0.3);
             margin-bottom: 1.25rem;
-            box-sizing: border-box;
-            outline: none;
         }
 
-        .team-grid {
+        .panel-title {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 800;
+            margin: 0 0 1rem 0;
+        }
+
+        .selectors-grid {
             display: grid;
             grid-template-columns: 1fr;
             gap: 0.75rem;
         }
 
-        .team-box {
-            background: var(--bg-card);
-            border-radius: 8px;
-            padding: 1rem;
-            border-left: 4px solid var(--gold);
-            border-top: 1px solid rgba(255,255,255,0.05);
+        @media (min-width: 600px) {
+            .selectors-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.35rem;
+            font-weight: 600;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 10px 12px;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .search-box {
+            margin-top: 0.75rem;
+        }
+
+        .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .team-details h3 {
-            margin: 0 0 0.2rem 0;
-            font-size: 1rem;
+        .results-heading {
+            font-size: 1.05rem;
+            font-weight: 800;
             color: #ffffff;
+            margin: 0;
         }
 
-        .team-details span {
-            font-size: 0.78rem;
+        .team-count {
+            background: rgba(212, 175, 55, 0.15);
             color: var(--gold);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.78rem;
             font-weight: 700;
         }
 
-        @media (min-width: 600px) {
-            .team-grid {
-                grid-template-columns: 1fr 1fr;
+        .teams-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        @media (min-width: 550px) {
+            .teams-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
+        }
+
+        @media (min-width: 820px) {
+            .teams-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .team-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 0.9rem 1rem;
+            border-left: 4px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: transform 0.15s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .team-shield {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.85rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .team-info {
+            overflow: hidden;
+        }
+
+        .team-name {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 0 0.2rem 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .team-meta {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        .empty-msg {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem 1rem;
+            background: var(--bg-card);
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -163,68 +268,335 @@
     </header>
 
     <main class="container">
-        <h2 style="color: var(--gold); font-size: 1.2rem; margin-bottom: 1rem;">Directorio de Equipos</h2>
-        
-        <input type="text" class="team-search" placeholder="Buscar equipo o club..." id="searchTeam">
-
-        <div class="team-grid">
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>Dos Hermanas CF 1971</h3>
-                    <span>3ª RFEF - Grupo X</span>
+        <section class="filter-panel">
+            <h2 class="panel-title">🛡️ Clubes de la Provincia de Sevilla</h2>
+            <div class="selectors-grid">
+                <div class="field-group">
+                    <label for="categorySelect">Categoría</label>
+                    <select id="categorySelect"></select>
+                </div>
+                <div class="field-group">
+                    <label for="groupSelect">Grupo</label>
+                    <select id="groupSelect"></select>
                 </div>
             </div>
-
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>CD Utrera</h3>
-                    <span>3ª RFEF - Grupo X</span>
-                </div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Buscar equipo por nombre en esta selección...">
             </div>
+        </section>
 
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>Real Betis C</h3>
-                    <span>3ª RFEF - Grupo X</span>
-                </div>
-            </div>
-
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>Sevilla FC C</h3>
-                    <span>3ª RFEF - Grupo X</span>
-                </div>
-            </div>
-
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>Castilleja CF</h3>
-                    <span>División de Honor</span>
-                </div>
-            </div>
-
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>UP Viso</h3>
-                    <span>División de Honor</span>
-                </div>
-            </div>
-
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>Estrella San Agustín</h3>
-                    <span>1ª Andaluza Sevilla</span>
-                </div>
-            </div>
-
-            <div class="team-box">
-                <div class="team-details">
-                    <h3>CD Alcalá</h3>
-                    <span>2ª Andaluza Sevilla</span>
-                </div>
-            </div>
+        <div class="results-header">
+            <h3 class="results-heading" id="currentHeading">Equipos</h3>
+            <span class="team-count" id="teamCount">0 clubes</span>
         </div>
+
+        <div class="teams-grid" id="teamsGrid"></div>
     </main>
 
+    <script>
+        const clubsData = {
+            "Segunda Federación": {
+                "Grupo 4": [
+                    "Betis Deportivo",
+                    "Sevilla Atlético",
+                    "Atlético Central",
+                    "Atlético Antoniano"
+                ]
+            },
+            "Tercera Federación": {
+                "Grupo 10": [
+                    "Dos Hermanas CF 1971",
+                    "Real Betis C",
+                    "Sevilla C",
+                    "U.D Tomares",
+                    "Utrera"
+                ]
+            },
+            "División de Honor Andaluza": {
+                "Grupo 1": [
+                    "C.D Cabecense",
+                    "Arcos C.F",
+                    "Coria C.F",
+                    "U.B Lebrijana",
+                    "U.D Rinconada",
+                    "U.P Viso",
+                    "C.D Inter Sevilla",
+                    "Castilleja C.F"
+                ]
+            },
+            "Primera Andaluza Sevilla": {
+                "Grupo Único": [
+                    "U.D Pilas",
+                    "C.D Mairena",
+                    "A.D. San José",
+                    "La Barrera C.F",
+                    "A.D Mosqueo",
+                    "C.D Ventippo",
+                    "Palomares C.F",
+                    "Torreblanca C.F",
+                    "C.D Alcalá",
+                    "C.D Pedrera",
+                    "C.D San Marcos",
+                    "Osuna Bote Club",
+                    "Lora C.F",
+                    "Camas C.F",
+                    "U.D Villaverde",
+                    "U.D Bellavista",
+                    "C.D Montequinto",
+                    "Arahal Balompié"
+                ]
+            },
+            "Segunda Andaluza Sevilla": {
+                "Grupo 1": [
+                    "Calavera C.F",
+                    "La Liara Balompié",
+                    "El Palmar Vda. Real",
+                    "Écija Balompié",
+                    "Cerro del Aguila",
+                    "U.D. Morón C.F",
+                    "P.D. Rociera",
+                    "Los Palacios C.F",
+                    "CD. Utrera B",
+                    "C.A.D Nervión",
+                    "Dos Hermanas CF B",
+                    "C.D Demo",
+                    "Atlético Central B",
+                    "Estrella San Agustín",
+                    "La Motilla F.C",
+                    "C.D Herrera",
+                    "C.D Cabecense B"
+                ],
+                "Grupo 2": [
+                    "Atlético Olivarense",
+                    "Atlético Algabeño",
+                    "Atlético Sanlúcar",
+                    "C.D Aznalcázar",
+                    "Triana C.F",
+                    "Vistahermosa C.F",
+                    "Valenciana F.C",
+                    "C.D Minas",
+                    "Espartinas C.F",
+                    "U.D Loreto",
+                    "Puebla C.F",
+                    "Campana Balompié",
+                    "Benacazón C.F",
+                    "Camino Viejo C.F",
+                    "Villanueva Atlético",
+                    "C.M.D San Juan",
+                    "C.D Gelves"
+                ]
+            },
+            "Tercera Andaluza Sevilla": {
+                "Grupo 1": [
+                    "Guadalcarnal C.D",
+                    "C.D Peñaflor F.S",
+                    "Brenes Balompié",
+                    "Cazalla de la Sierra",
+                    "Celti Puebla C.D",
+                    "Oduciarosal",
+                    "U.D Constantina",
+                    "Burguillos C.D",
+                    "C.D Cantillana",
+                    "Alcalá del Río C.F",
+                    "Priorato Juventud",
+                    "Cañada Rosal",
+                    "Alcalea del Río F.C",
+                    "C.D El Pedroso",
+                    "U.D San Nicolás"
+                ],
+                "Grupo 2": [
+                    "Badalotosa C.F",
+                    "C.D Coronil",
+                    "Gilena C.F",
+                    "Peña Bética Alcalá",
+                    "Paradas Balompié",
+                    "U.D La Jara",
+                    "U.D Marinaleda",
+                    "Marchena Balompié",
+                    "A.D Carmana",
+                    "La Barrera C.F B",
+                    "Estepa Industrial",
+                    "La Roda C.F",
+                    "C.D Mosquito",
+                    "Consolación",
+                    "U.D Los Corrales"
+                ],
+                "Grupo 3": [
+                    "CD. DR. FLEMING",
+                    "Tabladilla C.D",
+                    "Cuervo Deportivo",
+                    "Miguel de Unamuno",
+                    "C.D Monteuqinto B",
+                    "C.D Marismillas",
+                    "U.D Fuente del Rey",
+                    "Sam-Cam Dos Hermanas",
+                    "C.D Lebrija Alma",
+                    "C.D Cantely",
+                    "La Motilla F.C B",
+                    "David Castedo CD",
+                    "Atlético Maribañez",
+                    "Eterna Juventud",
+                    "Atlético Antoniano B"
+                ],
+                "Grupo 4": [
+                    "Sevilla F.C B",
+                    "Ibarburu C.F",
+                    "C.D Colegio Claret",
+                    "Montellano C.D",
+                    "Ciudad Jardín C.F",
+                    "Triaca F.C",
+                    "CD Mosquito B",
+                    "C.D Mairena B",
+                    "U.D Bellavista B",
+                    "Andalucía Este C.F",
+                    "La vino tinto",
+                    "Ishbiliya Balompié",
+                    "C.D Rebesa",
+                    "Coripe C.F",
+                    "Jorge Juan A. Ulloa"
+                ],
+                "Grupo 5": [
+                    "U.D Soleá",
+                    "U.D Santiponce",
+                    "Guillena C.F",
+                    "J.D. Bormujos",
+                    "UD Loreto B",
+                    "CD Unión Gerena",
+                    "C.D San Jerónimo",
+                    "Aznalcóllar F.B.",
+                    "Real Betis D",
+                    "AA.AA Colspe",
+                    "CD Atlético San Juan",
+                    "Castilblanco F.C",
+                    "C.D Torre Reina",
+                    "Galeones CD",
+                    "El Ronquillo C.F"
+                ],
+                "Grupo 6": [
+                    "Mures C.F",
+                    "C.D Almensilla",
+                    "Huévar C.F",
+                    "C.D Albaida h",
+                    "C.D Salteras",
+                    "Juventud Dep. Ginés",
+                    "C.D San Martín",
+                    "C.D Cantarrana",
+                    "Atlético Libertad",
+                    "Mairena del Aljarafe",
+                    "Umbrete C.F",
+                    "Carrión Céspedes",
+                    "Nueva Sevilla",
+                    "Bormujos GSport F.S",
+                    "Coria C.F B"
+                ]
+            }
+        };
+
+        const categorySelect = document.getElementById('categorySelect');
+        const groupSelect = document.getElementById('groupSelect');
+        const searchInput = document.getElementById('searchInput');
+        const teamsGrid = document.getElementById('teamsGrid');
+        const currentHeading = document.getElementById('currentHeading');
+        const teamCount = document.getElementById('teamCount');
+
+        function getInitials(name) {
+            const clean = name.replace(/C\.F\.?|U\.D\.?|C\.D\.?|A\.D\.?|S\.A\.D\.?|F\.C\.?|U\.B\.?|U\.P\.?|P\.D\.?|C\.A\.D\.?|C\.M\.D\.?|F\.S\.?|F\.B\.?/gi, '').trim();
+            const parts = clean.split(/\s+/);
+            if (parts.length >= 2) {
+                return (parts[0][0] + parts[1][0]).toUpperCase();
+            }
+            return clean.substring(0, 2).toUpperCase() || 'FC';
+        }
+
+        function populateCategories() {
+            const categories = Object.keys(clubsData);
+            categorySelect.innerHTML = '';
+            categories.forEach(function(cat) {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                categorySelect.appendChild(option);
+            });
+            populateGroups();
+        }
+
+        function populateGroups() {
+            const selectedCat = categorySelect.value;
+            const groups = Object.keys(clubsData[selectedCat]);
+            groupSelect.innerHTML = '';
+            groups.forEach(function(grp) {
+                const option = document.createElement('option');
+                option.value = grp;
+                option.textContent = grp;
+                groupSelect.appendChild(option);
+            });
+            renderTeams();
+        }
+
+        function renderTeams() {
+            const selectedCat = categorySelect.value;
+            const selectedGrp = groupSelect.value;
+            const query = searchInput.value.trim().toLowerCase();
+
+            const rawTeams = clubsData[selectedCat][selectedGrp] || [];
+            const filteredTeams = rawTeams.filter(function(team) {
+                return team.toLowerCase().includes(query);
+            });
+
+            currentHeading.textContent = selectedCat + ' · ' + selectedGrp;
+            teamCount.textContent = filteredTeams.length + (filteredTeams.length === 1 ? ' club' : ' clubes');
+
+            teamsGrid.innerHTML = '';
+
+            if (filteredTeams.length === 0) {
+                const empty = document.createElement('div');
+                empty.className = 'empty-msg';
+                empty.textContent = 'No se encontraron equipos con ese nombre en esta categoría.';
+                teamsGrid.appendChild(empty);
+                return;
+            }
+
+            filteredTeams.forEach(function(teamName) {
+                const card = document.createElement('div');
+                card.className = 'team-card';
+
+                const shield = document.createElement('div');
+                shield.className = 'team-shield';
+                shield.textContent = getInitials(teamName);
+
+                const info = document.createElement('div');
+                info.className = 'team-info';
+
+                const title = document.createElement('h4');
+                title.className = 'team-name';
+                title.textContent = teamName;
+
+                const meta = document.createElement('p');
+                meta.className = 'team-meta';
+                meta.textContent = selectedCat + ' (' + selectedGrp + ')';
+
+                info.appendChild(title);
+                info.appendChild(meta);
+                card.appendChild(shield);
+                card.appendChild(info);
+
+                teamsGrid.appendChild(card);
+            });
+        }
+
+        categorySelect.addEventListener('change', function() {
+            searchInput.value = '';
+            populateGroups();
+        });
+
+        groupSelect.addEventListener('change', function() {
+            searchInput.value = '';
+            renderTeams();
+        });
+
+        searchInput.addEventListener('input', renderTeams);
+
+        populateCategories();
+    </script>
 </body>
 </html>
