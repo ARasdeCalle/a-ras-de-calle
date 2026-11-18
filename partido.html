@@ -9,7 +9,7 @@
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
-            --primary-green: #2e7d32;
+            --primary-blue: #1976d2; /* Mismo azul corporativo unificado */
             --accent-gold: #fbc02d;
             --text-main: #ffffff;
             --text-muted: #b0b0b0;
@@ -30,10 +30,9 @@
             padding-bottom: 40px;
         }
 
-        /* Cabecera y Navegación Interna Ordenada */
         header {
             background-color: var(--card-bg);
-            border-bottom: 2px solid var(--primary-green);
+            border-bottom: 2px solid var(--primary-blue);
             padding: 12px 16px;
             position: sticky;
             top: 0;
@@ -61,10 +60,9 @@
         }
 
         .logo-title span {
-            color: var(--primary-green);
+            color: var(--primary-blue);
         }
 
-        /* Enlaces a otras páginas internas estrictamente ordenados y limpios */
         .nav-links {
             display: flex;
             gap: 8px;
@@ -86,19 +84,17 @@
         }
 
         .nav-link-item:hover, .nav-link-item.active {
-            background-color: var(--primary-green);
+            background-color: var(--primary-blue);
             color: white;
-            border-color: var(--primary-green);
+            border-color: var(--primary-blue);
         }
 
-        /* Contenedor Principal */
         .container {
             max-width: 760px;
             margin: 16px auto;
             padding: 0 16px;
         }
 
-        /* Selector de Categoría */
         .filter-box {
             background-color: var(--card-bg);
             padding: 14px;
@@ -112,7 +108,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            color: var(--primary-green);
+            color: var(--primary-blue);
             margin-bottom: 8px;
             font-weight: 700;
         }
@@ -130,10 +126,9 @@
         }
 
         select:focus {
-            border-color: var(--primary-green);
+            border-color: var(--primary-blue);
         }
 
-        /* Navegación de Jornadas */
         .jornada-nav {
             display: flex;
             justify-content: space-between;
@@ -146,7 +141,7 @@
         }
 
         .btn-nav {
-            background-color: var(--primary-green);
+            background-color: var(--primary-blue);
             color: white;
             border: none;
             padding: 8px 14px;
@@ -166,11 +161,10 @@
         .jornada-title {
             font-size: 1.05rem;
             font-weight: 800;
-            color: var(--primary-green);
+            color: var(--primary-blue);
             text-transform: uppercase;
         }
 
-        /* Lista de Partidos */
         .matches-list {
             display: flex;
             flex-direction: column;
@@ -221,7 +215,7 @@
             border-radius: 8px;
             font-weight: 800;
             font-size: 1rem;
-            color: var(--primary-green);
+            color: var(--primary-blue);
             min-width: 76px;
             text-align: center;
             letter-spacing: 0.5px;
@@ -234,7 +228,6 @@
             font-weight: 700;
         }
 
-        /* Etiquetas específicas para Suspendidos / Aplazados / Descansos */
         .score-box.suspended {
             background-color: rgba(211, 47, 47, 0.15);
             border-color: #d32f2f;
@@ -266,7 +259,6 @@
         <div class="header-top">
             <a href="index.html" class="logo-title">A RAS DE <span>CALLE</span></a>
         </div>
-        <!-- Enlaces internos ordenados lógicamente y apuntando a clasificacion.html -->
         <nav class="nav-links">
             <a href="index.html" class="nav-link-item">Inicio</a>
             <a href="partidos.html" class="nav-link-item active">Resultados</a>
@@ -278,7 +270,6 @@
     </header>
 
     <div class="container">
-        <!-- Selector de Categoría -->
         <div class="filter-box">
             <label for="categoriaSelect">Selecciona Categoría y Grupo</label>
             <select id="categoriaSelect">
@@ -296,18 +287,17 @@
             </select>
         </div>
 
-        <!-- Navegador de Jornadas -->
         <div class="jornada-nav">
             <button id="btnPrev" class="btn-nav" onclick="cambiarJornada(-1)">< Anterior</button>
             <div id="jornadaLabel" class="jornada-title">Jornada 1</div>
             <button id="btnNext" class="btn-nav" onclick="cambiarJornada(1)">Siguiente ></button>
         </div>
 
-        <!-- Contenedor de Partidos -->
         <div id="matchesContainer" class="matches-list"></div>
     </div>
 
     <script>
+        // Mantiene íntegra toda la base de datos de partidos, grupos y estados
         const DATOS_LIGA = {
             "tercera_rfef": {
                 1: [
