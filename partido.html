@@ -266,7 +266,7 @@
         <div class="header-top">
             <a href="index.html" class="logo-title">A RAS DE <span>CALLE</span></a>
         </div>
-        <!-- Enlaces internos ordenados lógicamente -->
+        <!-- Enlaces internos ordenados lógicamente y apuntando a clasificacion.html -->
         <nav class="nav-links">
             <a href="index.html" class="nav-link-item">Inicio</a>
             <a href="partidos.html" class="nav-link-item active">Resultados</a>
@@ -1485,17 +1485,18 @@
                 let localClass = "team local";
                 let visitClass = "team visitante";
                 let scoreClass = "score-box";
+                let textoRes = p.res;
 
                 if (esDescanso) {
                     scoreClass += " rest";
-                } else if (p.res === "SUSP." || p.res === "Susp.") {
+                } else if (textoRes === "SUSP." || textoRes === "Susp.") {
                     scoreClass += " suspended";
-                    p.res = "SUSPENDIDO";
-                } else if (p.res === "Aplaz." || p.res === "APLAZ.") {
+                    textoRes = "SUSPENDIDO";
+                } else if (textoRes === "Aplaz." || textoRes === "APLAZ.") {
                     scoreClass += " postponed";
-                    p.res = "APLAZADO";
-                } else if (p.res.includes("-")) {
-                    const partes = p.res.split("-").map(Number);
+                    textoRes = "APLAZADO";
+                } else if (textoRes.includes("-")) {
+                    const partes = textoRes.split("-").map(Number);
                     if (!isNaN(partes[0]) && !isNaN(partes[1])) {
                         if (partes[0] > partes[1]) localClass += " winner";
                         else if (partes[1] > partes[0]) visitClass += " winner";
@@ -1506,7 +1507,7 @@
 
                 card.innerHTML = `
                     <div class="${localClass}">${p.local}</div>
-                    <div class="${scoreClass}">${p.res}</div>
+                    <div class="${scoreClass}">${textoRes}</div>
                     <div class="${visitClass}">${p.visitante}</div>
                 `;
                 matchesContainer.appendChild(card);
