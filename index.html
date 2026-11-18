@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio - A Ras de Calle</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
-            --primary-blue: #1976d2; /* Azul corporativo unificado */
+            --primary-blue: #1976d2;
             --accent-gold: #fbc02d;
             --text-main: #ffffff;
             --text-muted: #b0b0b0;
@@ -30,10 +31,10 @@
             padding-bottom: 40px;
         }
 
-        /* Cabecera y Navegación */
+        /* Cabecera y Barra de Navegación Exacta */
         header {
             background-color: var(--card-bg);
-            border-bottom: 2px solid var(--primary-blue);
+            border-bottom: 2px solid var(--accent-gold);
             padding: 12px 16px;
             position: sticky;
             top: 0;
@@ -61,9 +62,10 @@
         }
 
         .logo-title span {
-            color: var(--primary-blue);
+            color: var(--accent-gold);
         }
 
+        /* Orden riguroso basado en tu captura */
         .nav-links {
             display: flex;
             gap: 8px;
@@ -85,9 +87,10 @@
         }
 
         .nav-link-item:hover, .nav-link-item.active {
-            background-color: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
+            background-color: var(--accent-gold);
+            color: #121212;
+            border-color: var(--accent-gold);
+            font-weight: 700;
         }
 
         /* Contenedor Principal */
@@ -100,20 +103,18 @@
             gap: 16px;
         }
 
-        /* 1. HERO BANNER: El Partidazo del Fin de Semana */
+        /* Hero Banner (El Partidazo) */
         .hero-match {
-            background: linear-gradient(135deg, #1e1e1e 0%, #111c24 100%);
-            border: 1px solid var(--primary-blue);
+            background: linear-gradient(135deg, #1e1e1e 0%, #161c24 100%);
+            border: 1px solid var(--accent-gold);
             border-radius: 12px;
             padding: 20px;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .hero-badge {
-            background-color: var(--primary-blue);
-            color: white;
+            background-color: var(--accent-gold);
+            color: #121212;
             font-size: 0.7rem;
             text-transform: uppercase;
             font-weight: 800;
@@ -134,13 +135,8 @@
             margin-bottom: 10px;
         }
 
-        .hero-teams .team-home {
-            text-align: right;
-        }
-
-        .hero-teams .team-away {
-            text-align: left;
-        }
+        .hero-teams .team-home { text-align: right; }
+        .hero-teams .team-away { text-align: left; }
 
         .hero-vs {
             background-color: var(--bg-color);
@@ -157,7 +153,7 @@
             font-weight: 600;
         }
 
-        /* 2. ACCESOS DIRECTOS RÁPIDOS */
+        /* Accesos Directos */
         .quick-access {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -178,7 +174,7 @@
         }
 
         .quick-card:hover {
-            border-color: var(--primary-blue);
+            border-color: var(--accent-gold);
             background-color: var(--card-hover);
             transform: translateY(-2px);
         }
@@ -186,7 +182,7 @@
         .quick-card h3 {
             font-size: 0.95rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--accent-gold);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -197,14 +193,14 @@
             color: var(--text-muted);
         }
 
-        /* 3. SECCIÓN DE NOTICIAS RECIENTES */
+        /* Noticias */
         .section-title {
             font-size: 1rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: var(--text-main);
-            border-left: 3px solid var(--primary-blue);
+            border-left: 3px solid var(--accent-gold);
             padding-left: 8px;
             margin-top: 6px;
         }
@@ -257,18 +253,24 @@
         <div class="header-top">
             <a href="index.html" class="logo-title">A RAS DE <span>CALLE</span></a>
         </div>
+        <!-- Barra de navegación idéntica a tu captura y con tus nombres de archivo exactos -->
         <nav class="nav-links">
             <a href="index.html" class="nav-link-item active">Inicio</a>
             <a href="partido.html" class="nav-link-item">Resultados</a>
-            <a href="estadísticas.html" class="nav-link-item">Clasificación</a>
+            <a href="clasificaciones.html" class="nav-link-item">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-link-item">Categorías</a>
+            <a href="foro.html" class="nav-link-item">Foro</a>
             <a href="equipos.html" class="nav-link-item">Equipos</a>
             <a href="noticias.html" class="nav-link-item">Noticias</a>
-            <a href="foro.html" class="nav-link-item">Foro</a>
+            <a href="proyecto.html" class="nav-link-item">Proyecto</a>
+            <a href="nostros.html" class="nav-link-item">Nosotros</a>
+            <a href="contacto.html" class="nav-link-item">Contacto</a>
+            <a href="estadísticas.html" class="nav-link-item">Estadísticas</a>
         </nav>
     </header>
 
     <div class="container">
-        <!-- 1. EL PARTIDAZO (Hero Banner) -->
+        <!-- El Partidazo -->
         <div class="hero-match">
             <div class="hero-badge">El Partidazo del Fin de Semana</div>
             <div class="hero-teams">
@@ -279,19 +281,19 @@
             <div class="hero-info">Domingo, 12:00 h • Estadio Municipal • Tercera Federación (G.10)</div>
         </div>
 
-        <!-- 2. ACCESOS DIRECTOS RÁPIDOS -->
+        <!-- Accesos rápidos -->
         <div class="quick-access">
-            <a href="partidos.html" class="quick-card">
+            <a href="partido.html" class="quick-card">
                 <h3>⚽ Resultados</h3>
                 <p>Consulta los marcadores de todas las jornadas y grupos.</p>
             </a>
-            <a href="clasificacion.html" class="quick-card">
-                <h3>📊 Clasificación</h3>
+            <a href="clasificaciones.html" class="quick-card">
+                <h3>📊 Clasificaciones</h3>
                 <p>Así va la tabla de tu equipo favorito al detalle.</p>
             </a>
         </div>
 
-        <!-- 3. ÚLTIMAS NOTICIAS -->
+        <!-- Noticias recientes -->
         <h2 class="section-title">Últimas Noticias</h2>
         <div class="news-grid">
             <a href="noticias.html" class="news-card">
@@ -303,11 +305,6 @@
                 <span class="news-category">División de Honor</span>
                 <div class="news-title">Previo del derbi sevillano: Todo listo para el gran duelo del domingo</div>
                 <div class="news-date">Ayer</div>
-            </a>
-            <a href="noticias.html" class="news-card">
-                <span class="news-category">Fútbol Local</span>
-                <div class="news-title">Novedades en los banquillos de la Segunda Andaluza de Sevilla</div>
-                <div class="news-date">Hace 3 días</div>
             </a>
         </div>
     </div>
