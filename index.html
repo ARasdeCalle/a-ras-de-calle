@@ -10,7 +10,6 @@
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
-            --primary-blue: #1976d2;
             --accent-gold: #fbc02d;
             --text-main: #ffffff;
             --text-muted: #b0b0b0;
@@ -31,7 +30,7 @@
             padding-bottom: 40px;
         }
 
-        /* Cabecera y Barra de Navegación Exacta */
+        /* Cabecera y Barra de Navegación Exacta a tu captura */
         header {
             background-color: var(--card-bg);
             border-bottom: 2px solid var(--accent-gold);
@@ -65,7 +64,7 @@
             color: var(--accent-gold);
         }
 
-        /* Orden riguroso basado en tu captura */
+        /* Orden riguroso y sin pestañas sobrantes */
         .nav-links {
             display: flex;
             gap: 8px;
@@ -74,8 +73,8 @@
         }
 
         .nav-link-item {
-            background-color: #262626;
-            color: var(--text-muted);
+            background-color: var(--card-bg);
+            color: var(--text-main);
             border: 1px solid var(--border-color);
             padding: 6px 12px;
             border-radius: 6px;
@@ -86,7 +85,11 @@
             transition: all 0.2s;
         }
 
-        .nav-link-item:hover, .nav-link-item.active {
+        .nav-link-item:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .nav-link-item.active {
             background-color: var(--accent-gold);
             color: #121212;
             border-color: var(--accent-gold);
@@ -105,22 +108,19 @@
 
         /* Hero Banner (El Partidazo) */
         .hero-match {
-            background: linear-gradient(135deg, #1e1e1e 0%, #161c24 100%);
-            border: 1px solid var(--accent-gold);
+            background: linear-gradient(135deg, #1e1e1e 0%, #1a1912 100%);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--accent-gold);
             border-radius: 12px;
             padding: 20px;
             text-align: center;
         }
 
         .hero-badge {
-            background-color: var(--accent-gold);
-            color: #121212;
+            color: var(--accent-gold);
             font-size: 0.7rem;
             text-transform: uppercase;
             font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 20px;
-            display: inline-block;
             margin-bottom: 12px;
             letter-spacing: 1px;
         }
@@ -182,7 +182,7 @@
         .quick-card h3 {
             font-size: 0.95rem;
             font-weight: 800;
-            color: var(--accent-gold);
+            color: var(--text-main);
             display: flex;
             align-items: center;
             gap: 6px;
@@ -253,7 +253,7 @@
         <div class="header-top">
             <a href="index.html" class="logo-title">A RAS DE <span>CALLE</span></a>
         </div>
-        <!-- Barra de navegación idéntica a tu captura y con tus nombres de archivo exactos -->
+        <!-- Barra de navegación exacta, sin pestañas extra y en orden -->
         <nav class="nav-links">
             <a href="index.html" class="nav-link-item active">Inicio</a>
             <a href="partido.html" class="nav-link-item">Resultados</a>
@@ -263,9 +263,6 @@
             <a href="equipos.html" class="nav-link-item">Equipos</a>
             <a href="noticias.html" class="nav-link-item">Noticias</a>
             <a href="proyecto.html" class="nav-link-item">Proyecto</a>
-            <a href="nostros.html" class="nav-link-item">Nosotros</a>
-            <a href="contacto.html" class="nav-link-item">Contacto</a>
-            <a href="estadísticas.html" class="nav-link-item">Estadísticas</a>
         </nav>
     </header>
 
@@ -281,7 +278,7 @@
             <div class="hero-info">Domingo, 12:00 h • Estadio Municipal • Tercera Federación (G.10)</div>
         </div>
 
-        <!-- Accesos rápidos -->
+        <!-- Accesos rápidos (enlace a clasificaciones.html corregido y operativo) -->
         <div class="quick-access">
             <a href="partido.html" class="quick-card">
                 <h3>⚽ Resultados</h3>
