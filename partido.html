@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resultados y Jornadas - A Ras de Calle</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
         :root {
             --bg-color: #121212;
             --card-bg: #1e1e1e;
             --card-hover: #2a2a2a;
-            --primary-blue: #1976d2; /* Mismo azul corporativo unificado */
             --accent-gold: #fbc02d;
             --text-main: #ffffff;
             --text-muted: #b0b0b0;
@@ -32,7 +32,7 @@
 
         header {
             background-color: var(--card-bg);
-            border-bottom: 2px solid var(--primary-blue);
+            border-bottom: 2px solid var(--accent-gold);
             padding: 12px 16px;
             position: sticky;
             top: 0;
@@ -60,7 +60,7 @@
         }
 
         .logo-title span {
-            color: var(--primary-blue);
+            color: var(--accent-gold);
         }
 
         .nav-links {
@@ -71,8 +71,8 @@
         }
 
         .nav-link-item {
-            background-color: #262626;
-            color: var(--text-muted);
+            background-color: var(--card-bg);
+            color: var(--text-main);
             border: 1px solid var(--border-color);
             padding: 6px 12px;
             border-radius: 6px;
@@ -83,10 +83,15 @@
             transition: all 0.2s;
         }
 
-        .nav-link-item:hover, .nav-link-item.active {
-            background-color: var(--primary-blue);
-            color: white;
-            border-color: var(--primary-blue);
+        .nav-link-item:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .nav-link-item.active {
+            background-color: var(--accent-gold);
+            color: #121212;
+            border-color: var(--accent-gold);
+            font-weight: 700;
         }
 
         .container {
@@ -108,7 +113,7 @@
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            color: var(--primary-blue);
+            color: var(--accent-gold);
             margin-bottom: 8px;
             font-weight: 700;
         }
@@ -126,7 +131,7 @@
         }
 
         select:focus {
-            border-color: var(--primary-blue);
+            border-color: var(--accent-gold);
         }
 
         .jornada-nav {
@@ -141,8 +146,8 @@
         }
 
         .btn-nav {
-            background-color: var(--primary-blue);
-            color: white;
+            background-color: var(--accent-gold);
+            color: #121212;
             border: none;
             padding: 8px 14px;
             border-radius: 8px;
@@ -161,7 +166,7 @@
         .jornada-title {
             font-size: 1.05rem;
             font-weight: 800;
-            color: var(--primary-blue);
+            color: var(--accent-gold);
             text-transform: uppercase;
         }
 
@@ -215,7 +220,7 @@
             border-radius: 8px;
             font-weight: 800;
             font-size: 1rem;
-            color: var(--primary-blue);
+            color: var(--accent-gold);
             min-width: 76px;
             text-align: center;
             letter-spacing: 0.5px;
@@ -262,10 +267,12 @@
         <nav class="nav-links">
             <a href="index.html" class="nav-link-item">Inicio</a>
             <a href="partido.html" class="nav-link-item active">Resultados</a>
-            <a href="estadísticas.html" class="nav-link-item">Clasificación</a>
+            <a href="clasificaciones.html" class="nav-link-item">Clasificaciones</a>
+            <a href="competiciones.html" class="nav-link-item">Categorías</a>
+            <a href="foro.html" class="nav-link-item">Foro</a>
             <a href="equipos.html" class="nav-link-item">Equipos</a>
             <a href="noticias.html" class="nav-link-item">Noticias</a>
-            <a href="foro.html" class="nav-link-item">Foro</a>
+            <a href="proyecto.html" class="nav-link-item">Proyecto</a>
         </nav>
     </header>
 
@@ -297,7 +304,6 @@
     </div>
 
     <script>
-        // Mantiene íntegra toda la base de datos de partidos, grupos y estados
         const DATOS_LIGA = {
             "tercera_rfef": {
                 1: [
