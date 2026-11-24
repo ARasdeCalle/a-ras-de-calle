@@ -11,6 +11,7 @@
       --bg-card: #0c213d;
       --bg-card-hover: #10294b;
       --bg-input: #07162b;
+      --bg-reply: #081930;
       --border-subtle: rgba(148, 178, 214, 0.14);
       --border-gold: #c99214;
       --accent-gold: #dfa215;
@@ -194,20 +195,19 @@
     .threads-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
 
     .thread-card {
       background-color: var(--bg-card);
       border: 1px solid var(--border-subtle);
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 18px 20px;
       transition: border-color 0.15s ease, background-color 0.15s ease;
     }
 
     .thread-card:hover {
-      background-color: var(--bg-card-hover);
-      border-color: rgba(223, 162, 21, 0.4);
+      border-color: rgba(223, 162, 21, 0.35);
     }
 
     .thread-header {
@@ -229,16 +229,140 @@
     }
 
     .thread-title {
-      font-size: 1rem;
+      font-size: 1.02rem;
       font-weight: 700;
       color: var(--text-main);
       margin-bottom: 6px;
     }
 
     .thread-text {
-      font-size: 0.85rem;
-      color: #b7c8de;
+      font-size: 0.88rem;
+      color: #c6d5e8;
       line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .thread-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .btn-toggle-replies {
+      background-color: rgba(148, 178, 214, 0.1);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 178, 214, 0.22);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .btn-toggle-replies:hover {
+      background-color: var(--bg-card-hover);
+      border-color: rgba(223, 162, 21, 0.5);
+      color: var(--text-gold);
+    }
+
+    /* Sección de respuestas */
+    .replies-box {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px dashed rgba(148, 178, 214, 0.18);
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .replies-box.open {
+      display: flex;
+    }
+
+    .replies-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .reply-item {
+      background-color: var(--bg-reply);
+      border: 1px solid var(--border-subtle);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+
+    .reply-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .reply-author {
+      color: var(--text-gold);
+      font-weight: 700;
+    }
+
+    .reply-message {
+      font-size: 0.85rem;
+      color: #dce6f2;
+      line-height: 1.45;
+      white-space: pre-line;
+    }
+
+    .reply-empty {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 6px 2px;
+    }
+
+    .reply-form {
+      background-color: rgba(6, 19, 36, 0.55);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .reply-form input,
+    .reply-form textarea {
+      margin-bottom: 0;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+    }
+
+    .btn-reply {
+      align-self: flex-end;
+      background-color: var(--accent-gold);
+      color: #071324;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+    }
+
+    .btn-reply:hover:not(:disabled) {
+      background-color: var(--accent-gold-hover);
+    }
+
+    .btn-reply:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .loading-text {
@@ -261,8 +385,14 @@
         padding: 20px 14px 48px;
       }
 
-      .forum-form {
-        padding: 18px 16px;
+      .forum-form,
+      .thread-card {
+        padding: 16px;
+      }
+
+      .btn-reply {
+        width: 100%;
+        align-self: stretch;
       }
     }
   </style>
@@ -316,10 +446,18 @@
     </section>
   </main>
 
-  <!-- Importar Firebase SDK y lógica segura -->
+  <!-- Importar Firebase SDK y lógica en tiempo real -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      query,
+      orderBy,
+      onSnapshot,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAxV8DvFapxP3Q3x-xR7q-bOoJSh2c8Iss",
@@ -334,14 +472,32 @@
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
 
-    document.getElementById('submitBtn').addEventListener('click', async function() {
-      const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
-      const cat = document.getElementById('categoryInput').value;
-      const title = document.getElementById('titleInput').value.trim();
-      const msg = document.getElementById('messageInput').value.trim();
+    // Guardamos qué hilos están desplegados para no cerrarlos al llegar un nuevo mensaje
+    const openThreads = new Set();
+    // Guardamos los listeners activos de respuestas para limpiarlos si cambia la lista de hilos
+    const replyUnsubs = new Map();
+
+    function formatDate(timestamp) {
+      if (!timestamp || typeof timestamp.toDate !== "function") {
+        return "Justo ahora";
+      }
+      const date = timestamp.toDate();
+      return date.toLocaleString("es-ES", {
+        day: "2-digit",
+        month: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", async function() {
+      const author = document.getElementById("authorInput").value.trim() || "Aficionado";
+      const cat = document.getElementById("categoryInput").value;
+      const title = document.getElementById("titleInput").value.trim();
+      const msg = document.getElementById("messageInput").value.trim();
 
       if (!title || !msg) {
-        alert('Por favor, rellena el título y el mensaje.');
+        alert("Por favor, rellena el título y el mensaje.");
         return;
       }
 
@@ -354,63 +510,216 @@
           createdAt: serverTimestamp()
         });
 
-        document.getElementById('titleInput').value = '';
-        document.getElementById('messageInput').value = '';
+        document.getElementById("titleInput").value = "";
+        document.getElementById("messageInput").value = "";
       } catch (e) {
         console.error("Error al publicar: ", e);
         alert("Hubo un error al publicar el mensaje.");
       }
     });
 
+    function subscribeToReplies(threadId, repliesListEl, countEl) {
+      if (replyUnsubs.has(threadId)) {
+        replyUnsubs.get(threadId)();
+      }
+
+      const repliesQuery = query(
+        collection(db, "threads", threadId, "replies"),
+        orderBy("createdAt", "asc")
+      );
+
+      const unsub = onSnapshot(repliesQuery, (snap) => {
+        const total = snap.size;
+        countEl.textContent = total === 1 ? "1 respuesta" : `${total} respuestas`;
+
+        repliesListEl.innerHTML = "";
+
+        if (snap.empty) {
+          const emptyEl = document.createElement("div");
+          emptyEl.className = "reply-empty";
+          emptyEl.textContent = "Aún no hay respuestas en este debate. ¡Sé el primero en contestar!";
+          repliesListEl.appendChild(emptyEl);
+          return;
+        }
+
+        snap.forEach((replyDoc) => {
+          const rData = replyDoc.data();
+
+          const item = document.createElement("div");
+          item.className = "reply-item";
+
+          const meta = document.createElement("div");
+          meta.className = "reply-meta";
+
+          const rAuthor = document.createElement("span");
+          rAuthor.className = "reply-author";
+          rAuthor.textContent = rData.author || "Aficionado";
+
+          const rTime = document.createElement("span");
+          rTime.textContent = formatDate(rData.createdAt);
+
+          meta.appendChild(rAuthor);
+          meta.appendChild(rTime);
+
+          const rMsg = document.createElement("p");
+          rMsg.className = "reply-message";
+          rMsg.textContent = rData.message || "";
+
+          item.appendChild(meta);
+          item.appendChild(rMsg);
+          repliesListEl.appendChild(item);
+        });
+      }, (err) => {
+        console.error("Error cargando respuestas:", err);
+      });
+
+      replyUnsubs.set(threadId, unsub);
+    }
+
     const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
     onSnapshot(q, (snapshot) => {
-      const threadsContainer = document.getElementById('forumThreads');
-      threadsContainer.innerHTML = '';
+      const threadsContainer = document.getElementById("forumThreads");
+
+      // Limpiar listeners anteriores de respuestas
+      replyUnsubs.forEach((unsub) => unsub());
+      replyUnsubs.clear();
+
+      threadsContainer.innerHTML = "";
 
       if (snapshot.empty) {
         threadsContainer.innerHTML = '<div class="loading-text">No hay debates todavía. ¡Sé el primero en escribir!</div>';
         return;
       }
 
-      snapshot.forEach((doc) => {
-        const data = doc.data();
+      snapshot.forEach((docSnap) => {
+        const threadId = docSnap.id;
+        const data = docSnap.data();
 
-        const card = document.createElement('article');
-        card.className = 'thread-card';
+        const card = document.createElement("article");
+        card.className = "thread-card";
 
-        const header = document.createElement('div');
-        header.className = 'thread-header';
+        const header = document.createElement("div");
+        header.className = "thread-header";
 
-        const authorSpan = document.createElement('span');
-        const strongAuthor = document.createElement('strong');
-        strongAuthor.textContent = data.author || '';
-        const catSpan = document.createElement('span');
-        catSpan.className = 'thread-category';
-        catSpan.textContent = data.category || '';
+        const authorSpan = document.createElement("span");
+        const strongAuthor = document.createElement("strong");
+        strongAuthor.textContent = data.author || "Aficionado";
+        const catSpan = document.createElement("span");
+        catSpan.className = "thread-category";
+        catSpan.textContent = data.category || "";
 
         authorSpan.appendChild(strongAuthor);
-        authorSpan.appendChild(document.createTextNode(' en '));
+        authorSpan.appendChild(document.createTextNode(" en "));
         authorSpan.appendChild(catSpan);
 
-        const timeSpan = document.createElement('span');
-        timeSpan.textContent = 'Reciente';
+        const timeSpan = document.createElement("span");
+        timeSpan.textContent = formatDate(data.createdAt);
 
         header.appendChild(authorSpan);
         header.appendChild(timeSpan);
 
-        const h2 = document.createElement('h2');
-        h2.className = 'thread-title';
-        h2.textContent = data.title || '';
+        const h2 = document.createElement("h2");
+        h2.className = "thread-title";
+        h2.textContent = data.title || "";
 
-        const p = document.createElement('p');
-        p.className = 'thread-text';
-        p.textContent = data.message || '';
+        const p = document.createElement("p");
+        p.className = "thread-text";
+        p.textContent = data.message || "";
+
+        const actions = document.createElement("div");
+        actions.className = "thread-actions";
+
+        const toggleBtn = document.createElement("button");
+        toggleBtn.type = "button";
+        toggleBtn.className = "btn-toggle-replies";
+        toggleBtn.textContent = "Respuestas (0)";
+
+        actions.appendChild(toggleBtn);
+
+        const repliesBox = document.createElement("div");
+        repliesBox.className = "replies-box" + (openThreads.has(threadId) ? " open" : "");
+
+        const repliesList = document.createElement("div");
+        repliesList.className = "replies-list";
+
+        const replyForm = document.createElement("div");
+        replyForm.className = "reply-form";
+
+        const replyAuthorInput = document.createElement("input");
+        replyAuthorInput.type = "text";
+        replyAuthorInput.placeholder = "Tu nombre para responder...";
+        // Reutiliza el nombre ya escrito en el formulario principal si existe
+        const mainAuthorVal = document.getElementById("authorInput").value.trim();
+        if (mainAuthorVal) {
+          replyAuthorInput.value = mainAuthorVal;
+        }
+
+        const replyMsgInput = document.createElement("textarea");
+        replyMsgInput.rows = 2;
+        replyMsgInput.placeholder = "Escribe tu respuesta al hilo...";
+
+        const replySubmitBtn = document.createElement("button");
+        replySubmitBtn.type = "button";
+        replySubmitBtn.className = "btn-reply";
+        replySubmitBtn.textContent = "Responder";
+
+        replySubmitBtn.addEventListener("click", async function() {
+          const rAuthor = replyAuthorInput.value.trim() || "Aficionado";
+          const rMessage = replyMsgInput.value.trim();
+
+          if (!rMessage) {
+            alert("Escribe una respuesta antes de enviarla.");
+            return;
+          }
+
+          replySubmitBtn.disabled = true;
+          replySubmitBtn.textContent = "Enviando...";
+
+          try {
+            await addDoc(collection(db, "threads", threadId, "replies"), {
+              author: rAuthor,
+              message: rMessage,
+              createdAt: serverTimestamp()
+            });
+
+            openThreads.add(threadId);
+            repliesBox.classList.add("open");
+            replyMsgInput.value = "";
+          } catch (err) {
+            console.error("Error al responder:", err);
+            alert("No se pudo enviar la respuesta. Revisa la conexión o las reglas de Firestore.");
+          } finally {
+            replySubmitBtn.disabled = false;
+            replySubmitBtn.textContent = "Responder";
+          }
+        });
+
+        toggleBtn.addEventListener("click", function() {
+          const isOpen = repliesBox.classList.toggle("open");
+          if (isOpen) {
+            openThreads.add(threadId);
+            replyMsgInput.focus();
+          } else {
+            openThreads.delete(threadId);
+          }
+        });
+
+        replyForm.appendChild(replyAuthorInput);
+        replyForm.appendChild(replyMsgInput);
+        replyForm.appendChild(replySubmitBtn);
+
+        repliesBox.appendChild(repliesList);
+        repliesBox.appendChild(replyForm);
 
         card.appendChild(header);
         card.appendChild(h2);
         card.appendChild(p);
+        card.appendChild(actions);
+        card.appendChild(repliesBox);
 
         threadsContainer.appendChild(card);
+
+        subscribeToReplies(threadId, repliesList, toggleBtn);
       });
     });
   </script>
