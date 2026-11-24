@@ -1,297 +1,418 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Ras de Calle - Foro</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        :root {
-            --bg-dark: #0b1f3b;
-            --bg-card: #132a4a;
-            --gold: #d4af37;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Ras de Calle — Foro</title>
+  <style>
+    :root {
+      --bg-page: #061324;
+      --bg-header: #051120;
+      --bg-card: #0c213d;
+      --bg-card-hover: #10294b;
+      --bg-input: #07162b;
+      --border-subtle: rgba(148, 178, 214, 0.14);
+      --border-gold: #c99214;
+      --accent-gold: #dfa215;
+      --accent-gold-hover: #ebb024;
+      --text-main: #f3f6fa;
+      --text-muted: #8fa4bf;
+      --text-gold: #e0a419;
+    }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #071324;
-            color: var(--text-light);
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .mobile-header {
-            background: var(--bg-dark);
-            border-bottom: 2px solid var(--gold);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 0.75rem 1rem;
-        }
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+      min-height: 100vh;
+      padding-bottom: 56px;
+    }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    /* Cabecera y navegación */
+    .site-header {
+      background-color: var(--bg-header);
+      border-bottom: 1px solid var(--border-gold);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
 
-        .logo-badge {
-            background: var(--gold);
-            color: var(--bg-dark);
-            font-weight: 900;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
+    .header-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-        .logo-text {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #ffffff;
-        }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-        .nav-scroll {
-            display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
-            padding-top: 0.75rem;
-            padding-bottom: 0.25rem;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
+    .brand-badge {
+      background-color: var(--accent-gold);
+      color: #071324;
+      font-weight: 900;
+      font-size: 0.78rem;
+      padding: 3px 7px;
+      border-radius: 4px;
+      line-height: 1.1;
+    }
 
-        .nav-scroll::-webkit-scrollbar { display: none; }
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
 
-        .nav-pill {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-light);
-            padding: 6px 14px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 600;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
+    .nav-link {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #d6e2f0;
+      border: 1px solid rgba(148, 178, 214, 0.16);
+      background-color: rgba(12, 33, 61, 0.45);
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
 
-        .nav-pill.active {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border-color: var(--gold);
-        }
+    .nav-link:hover {
+      background-color: var(--bg-card-hover);
+      border-color: rgba(223, 162, 21, 0.45);
+      color: #ffffff;
+    }
 
-        .container {
-            padding: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    .nav-link.active {
+      background-color: var(--accent-gold);
+      color: #071324;
+      border-color: var(--accent-gold);
+      font-weight: 700;
+    }
 
-        .forum-form {
-            background: var(--bg-card);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            margin-bottom: 1.5rem;
-        }
+    /* Contenedor principal */
+    .main-container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-        .form-title {
-            color: var(--gold);
-            font-size: 1rem;
-            font-weight: 800;
-            margin: 0 0 1rem 0;
-        }
+    .forum-form {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
 
-        input, textarea, select {
-            width: 100%;
-            background: var(--bg-dark);
-            color: var(--text-light);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 0.8rem;
-            box-sizing: border-box;
-            font-family: inherit;
-        }
+    .form-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-gold);
+      margin-bottom: 6px;
+    }
 
-        .btn-submit {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
-            font-weight: 900;
-            cursor: pointer;
-            width: 100%;
-        }
+    .form-title {
+      color: var(--text-main);
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
 
-        .thread-card {
-            background: var(--bg-card);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--gold);
-        }
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background-color: var(--bg-input);
+      color: var(--text-main);
+      border: 1px solid rgba(148, 178, 214, 0.2);
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.15s ease;
+    }
 
-        .thread-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.4rem;
-        }
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent-gold);
+    }
 
-        .thread-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0 0 0.5rem 0;
-        }
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-muted);
+    }
 
-        .thread-text {
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            margin-bottom: 0.8rem;
-            line-height: 1.4;
-        }
+    .btn-submit {
+      background-color: var(--accent-gold);
+      color: #071324;
+      border: none;
+      padding: 11px 18px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.15s ease;
+    }
 
-        .loading-text {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            padding: 1rem;
-        }
-    </style>
+    .btn-submit:hover {
+      background-color: var(--accent-gold-hover);
+    }
+
+    .threads-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .thread-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 16px 20px;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .thread-card:hover {
+      background-color: var(--bg-card-hover);
+      border-color: rgba(223, 162, 21, 0.4);
+    }
+
+    .thread-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .thread-category {
+      color: var(--text-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .thread-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .thread-text {
+      font-size: 0.85rem;
+      color: #b7c8de;
+      line-height: 1.5;
+    }
+
+    .loading-text {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      padding: 20px 14px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        padding: 12px 14px;
+        gap: 12px;
+      }
+
+      .main-container {
+        padding: 20px 14px 48px;
+      }
+
+      .forum-form {
+        padding: 18px 16px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">ARC</span>
+        <span>A RAS DE CALLE</span>
+      </a>
 
-    <header class="mobile-header">
-        <div class="brand-container">
-            <div class="brand-logo">
-                <span class="logo-badge">⚽ ARC</span>
-                <span class="logo-text">A RAS DE CALLE</span>
-            </div>
-        </div>
-        <nav class="nav-scroll">
-            <a href="index.html" class="nav-pill">Inicio</a>
-            <a href="partido.html" class="nav-pill">Resultados</a>
-            <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
-            <a href="competiciones.html" class="nav-pill">Categorías</a>
-            <a href="foro.html" class="nav-pill active">Foro</a>
-            <a href="equipos.html" class="nav-pill">Equipos</a>
-            <a href="noticias.html" class="nav-pill">Noticias</a>
-            <a href="proyecto.html" class="nav-pill">El Proyecto</a>
-        </nav>
-    </header>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="partido.html" class="nav-link">Resultados</a></li>
+          <li><a href="estadisticas.html" class="nav-link">Clasificaciones</a></li>
+          <li><a href="competiciones.html" class="nav-link">Categorías</a></li>
+          <li><a href="foro.html" class="nav-link active">Foro</a></li>
+          <li><a href="equipos.html" class="nav-link">Equipos</a></li>
+          <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+          <li><a href="proyecto.html" class="nav-link">El Proyecto</a></li>
+          <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+          <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main class="container">
-        <!-- Formulario para publicar nuevo tema -->
-        <div class="forum-form">
-            <h3 class="form-title">💬 Crear nuevo debate</h3>
-            <input type="text" id="authorInput" placeholder="Tu nombre o usuario...">
-            <select id="categoryInput">
-                <option value="3ª RFEF">3ª RFEF</option>
-                <option value="División de Honor">División de Honor</option>
-                <option value="1ª Andaluza">1ª Andaluza</option>
-                <option value="2ª Andaluza">2ª Andaluza</option>
-            </select>
-            <input type="text" id="titleInput" placeholder="Título del tema...">
-            <textarea id="messageInput" rows="3" placeholder="Escribe tu mensaje..."></textarea>
-            <button class="btn-submit" id="submitBtn">Publicar en el Foro</button>
-        </div>
+  <main class="main-container">
+    <!-- Formulario para publicar nuevo tema -->
+    <section class="forum-form">
+      <div class="form-kicker">COMUNIDAD</div>
+      <h1 class="form-title">Crear nuevo debate</h1>
+      <input type="text" id="authorInput" placeholder="Tu nombre o usuario..." />
+      <select id="categoryInput">
+        <option value="3ª RFEF">3ª RFEF</option>
+        <option value="División de Honor">División de Honor</option>
+        <option value="1ª Andaluza">1ª Andaluza</option>
+        <option value="2ª Andaluza">2ª Andaluza</option>
+        <option value="3ª Andaluza">3ª Andaluza</option>
+      </select>
+      <input type="text" id="titleInput" placeholder="Título del tema..." />
+      <textarea id="messageInput" rows="3" placeholder="Escribe tu mensaje..."></textarea>
+      <button type="button" class="btn-submit" id="submitBtn">Publicar en el Foro</button>
+    </section>
 
-        <!-- Lista de Debates en Directo -->
-        <div id="forumThreads">
-            <div class="loading-text">Cargando debates en directo...</div>
-        </div>
-    </main>
+    <!-- Lista de Debates en Directo -->
+    <section class="threads-list" id="forumThreads" aria-label="Debates en directo">
+      <div class="loading-text">Cargando debates en directo...</div>
+    </section>
+  </main>
 
-    <!-- Importar Firebase SDK y lógica segura -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+  <!-- Importar Firebase SDK y lógica segura -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyAxV8DvFapxP3Q3x-xR7q-bOoJSh2c8Iss",
-            authDomain: "a-ras-de-calle.firebaseapp.com",
-            projectId: "a-ras-de-calle",
-            storageBucket: "a-ras-de-calle.firebasestorage.app",
-            messagingSenderId: "842000224026",
-            appId: "1:842000224026:web:9bdccfad45d002a67026a3",
-            measurementId: "G-02ETYTFN8R"
-        };
+    const firebaseConfig = {
+      apiKey: "AIzaSyAxV8DvFapxP3Q3x-xR7q-bOoJSh2c8Iss",
+      authDomain: "a-ras-de-calle.firebaseapp.com",
+      projectId: "a-ras-de-calle",
+      storageBucket: "a-ras-de-calle.firebasestorage.app",
+      messagingSenderId: "842000224026",
+      appId: "1:842000224026:web:9bdccfad45d002a67026a3",
+      measurementId: "G-02ETYTFN8R"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
 
-        document.getElementById('submitBtn').addEventListener('click', async function() {
-            const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
-            const cat = document.getElementById('categoryInput').value;
-            const title = document.getElementById('titleInput').value.trim();
-            const msg = document.getElementById('messageInput').value.trim();
+    document.getElementById('submitBtn').addEventListener('click', async function() {
+      const author = document.getElementById('authorInput').value.trim() || 'Aficionado';
+      const cat = document.getElementById('categoryInput').value;
+      const title = document.getElementById('titleInput').value.trim();
+      const msg = document.getElementById('messageInput').value.trim();
 
-            if (!title || !msg) {
-                alert('Por favor, rellena el título y el mensaje.');
-                return;
-            }
+      if (!title || !msg) {
+        alert('Por favor, rellena el título y el mensaje.');
+        return;
+      }
 
-            try {
-                await addDoc(collection(db, "threads"), {
-                    author: author,
-                    category: cat,
-                    title: title,
-                    message: msg,
-                    createdAt: serverTimestamp()
-                });
-
-                document.getElementById('titleInput').value = '';
-                document.getElementById('messageInput').value = '';
-            } catch (e) {
-                console.error("Error al publicar: ", e);
-                alert("Hubo un error al publicar el mensaje.");
-            }
+      try {
+        await addDoc(collection(db, "threads"), {
+          author: author,
+          category: cat,
+          title: title,
+          message: msg,
+          createdAt: serverTimestamp()
         });
 
-        const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
-        onSnapshot(q, (snapshot) => {
-            const threadsContainer = document.getElementById('forumThreads');
-            threadsContainer.innerHTML = '';
+        document.getElementById('titleInput').value = '';
+        document.getElementById('messageInput').value = '';
+      } catch (e) {
+        console.error("Error al publicar: ", e);
+        alert("Hubo un error al publicar el mensaje.");
+      }
+    });
 
-            if (snapshot.empty) {
-                threadsContainer.innerHTML = '<div class="loading-text">No hay debates todavía. ¡Sé el primero en escribir!</div>';
-                return;
-            }
+    const q = query(collection(db, "threads"), orderBy("createdAt", "desc"));
+    onSnapshot(q, (snapshot) => {
+      const threadsContainer = document.getElementById('forumThreads');
+      threadsContainer.innerHTML = '';
 
-            snapshot.forEach((doc) => {
-                const data = doc.data();
-                
-                const card = document.createElement('div');
-                card.className = 'thread-card';
+      if (snapshot.empty) {
+        threadsContainer.innerHTML = '<div class="loading-text">No hay debates todavía. ¡Sé el primero en escribir!</div>';
+        return;
+      }
 
-                const header = document.createElement('div');
-                header.className = 'thread-header';
-                header.innerHTML = '<span><strong>' + (data.author || '') + '</strong> en <span style="color:var(--gold);">' + (data.category || '') + '</span></span><span>Reciente</span>';
+      snapshot.forEach((doc) => {
+        const data = doc.data();
 
-                const h4 = document.createElement('h4');
-                h4.className = 'thread-title';
-                h4.textContent = data.title || '';
+        const card = document.createElement('article');
+        card.className = 'thread-card';
 
-                const p = document.createElement('p');
-                p.className = 'thread-text';
-                p.textContent = data.message || '';
+        const header = document.createElement('div');
+        header.className = 'thread-header';
 
-                card.appendChild(header);
-                card.appendChild(h4);
-                card.appendChild(p);
+        const authorSpan = document.createElement('span');
+        const strongAuthor = document.createElement('strong');
+        strongAuthor.textContent = data.author || '';
+        const catSpan = document.createElement('span');
+        catSpan.className = 'thread-category';
+        catSpan.textContent = data.category || '';
 
-                threadsContainer.appendChild(card);
-            });
-        });
-    </script>
+        authorSpan.appendChild(strongAuthor);
+        authorSpan.appendChild(document.createTextNode(' en '));
+        authorSpan.appendChild(catSpan);
+
+        const timeSpan = document.createElement('span');
+        timeSpan.textContent = 'Reciente';
+
+        header.appendChild(authorSpan);
+        header.appendChild(timeSpan);
+
+        const h2 = document.createElement('h2');
+        h2.className = 'thread-title';
+        h2.textContent = data.title || '';
+
+        const p = document.createElement('p');
+        p.className = 'thread-text';
+        p.textContent = data.message || '';
+
+        card.appendChild(header);
+        card.appendChild(h2);
+        card.appendChild(p);
+
+        threadsContainer.appendChild(card);
+      });
+    });
+  </script>
 </body>
 </html>
