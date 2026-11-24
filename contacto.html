@@ -210,8 +210,35 @@
       transition: background-color 0.15s ease;
     }
 
-    .btn-submit:hover {
+    .btn-submit:hover:not(:disabled) {
       background-color: var(--accent-gold-hover);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    .status-msg {
+      margin-top: 12px;
+      font-size: 0.86rem;
+      border-radius: 8px;
+      padding: 10px 14px;
+      display: none;
+    }
+
+    .status-msg.success {
+      display: block;
+      background-color: rgba(34, 197, 94, 0.14);
+      border: 1px solid rgba(34, 197, 94, 0.45);
+      color: #bbf7d0;
+    }
+
+    .status-msg.error {
+      display: block;
+      background-color: rgba(239, 68, 68, 0.14);
+      border: 1px solid rgba(239, 68, 68, 0.45);
+      color: #fecaca;
     }
 
     @media (max-width: 700px) {
@@ -259,27 +286,69 @@
     <section class="contact-card">
       <div class="card-kicker">REDACCIÓN</div>
       <h1 class="card-title">Ponte en contacto con la redacción</h1>
-      <p>¿Tienes información sobre tu equipo, actas de partidos de categorías modestas, quieres proponer mejoras o colaborar con <strong>A Ras de Calle</strong>? Envíanos un mensaje y te responderemos lo antes posible.</p>
+      <p>¿Tienes información sobre tu equipo, actas de partidos de categorías modestas, quieres proponer mejoras o colaborar con <strong>A Ras de Calle</strong>? Envíanos un mensaje y te responderemos lo antes posible[cite: 6].</p>
 
-      <form onsubmit="event.preventDefault(); alert('¡Mensaje enviado con éxito! Gracias por contactar con A Ras de Calle.');">
+      <form id="contactForm" action="https://formspree.io/f/mqpqgobo" method="POST">
         <div class="form-group">
           <label for="nombre">Tu Nombre o Club</label>
-          <input type="text" id="nombre" placeholder="Ej. Antonio Pérez / CD Sevilla" required />
+          <input type="text" id="nombre" name="nombre" placeholder="Ej. Antonio / CD Sevilla" required />
         </div>
 
         <div class="form-group">
           <label for="email">Correo Electrónico</label>
-          <input type="email" id="email" placeholder="tu_correo@example.com" required />
+          <input type="email" id="email" name="email" placeholder="tu_correo@ejemplo.com" required />
         </div>
 
         <div class="form-group">
           <label for="mensaje">Mensaje</label>
-          <textarea id="mensaje" rows="4" placeholder="Escribe aquí tu consulta o información..." required></textarea>
+          <textarea id="mensaje" name="mensaje" rows="4" placeholder="Escribe aquí tu consulta o información..." required></textarea>
         </div>
 
-        <button type="submit" class="btn-submit">Enviar Mensaje</button>
+        <button type="submit" class="btn-submit" id="contactSubmitBtn">Enviar Mensaje</button>
+        <div class="status-msg" id="contactStatus" role="status" aria-live="polite"></div>
       </form>
     </section>
   </main>
+
+  <script>
+    const contactForm = document.getElementById("contactForm");
+    const submitBtn = document.getElementById("contactSubmitBtn");
+    const statusEl = document.getElementById("contactStatus");
+
+    contactForm.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      const endpoint = contactForm.getAttribute("action");
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviando...";
+      statusEl.className = "status-msg";
+      statusEl.textContent = "";
+
+      try {
+        const response = await fetch(endpoint, {
+          method: "POST",
+          body: new FormData(contactForm),
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (response.ok) {
+          contactForm.reset();
+          statusEl.className = "status-msg success";
+          statusEl.textContent = "¡Mensaje enviado! Te llegará a tu correo en breve.";
+        } else {
+          statusEl.className = "status-msg error";
+          statusEl.textContent = "No se pudo enviar el mensaje. Revisa el enlace del formulario e inténtalo de nuevo.";
+        }
+      } catch (error) {
+        statusEl.className = "status-msg error";
+        statusEl.textContent = "Error de conexión al enviar el mensaje. Comprueba tu red e inténtalo otra vez.";
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Enviar Mensaje";
+      }
+    });
+  </script>
 </body>
 </html>
