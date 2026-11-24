@@ -1,311 +1,335 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Ras de Calle - Categorías</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        :root {
-            --bg-dark: #0b1f3b;
-            --bg-card: #132a4a;
-            --gold: #d4af37;
-            --text-light: #f8fafc;
-            --text-muted: #94a3b8;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Ras de Calle — Categorías</title>
+  <style>
+    :root {
+      --bg-page: #061324;
+      --bg-header: #051120;
+      --bg-card: #0c213d;
+      --bg-card-hover: #10294b;
+      --border-subtle: rgba(148, 178, 214, 0.14);
+      --border-gold: #c99214;
+      --accent-gold: #dfa215;
+      --accent-gold-hover: #ebb024;
+      --text-main: #f3f6fa;
+      --text-muted: #8fa4bf;
+      --text-gold: #e0a419;
+    }
 
-        body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #071324;
-            color: var(--text-light);
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        .mobile-header {
-            background: var(--bg-dark);
-            border-bottom: 2px solid var(--gold);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 0.75rem 1rem;
-        }
+    body {
+      background-color: var(--bg-page);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.45;
+      min-height: 100vh;
+    }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        .brand-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+    /* Cabecera y navegación */
+    .site-header {
+      background-color: var(--bg-header);
+      border-bottom: 1px solid var(--border-gold);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
 
-        .logo-badge {
-            background: var(--gold);
-            color: var(--bg-dark);
-            font-weight: 900;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
+    .header-inner {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
 
-        .logo-text {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #ffffff;
-        }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
 
-        .nav-scroll {
-            display: flex;
-            gap: 0.5rem;
-            overflow-x: auto;
-            padding-top: 0.75rem;
-            padding-bottom: 0.25rem;
-            white-space: nowrap;
-            -webkit-overflow-scrolling: touch;
-        }
+    .brand-badge {
+      background-color: var(--accent-gold);
+      color: #071324;
+      font-weight: 900;
+      font-size: 0.78rem;
+      padding: 3px 7px;
+      border-radius: 4px;
+      line-height: 1.1;
+    }
 
-        .nav-scroll::-webkit-scrollbar { display: none; }
+    .nav-list {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      list-style: none;
+    }
 
-        .nav-pill {
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-light);
-            padding: 6px 14px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-size: 0.82rem;
-            font-weight: 600;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-        }
+    .nav-link {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #d6e2f0;
+      border: 1px solid rgba(148, 178, 214, 0.16);
+      background-color: rgba(12, 33, 61, 0.45);
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+    }
 
-        .nav-pill.active {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border-color: var(--gold);
-        }
+    .nav-link:hover {
+      background-color: var(--bg-card-hover);
+      border-color: rgba(223, 162, 21, 0.45);
+      color: #ffffff;
+    }
 
-        .container {
-            padding: 1.75rem 1.25rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
+    .nav-link.active {
+      background-color: var(--accent-gold);
+      color: #071324;
+      border-color: var(--accent-gold);
+      font-weight: 700;
+    }
 
-        .page-title-box {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            margin-bottom: 2rem;
-            text-align: center;
-        }
+    /* Contenedor principal */
+    .main-container {
+      max-width: 1020px;
+      margin: 0 auto;
+      padding: 28px 20px 64px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
 
-        .page-title-box h1 {
-            color: var(--gold);
-            font-size: 1.4rem;
-            font-weight: 900;
-            margin: 0 0 0.5rem 0;
-        }
+    .page-header-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 22px 24px;
+    }
 
-        .page-title-box p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            margin: 0;
-            line-height: 1.5;
-        }
+    .page-kicker {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-gold);
+      margin-bottom: 6px;
+    }
 
-        .categories-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.25rem;
-        }
+    .page-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
 
-        @media (min-width: 650px) {
-            .categories-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+    .page-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
 
-        .cat-card {
-            background: var(--bg-card);
-            border-radius: 10px;
-            padding: 1.5rem;
-            border-left: 5px solid var(--gold);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            transition: transform 0.2s ease;
-        }
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
 
-        .cat-card:hover {
-            transform: translateY(-3px);
-        }
+    .cat-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+    }
 
-        .cat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 0.75rem;
-        }
+    .cat-card:hover {
+      background-color: var(--bg-card-hover);
+      border-color: rgba(223, 162, 21, 0.45);
+      transform: translateY(-1px);
+    }
 
-        .cat-badge {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
+    .cat-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-gold);
+      margin-bottom: 6px;
+    }
 
-        .cat-name {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin: 0 0 0.5rem 0;
-        }
+    .cat-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
 
-        .cat-desc {
-            font-size: 0.88rem;
-            color: #cbd5e1;
-            line-height: 1.5;
-            margin: 0 0 1.25rem 0;
-        }
+    .cat-desc {
+      font-size: 0.83rem;
+      color: #b7c8de;
+    }
 
-        .cat-footer {
-            display: flex;
-            gap: 0.5rem;
-        }
+    .cat-footer {
+      display: flex;
+      gap: 10px;
+      padding-top: 4px;
+    }
 
-        .btn-action {
-            flex: 1;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-light);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-align: center;
-            text-decoration: none;
-            transition: background 0.15s ease;
-        }
+    .btn-action {
+      flex: 1;
+      text-align: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-main);
+      background-color: rgba(6, 19, 36, 0.65);
+      border: 1px solid rgba(148, 178, 214, 0.2);
+      transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
 
-        .btn-action:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border-color: var(--gold);
-        }
-    </style>
+    .btn-action:hover {
+      background-color: var(--accent-gold);
+      color: #071324;
+      border-color: var(--accent-gold);
+    }
+
+    @media (max-width: 700px) {
+      .header-inner {
+        padding: 12px 14px;
+        gap: 12px;
+      }
+
+      .main-container {
+        padding: 20px 14px 48px;
+      }
+
+      .categories-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">ARC</span>
+        <span>A RAS DE CALLE</span>
+      </a>
 
-    <header class="mobile-header">
-        <div class="brand-container">
-            <div class="brand-logo">
-                <span class="logo-badge">⚽ ARC</span>
-                <span class="logo-text">A RAS DE CALLE</span>
-            </div>
+      <nav aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Inicio</a></li>
+          <li><a href="partido.html" class="nav-link">Resultados</a></li>
+          <li><a href="estadisticas.html" class="nav-link">Clasificaciones</a></li>
+          <li><a href="competiciones.html" class="nav-link active">Categorías</a></li>
+          <li><a href="foro.html" class="nav-link">Foro</a></li>
+          <li><a href="equipos.html" class="nav-link">Equipos</a></li>
+          <li><a href="noticias.html" class="nav-link">Noticias</a></li>
+          <li><a href="proyecto.html" class="nav-link">El Proyecto</a></li>
+          <li><a href="nostros.html" class="nav-link">Nosotros</a></li>
+          <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <section class="page-header-card">
+      <div class="page-kicker">COMPETICIONES</div>
+      <h1 class="page-title">Mapa de Competiciones</h1>
+      <p class="page-subtitle">Estructura completa del fútbol sevillano y andaluz cubierto en A Ras de Calle, desde Tercera Federación hasta el fútbol provincial más cercano.</p>
+    </section>
+
+    <section class="categories-grid" aria-label="Categorías cubiertas">
+      <article class="cat-card">
+        <div>
+          <div class="cat-badge">NACIONAL / RFEF</div>
+          <h2 class="cat-name">Tercera Federación (Grupo 10)</h2>
+          <p class="cat-desc">El puente competitivo entre el fútbol autonómico y la élite nacional con clubes andaluces de referencia.</p>
         </div>
-        <nav class="nav-scroll">
-            <a href="index.html" class="nav-pill">Inicio</a>
-            <a href="partido.html" class="nav-pill">Resultados</a>
-            <a href="estadisticas.html" class="nav-pill">Clasificaciones</a>
-            <a href="competiciones.html" class="nav-pill active">Categorías</a>
-            <a href="foro.html" class="nav-pill">Foro</a>
-            <a href="equipos.html" class="nav-pill">Equipos</a>
-            <a href="noticias.html" class="nav-pill">Noticias</a>
-            <a href="proyecto.html" class="nav-pill">El Proyecto</a>
-        </nav>
-    </header>
-
-    <main class="container">
-        <div class="page-title-box">
-            <h1>🏆 Mapa de Competiciones</h1>
-            <p>Estructura completa del fútbol sevillano y andaluz cubierto en A Ras de Calle, desde Tercera Federación hasta el fútbol provincial más cercano.</p>
+        <div class="cat-footer">
+          <a href="estadisticas.html" class="btn-action">Clasificación</a>
+          <a href="equipos.html" class="btn-action">Equipos</a>
         </div>
+      </article>
 
-        <div class="categories-grid">
-            <!-- Tercera Federación -->
-            <div class="cat-card">
-                <div>
-                    <div class="cat-header">
-                        <span class="cat-badge">Nacional / RFEF</span>
-                    </div>
-                    <h3 class="cat-name">Tercera Federación (Grupo 10)</h3>
-                    <p class="cat-desc">El puente competitivo entre el fútbol autonómico y la élite nacional con clubes andaluces de referencia.</p>
-                </div>
-                <div class="cat-footer">
-                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
-                    <a href="equipos.html" class="btn-action">Equipos</a>
-                </div>
-            </div>
-
-            <!-- División de Honor -->
-            <div class="cat-card">
-                <div>
-                    <div class="cat-header">
-                        <span class="cat-badge">Autonómica</span>
-                    </div>
-                    <h3 class="cat-name">División de Honor Andaluza (Grupo 1)</h3>
-                    <p class="cat-desc">La élite del fútbol autonómico andaluz occidental luchando por dar el salto a categoría nacional.</p>
-                </div>
-                <div class="cat-footer">
-                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
-                    <a href="equipos.html" class="btn-action">Equipos</a>
-                </div>
-            </div>
-
-            <!-- Primera Andaluza -->
-            <div class="cat-card">
-                <div>
-                    <div class="cat-header">
-                        <span class="cat-badge">Provincial Sevilla</span>
-                    </div>
-                    <h3 class="cat-name">Primera Andaluza Sevilla</h3>
-                    <p class="cat-desc">Grupo único de máxima exigencia provincial donde cada jornada define el pulso por el ascenso.</p>
-                </div>
-                <div class="cat-footer">
-                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
-                    <a href="equipos.html" class="btn-action">Equipos</a>
-                </div>
-            </div>
-
-            <!-- Segunda Andaluza -->
-            <div class="cat-card">
-                <div>
-                    <div class="cat-header">
-                        <span class="cat-badge">Provincial Sevilla</span>
-                    </div>
-                    <h3 class="cat-name">Segunda Andaluza Sevilla (Grupos 1 y 2)</h3>
-                    <p class="cat-desc">Emoción dividida en dos grupos con los mejores conjuntos de los municipios y barrios de la provincia.</p>
-                </div>
-                <div class="cat-footer">
-                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
-                    <a href="equipos.html" class="btn-action">Equipos</a>
-                </div>
-            </div>
-
-            <!-- Tercera Andaluza -->
-            <div class="cat-card">
-                <div>
-                    <div class="cat-header">
-                        <span class="cat-badge">Fútbol Base / Local</span>
-                    </div>
-                    <h3 class="cat-name">Tercera Andaluza Sevilla (Grupos 1 al 6)</h3>
-                    <p class="cat-desc">El alma del fútbol más puro y cercano de Sevilla repartido en 6 grupos llenos de pasión local.</p>
-                </div>
-                <div class="cat-footer">
-                    <a href="estadisticas.html" class="btn-action">Clasificación</a>
-                    <a href="equipos.html" class="btn-action">Equipos</a>
-                </div>
-            </div>
+      <article class="cat-card">
+        <div>
+          <div class="cat-badge">AUTONÓMICA</div>
+          <h2 class="cat-name">División de Honor Andaluza (Grupo 1)</h2>
+          <p class="cat-desc">La élite del fútbol autonómico andaluz occidental luchando por dar el salto a categoría nacional.</p>
         </div>
-    </main>
+        <div class="cat-footer">
+          <a href="estadisticas.html" class="btn-action">Clasificación</a>
+          <a href="equipos.html" class="btn-action">Equipos</a>
+        </div>
+      </article>
+
+      <article class="cat-card">
+        <div>
+          <div class="cat-badge">PROVINCIAL SEVILLA</div>
+          <h2 class="cat-name">Primera Andaluza Sevilla</h2>
+          <p class="cat-desc">Grupo único de máxima exigencia provincial donde cada jornada define el pulso por el ascenso.</p>
+        </div>
+        <div class="cat-footer">
+          <a href="estadisticas.html" class="btn-action">Clasificación</a>
+          <a href="equipos.html" class="btn-action">Equipos</a>
+        </div>
+      </article>
+
+      <article class="cat-card">
+        <div>
+          <div class="cat-badge">PROVINCIAL SEVILLA</div>
+          <h2 class="cat-name">Segunda Andaluza Sevilla (Grupos 1 y 2)</h2>
+          <p class="cat-desc">Emoción dividida en dos grupos con los mejores conjuntos de los municipios y barrios de la provincia.</p>
+        </div>
+        <div class="cat-footer">
+          <a href="estadisticas.html" class="btn-action">Clasificación</a>
+          <a href="equipos.html" class="btn-action">Equipos</a>
+        </div>
+      </article>
+
+      <article class="cat-card">
+        <div>
+          <div class="cat-badge">FÚTBOL BASE / LOCAL</div>
+          <h2 class="cat-name">Tercera Andaluza Sevilla (Grupos 1 al 6)</h2>
+          <p class="cat-desc">El alma del fútbol más puro y cercano de Sevilla repartido en 6 grupos llenos de pasión local.</p>
+        </div>
+        <div class="cat-footer">
+          <a href="estadisticas.html" class="btn-action">Clasificación</a>
+          <a href="equipos.html" class="btn-action">Equipos</a>
+        </div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
